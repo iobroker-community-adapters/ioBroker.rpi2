@@ -14,7 +14,7 @@
     ],
     "optionalDependencies": {
         "rpi-gpio": "^2.1.7",
-        "rpi-gpio-buttons": "^1.2.0"
+        "rpi-gpio-buttons": "^2.0.1"
     },
     "dependencies": {
         "sync-exec": "^0.6.2",

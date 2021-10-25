@@ -26,7 +26,7 @@
         "axios": "^0.24.0",
         "chai": "^4.3.4",
         "gulp": "^4.0.2",
-        "mocha": "^9.0.2"
+        "mocha": "^9.1.3"
     },
     "homepage": "https://github.com/iobroker-community-adapters/ioBroker.rpi2",
     "license": "MIT",

@@ -1,9 +1,9 @@
 {
     "name": "iobroker.rpi2",
     "description": "RPI-Monitor for ioBroker Installations",
-    "version": "1.3.1",
+    "version": "1.4.0",
     "engines": {
-        "node": ">=4"
+        "node": ">=10"
     },
     "author": {
         "name": "husky-koglhof",
@@ -35,6 +35,7 @@
         "monitoring",
         "raspberry",
         "orangepi",
+        "odroid",
         "odroid",
         "bananapi"
     ],

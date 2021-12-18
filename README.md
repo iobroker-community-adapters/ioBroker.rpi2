@@ -13,7 +13,7 @@ ioBroker RPI-Monitor Adapter
 RPI-Monitor implementation for integration into ioBroker. It is the same implementation as for iobroker.rpi, but with GPIOs.
 
 ## Important Information
-Works only with node >= 0.12
+Works only with node >= 10
 
 **ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
 
@@ -98,6 +98,9 @@ On configuration page you can select following modules:
 ## Tested Hardware
  - Odroid C1
  - Raspberry Pi 1
+ - Raspberry Pi Zero 
+ - Raspberry Pi Zero 2
+
 
 ## GPIOs
 You can read and control GPIOs too.
@@ -147,6 +150,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 
 ## Changelog
+
+### 1.4.0 (2021-07-16)
+* (Hombach) removed support for Node.js < 10 and js-controller < 3.0
 
 ### 1.3.1 (2021-07-16)
 * (Apollon77) Prevent js-controller 3.3 warnings

@@ -22,7 +22,7 @@
         "@iobroker/adapter-core": "^2.5.1"
     },
     "devDependencies": {
-        "@iobroker/testing": "^2.5.2",
+        "@iobroker/testing": "^2.5.3",
         "axios": "^0.25.0",
         "chai": "^4.3.4",
         "gulp": "^4.0.2",

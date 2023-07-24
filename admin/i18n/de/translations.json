@@ -1,5 +1,5 @@
 {
-    "Button debounce period (ms)": "Entprellungszeitraum für Schaltflächen (ms)",
+    "Button debounce period (ms)": "Schaltflächen Entprellzeit (ms)",
     "Button double click period (ms)": "Doppelklickzeit (ms)",
     "Button long press period (ms)": "Taste lange Druckdauer (ms)",
     "Buttons are wired pull up": "Die Tasten sind hochgezogen",

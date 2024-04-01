@@ -28,7 +28,7 @@
         "@iobroker/testing": "^2.6.0",
         "axios": "^0.27.2",
         "chai": "^4.3.10",
-        "gulp": "^4.0.2",
+        "gulp": "^5.0.0",
         "mocha": "^9.2.2"
     },
     "homepage": "https://github.com/iobroker-community-adapters/ioBroker.rpi2",

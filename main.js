@@ -387,6 +387,19 @@ async function parser(adapter) {
                     }
                 }
             }
+        } else if (c.indexOf('c_') !== 0 && config['c_' + c] === false) {
+            //is config, but disabled.
+            const folderId = `${adapter.namespace}.${c}`;
+            adapter.log.debug(`${c} disabled -> clean up.`);
+            if (objects[folderId]) { //if object exists, delete it.
+                await adapter.delObjectAsync(folderId, {recursive: true});
+                delete objects[folderId];
+                for (const id of Object.keys(objects)) {
+                    if (id.startsWith(folderId)) {
+                        delete objects[id];
+                    }
+                }
+            }
         }
     }
 }

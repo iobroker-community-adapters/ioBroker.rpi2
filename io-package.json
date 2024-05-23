@@ -1,379 +1,309 @@
 {
-    "common": {
-        "name": "rpi2",
-        "version": "1.3.2",
-        "news": {
-            "1.3.2": {
-                "en": "Requires js-controller 3.3 or higher! Allo js.controller to do a rebuild when GPIO is configured but fails",
-                "de": "Benötigt js-controller 3.3 oder höher! Allo js.controller, um eine Neuerstellung durchzuführen, wenn GPIO konfiguriert ist, aber fehlschlägt",
-                "ru": "Требуется js-контроллер 3.3 или выше! Разрешить js.controller выполнять перестроение, когда GPIO настроен, но не работает",
-                "pt": "Requer js-controller 3.3 ou superior! Allo js.controller para fazer uma reconstrução quando o GPIO está configurado, mas falha",
-                "nl": "Vereist js-controller 3.3 of hoger! Allo js.controller om een rebuild uit te voeren wanneer GPIO is geconfigureerd maar mislukt",
-                "fr": "Nécessite js-controller 3.3 ou supérieur ! Allo js.controller pour effectuer une reconstruction lorsque GPIO est configuré mais échoue",
-                "it": "Richiede js-controller 3.3 o successivo! Allo js.controller per eseguire una ricostruzione quando GPIO è configurato ma non riesce",
-                "es": "¡Requiere js-controller 3.3 o superior! Allo js.controller para hacer una reconstrucción cuando GPIO está configurado pero falla",
-                "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
-                "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建"
-            },
-            "1.3.1": {
-                "en": "js-controller 3.3 warnings prevented",
-                "de": "js-controller 3.3 Warnungen verhindert",
-                "ru": "js-controller 3.3 предупреждения предотвращены",
-                "pt": "Avisos do js-controller 3.3 evitados",
-                "nl": "js-controller 3.3 waarschuwingen voorkomen",
-                "fr": "js-controller 3.3 avertissements empêchés",
-                "it": "js-controller 3.3 avvisi impediti",
-                "es": "advertencias de js-controller 3.3 prevenidas",
-                "pl": "js-controller 3.3 zablokowano ostrzeżenia",
-                "zh-cn": "js-controller 3.3 警告被阻止"
-            },
-            "1.3.0": {
-                "en": "Add support for DHTxx/AM23xx Sensors, Configure internal Pull UP/Down Resistor, Optimizations and fixes",
-                "de": "Unterstützung für DHTxx/AM23xx-Sensoren hinzufügen, internen Pull-Up/Down-Widerstand konfigurieren, Optimierungen und Korrekturen",
-                "ru": "Добавление поддержки датчиков DHTxx / AM23xx, настройка внутреннего резистора Pull Up / Down, оптимизации и исправления",
-                "pt": "Adicionar suporte para sensores DHTxx / AM23xx, configurar resistor interno pull UP / Down, otimizações e correções",
-                "nl": "Ondersteuning toevoegen voor DHTxx/AM23xx-sensoren, interne pull UP/Down-weerstand configureren, optimalisaties en fixes",
-                "fr": "Ajout de la prise en charge des capteurs DHTxx/AM23xx, configuration de la résistance interne Pull UP/Down, optimisations et correctifs",
-                "it": "Aggiungi il supporto per i sensori DHTxx/AM23xx, configura la resistenza interna di pull UP/Down, ottimizzazioni e correzioni",
-                "es": "Agregue soporte para sensores DHTxx / AM23xx, configure la resistencia interna Pull UP / Down, optimizaciones y correcciones",
-                "pl": "Dodaj wsparcie dla czujników DHTxx/AM23xx, skonfiguruj wewnętrzny rezystor pull up/down, optymalizacje i poprawki",
-                "zh-cn": "添加对 DHTxx/AM23xx 传感器的支持、配置内部上拉/下拉电阻、优化和修复"
-            },
-            "1.2.0": {
-                "en": "GPIO configuration as output with defined initial value",
-                "de": "GPIO Konfiguration als Ausgang mit definiertem Startwert",
-                "ru": "Конфигурация GPIO как выход с заданным начальным значением",
-                "pt": "Configuração GPIO como saída com valor inicial definido",
-                "nl": "GPIO-configuratie als uitgang met gedefinieerde beginwaarde",
-                "fr": "Configuration GPIO en sortie avec valeur initiale définie",
-                "it": "Configurazione GPIO come output con valore iniziale definito",
-                "es": "Configuración GPIO como salida con valor inicial definido",
-                "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
-                "zh-cn": "GPIO配置为具有定义的初始值的输出"
-            },
-            "1.1.1": {
-                "en": "Error messages for not existing values are logged only once",
-                "de": "Fehlermeldungen für nicht vorhandene Werte werden nur einmal protokolliert",
-                "ru": "Сообщения об ошибках для несуществующих значений регистрируются только один раз",
-                "pt": "Mensagens de erro para valores não existentes são registradas somente uma vez",
-                "nl": "Foutmeldingen voor niet bestaande waarden worden slechts één keer vastgelegd",
-                "fr": "Les messages d'erreur relatifs à des valeurs non existantes ne sont consignés qu'une seule fois.",
-                "it": "I messaggi di errore per i valori non esistenti vengono registrati solo una volta",
-                "es": "Los mensajes de error para valores no existentes se registran una sola vez.",
-                "pl": "Komunikaty o błędach dla nieistniejących wartości są rejestrowane tylko raz",
-                "zh-cn": "不存在的值的错误消息仅记录一次"
-            },
-            "1.1.0": {
-                "en": "Support for Nodejs 10",
-                "de": "Unterstützung für Nodejs 10",
-                "ru": "Поддержка Nodejs 10",
-                "pt": "Suporte para Nodejs 10",
-                "nl": "Ondersteuning voor Nodejs 10",
-                "fr": "Prise en charge de Nodejs 10",
-                "it": "Supporto per Nodejs 10",
-                "es": "Soporte para Nodejs 10",
-                "pl": "Wsparcie dla Nodejs 10",
-                "zh-cn": "支持Nodejs 10"
-            },
-            "1.0.0": {
-                "en": "Admin3 support",
-                "de": "Admin3-Unterstützung",
-                "ru": "Поддержка Admin3",
-                "pt": "Suporte Admin3",
-                "nl": "Admin3-ondersteuning",
-                "fr": "Support Admin3",
-                "it": "Supporto per Admin3",
-                "es": "Soporte de Admin3",
-                "pl": "Obsługa Admin3",
-                "zh-cn": "Admin3的支持"
-            },
-            "0.3.2": {
-                "en": "fixed Mem available readings on Stretch",
-                "de": "mem available bei strech gefixt",
-                "ru": "fixed Mem available readings on Stretch",
-                "pt": "fixo Mem disponível leituras no Trecho",
-                "nl": "vaste Mem beschikbare metingen op Rek",
-                "fr": "fixe Mem disponible lectures sur le Tronçon",
-                "it": "fisso Mem disponibile letture Tratto",
-                "es": "fijo Mem disponible lecturas en el Tramo",
-                "pl": "stałej pamięci są dostępne czytania na odcinku",
-                "zh-cn": "固定Mem提供的读数在拉伸"
-            },
-            "0.3.1": {
-                "en": "Fixup swap_used calculation.",
-                "de": "Korrigiere swap_used Kalkulation",
-                "ru": "Исправлено вычисление swap_used",
-                "pt": "Ajuste swap_used de cálculo.",
-                "nl": "Correctie swap_used berekening.",
-                "fr": "Correction swap_used de calcul.",
-                "it": "Correzione swap_used di calcolo.",
-                "es": "Corrección swap_used de cálculo.",
-                "pl": "Obliczanie poprawki swap_used.",
-                "zh-cn": "链接地址swap_used计算。"
-            },
-            "0.3.0": {
-                "en": "Add GPIO direction indication",
-                "de": "GPIO Richtung States hinzugefügt",
-                "ru": "Добавлены состояния для индикации направления GPIO",
-                "pt": "Adicionar GPIO direção indicação",
-                "nl": "Toevoegen GPIO richting aangeven",
-                "fr": "Ajouter GPIO indication de la direction",
-                "it": "Aggiungere GPIO indicazione di direzione",
-                "es": "Agregar GPIO indicación de la dirección",
-                "pl": "Dodaj wskazaniem kierunku linii GPIO ",
-                "zh-cn": "添加端口方向的指示"
-            },
-            "0.2.2": {
-                "en": "Use BCM enumeration",
-                "de": "Benutze BCM Numerierung",
-                "ru": "Используется BCM нумерация",
-                "pt": "Usar o BCM enumeração",
-                "nl": "Gebruik BCM opsomming",
-                "fr": "Utiliser BCM énumération",
-                "it": "Uso miliardi di metri CUBI di enumerazione",
-                "es": "El uso de BCM enumeración",
-                "pl": "Używać wyliczenie mld m sześc. ",
-                "zh-cn": "使用BCM枚举"
-            },
-            "0.2.1": {
-                "en": "fix start of adapter",
-                "de": "Korrigiert Adapterstart",
-                "ru": "Исправлен старт драйвера",
-                "pt": "correcção início do adaptador",
-                "nl": "fix start van adapter",
-                "fr": "fix début de l'adaptateur",
-                "it": "fix inizio dell'adattatore",
-                "es": "revisión inicio de adaptador",
-                "pl": "naprawiono zasilacza",
-                "zh-cn": "修复启动的适配器"
-            }
-        },
-        "title": "RPI-Monitor",
-        "titleLang": {
-            "en": "RPI-Monitor",
-            "de": "RPI-Monitor",
-            "ru": "RPI-монитор",
-            "pt": "RPI-Monitor",
-            "nl": "RPI-monitor",
-            "fr": "RPI-Moniteur",
-            "it": "RPI-Monitor",
-            "es": "Monitor RPI",
-            "pl": "Monitor RPI",
-            "zh-cn": "RPI-监视器"
-        },
-        "desc": {
-            "en": "RPI-Monitor",
-            "de": "RPI-Monitor",
-            "ru": "RPI-монитор",
-            "pt": "RPI-Monitor",
-            "nl": "RPI-Monitor",
-            "fr": "RPI-Monitor",
-            "it": "RPI-Monitor",
-            "es": "RPI-Monitor",
-            "pl": "Monitor RPI",
-            "zh-cn": "RPI-监视器"
-        },
-        "authors": [
-            "Christian Baumgartner",
-            "husky-koglhof <husky.koglhof@icloud.com>",
-            "Garfonso <garfonso@mobo.info>"
-        ],
-        "os": [
-            "linux"
-        ],
-        "keywords": [
-            "ioBroker",
-            "monitoring",
-            "raspberry",
-            "orangepi",
-            "odroid",
-            "bananapi",
-            "gpio"
-        ],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "rpi2.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.rpi2/master/admin/rpi2.png",
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/blob/master/README.md",
-        "loglevel": "info",
-        "tier": 2,
-        "mode": "daemon",
-        "type": "hardware",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "materialize"
-        },
-        "osDependencies": {
-            "linux": [
-                "build-essential",
-                "python"
-            ]
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.22"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=5.0.0"
-            }
-        ],
-        "singletonHost": true
+  "common": {
+    "name": "rpi2",
+    "version": "2.0.0-alpha.0",
+    "news": {
+      "2.0.0-alpha.0": {
+        "en": "Get stuff up to date...",
+        "de": "Zeugs aktualisiert...",
+        "en": "Requires js-controller 3.3 or higher! Allo js.controller to do a rebuild when GPIO is configured but fails",
+        "de": "Benötigt js-controller 3.3 oder höher! Allo js.controller, um eine Neuerstellung durchzuführen, wenn GPIO konfiguriert ist, aber fehlschlägt",
+        "ru": "Требуется js-контроллер 3.3 или выше! Разрешить js.controller выполнять перестроение, когда GPIO настроен, но не работает",
+        "pt": "Requer js-controller 3.3 ou superior! Allo js.controller para fazer uma reconstrução quando o GPIO está configurado, mas falha",
+        "nl": "Vereist js-controller 3.3 of hoger! Allo js.controller om een rebuild uit te voeren wanneer GPIO is geconfigureerd maar mislukt",
+        "fr": "Nécessite js-controller 3.3 ou supérieur ! Allo js.controller pour effectuer une reconstruction lorsque GPIO est configuré mais échoue",
+        "it": "Richiede js-controller 3.3 o successivo! Allo js.controller per eseguire una ricostruzione quando GPIO è configurato ma non riesce",
+        "es": "¡Requiere js-controller 3.3 o superior! Allo js.controller para hacer una reconstrucción cuando GPIO está configurado pero falla",
+        "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
+        "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建"
+      },
+      "1.3.1": {
+        "en": "js-controller 3.3 warnings prevented",
+        "de": "js-controller 3.3 Warnungen verhindert",
+        "ru": "js-controller 3.3 предупреждения предотвращены",
+        "pt": "Avisos do js-controller 3.3 evitados",
+        "nl": "js-controller 3.3 waarschuwingen voorkomen",
+        "fr": "js-controller 3.3 avertissements empêchés",
+        "it": "js-controller 3.3 avvisi impediti",
+        "es": "advertencias de js-controller 3.3 prevenidas",
+        "pl": "js-controller 3.3 zablokowano ostrzeżenia",
+        "zh-cn": "js-controller 3.3 警告被阻止"
+      },
+      "1.3.0": {
+        "en": "Add support for DHTxx/AM23xx Sensors, Configure internal Pull UP/Down Resistor, Optimizations and fixes",
+        "de": "Unterstützung für DHTxx/AM23xx-Sensoren hinzufügen, internen Pull-Up/Down-Widerstand konfigurieren, Optimierungen und Korrekturen",
+        "ru": "Добавление поддержки датчиков DHTxx / AM23xx, настройка внутреннего резистора Pull Up / Down, оптимизации и исправления",
+        "pt": "Adicionar suporte para sensores DHTxx / AM23xx, configurar resistor interno pull UP / Down, otimizações e correções",
+        "nl": "Ondersteuning toevoegen voor DHTxx/AM23xx-sensoren, interne pull UP/Down-weerstand configureren, optimalisaties en fixes",
+        "fr": "Ajout de la prise en charge des capteurs DHTxx/AM23xx, configuration de la résistance interne Pull UP/Down, optimisations et correctifs",
+        "it": "Aggiungi il supporto per i sensori DHTxx/AM23xx, configura la resistenza interna di pull UP/Down, ottimizzazioni e correzioni",
+        "es": "Agregue soporte para sensores DHTxx / AM23xx, configure la resistencia interna Pull UP / Down, optimizaciones y correcciones",
+        "pl": "Dodaj wsparcie dla czujników DHTxx/AM23xx, skonfiguruj wewnętrzny rezystor pull up/down, optymalizacje i poprawki",
+        "zh-cn": "添加对 DHTxx/AM23xx 传感器的支持、配置内部上拉/下拉电阻、优化和修复"
+      },
+      "1.2.0": {
+        "en": "GPIO configuration as output with defined initial value",
+        "de": "GPIO Konfiguration als Ausgang mit definiertem Startwert",
+        "ru": "Конфигурация GPIO как выход с заданным начальным значением",
+        "pt": "Configuração GPIO como saída com valor inicial definido",
+        "nl": "GPIO-configuratie als uitgang met gedefinieerde beginwaarde",
+        "fr": "Configuration GPIO en sortie avec valeur initiale définie",
+        "it": "Configurazione GPIO come output con valore iniziale definito",
+        "es": "Configuración GPIO como salida con valor inicial definido",
+        "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
+        "zh-cn": "GPIO配置为具有定义的初始值的输出"
+      },
+      "1.1.1": {
+        "en": "Error messages for not existing values are logged only once",
+        "de": "Fehlermeldungen für nicht vorhandene Werte werden nur einmal protokolliert",
+        "ru": "Сообщения об ошибках для несуществующих значений регистрируются только один раз",
+        "pt": "Mensagens de erro para valores não existentes são registradas somente uma vez",
+        "nl": "Foutmeldingen voor niet bestaande waarden worden slechts één keer vastgelegd",
+        "fr": "Les messages d'erreur relatifs à des valeurs non existantes ne sont consignés qu'une seule fois.",
+        "it": "I messaggi di errore per i valori non esistenti vengono registrati solo una volta",
+        "es": "Los mensajes de error para valores no existentes se registran una sola vez.",
+        "pl": "Komunikaty o błędach dla nieistniejących wartości są rejestrowane tylko raz",
+        "zh-cn": "不存在的值的错误消息仅记录一次"
+      },
+      "1.1.0": {
+        "en": "Support for Nodejs 10",
+        "de": "Unterstützung für Nodejs 10",
+        "ru": "Поддержка Nodejs 10",
+        "pt": "Suporte para Nodejs 10",
+        "nl": "Ondersteuning voor Nodejs 10",
+        "fr": "Prise en charge de Nodejs 10",
+        "it": "Supporto per Nodejs 10",
+        "es": "Soporte para Nodejs 10",
+        "pl": "Wsparcie dla Nodejs 10",
+        "zh-cn": "支持Nodejs 10"
+      }
     },
-    "native": {
-        "c_cpu": true,
-        "c_raspberry": false,
-        "c_memory": true,
-        "c_network": true,
-        "c_sdcard": true,
-        "c_swap": true,
-        "c_temperature": true,
-        "c_uptime": true,
-        "c_wlan": true,
-        "interval": 60000,
-        "cpu": {
-            "cpu_frequency": {
-                "command": "test -r /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq || test -r /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq || echo -1000",
-                "regexp": "(.*)",
-                "post": "$1/1000"
-            },
-            "load1,load5,load15": {
-                "command": "cat /proc/loadavg",
-                "regexp": "^(\\S+)\\s(\\S+)\\s(\\S+)",
-                "post": ""
-            },
-            "scaling_governor": {
-                "command": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
-                "regexp": "(.*)",
-                "post": ""
-            }
-        },
-        "raspberry": {
-            "cpu_voltage": {
-                "command": "vcgencmd measure_volts core",
-                "regexp": "(\\d+.\\d+)V",
-                "post": ""
-            },
-            "mem_arm": {
-                "command": "vcgencmd get_mem arm",
-                "regexp": "(\\d+)",
-                "post": ""
-            },
-            "mem_gpu": {
-                "command": "vcgencmd get_mem gpu",
-                "regexp": "(\\d+)",
-                "post": ""
-            }
-        },
-        "memory": {
-            "memory_total": {
-                "command": "cat /proc/meminfo",
-                "regexp": "MemTotal:\\s+(\\d+)",
-                "post": "$1/1024"
-            },
-            "memory_free": {
-                "command": "cat /proc/meminfo",
-                "regexp": "MemFree:\\s+(\\d+)",
-                "post": "$1/1024"
-            },
-            "memory_available": {
-                "command": "cat /proc/meminfo",
-                "regexp": "MemAvailable:\\s+(\\d+)",
-                "post": "$1/1024",
-                "multiline": true
-            }
-        },
-        "network": {
-            "net_received": {
-                "command": "cat /sys/class/net/eth0/statistics/rx_bytes",
-                "regexp": "(.*)",
-                "post": "$1*-1"
-            },
-            "net_send": {
-                "command": "cat /sys/class/net/eth0/statistics/tx_bytes",
-                "regexp": "(.*)",
-                "post": ""
-            }
-        },
-        "sdcard": {
-            "sdcard_root_total": {
-                "command": "df /",
-                "regexp": "\\S+\\s+(\\d+).*\\/$",
-                "post": "$1/1024",
-                "multiline": true
-            },
-            "sdcard_boot_total": {
-                "command": "df /boot",
-                "regexp": "\\S+\\s+(\\d+).*\\/boot$",
-                "post": "$1/1024",
-                "multiline": true
-            },
-            "sdcard_root_used": {
-                "command": "df /",
-                "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/$",
-                "post": "$1/1024",
-                "multiline": true
-            },
-            "sdcard_boot_used": {
-                "command": "df /boot",
-                "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot$",
-                "post": "$1/1024",
-                "multiline": true
-            }
-        },
-        "swap": {
-            "swap_total": {
-                "command": "cat /proc/meminfo",
-                "regexp": "SwapTotal:\\s+(\\d+)",
-                "post": "$1/1024",
-                "multiline": true
-            },
-            "swap_used": {
-                "command": "cat /proc/meminfo",
-                "regexp": "SwapFree:\\s+(\\d+)",
-                "post": "(rpi.swap_total - $1)/1024",
-                "multiline": true
-            }
-        },
-        "temperature": {
-            "soc_temp": {
-                "command": "cat /sys/devices/virtual/thermal/thermal_zone0/temp",
-                "regexp": "(.*)",
-                "post": "$1/1000"
-            }
-        },
-        "uptime": {
-            "uptime": {
-                "command": "cat /proc/uptime",
-                "regexp": "(^\\S+)",
-                "post": ""
-            }
-        },
-        "wlan": {
-            "wifi_received": {
-                "command": "cat /sys/class/net/wlan0/statistics/rx_bytes",
-                "regexp": "(.*)",
-                "post": "$1*-1"
-            },
-            "wifi_send": {
-                "command": "cat /sys/class/net/wlan0/statistics/tx_bytes",
-                "regexp": "(.*)",
-                "post": ""
-            }
-        },
-        "gpios": [],
-        "forceinit": false,
-        "inputPullUp": false,
-        "buttonPullUp": false
+    "title": "RPI-Monitor",
+    "titleLang": {
+      "en": "RPI-Monitor",
+      "de": "RPI-Monitor",
+      "ru": "RPI-монитор",
+      "pt": "RPI-Monitor",
+      "nl": "RPI-monitor",
+      "fr": "RPI-Moniteur",
+      "it": "RPI-Monitor",
+      "es": "Monitor RPI",
+      "pl": "Monitor RPI",
+      "zh-cn": "RPI-监视器"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "RPI-Monitor",
+      "de": "RPI-Monitor",
+      "ru": "RPI-монитор",
+      "pt": "RPI-Monitor",
+      "nl": "RPI-Monitor",
+      "fr": "RPI-Monitor",
+      "it": "RPI-Monitor",
+      "es": "RPI-Monitor",
+      "pl": "Monitor RPI",
+      "zh-cn": "RPI-监视器"
+    },
+    "authors": [
+      "Christian Baumgartner",
+      "husky-koglhof <husky.koglhof@icloud.com>",
+      "Garfonso <garfonso@mobo.info>"
+    ],
+    "os": [
+      "linux"
+    ],
+    "keywords": [
+      "ioBroker",
+      "monitoring",
+      "raspberry",
+      "orangepi",
+      "odroid",
+      "bananapi",
+      "gpio"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "rpi2.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.rpi2/master/admin/rpi2.png",
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/blob/master/README.md",
+    "loglevel": "info",
+    "tier": 2,
+    "mode": "daemon",
+    "type": "hardware",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "materialize"
+    },
+    "osDependencies": {
+      "linux": [
+        "build-essential",
+        "python"
+      ]
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.0.0"
+      }
+    ],
+    "singletonHost": true
+  },
+  "native": {
+    "c_cpu": true,
+    "c_raspberry": false,
+    "c_memory": true,
+    "c_network": true,
+    "c_sdcard": true,
+    "c_swap": true,
+    "c_temperature": true,
+    "c_uptime": true,
+    "c_wlan": true,
+    "interval": 60000,
+    "cpu": {
+      "cpu_frequency": {
+        "command": "test -r /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq || test -r /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq || echo -1000",
+        "regexp": "(.*)",
+        "post": "$1/1000"
+      },
+      "load1,load5,load15": {
+        "command": "cat /proc/loadavg",
+        "regexp": "^(\\S+)\\s(\\S+)\\s(\\S+)",
+        "post": ""
+      },
+      "scaling_governor": {
+        "command": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+        "regexp": "(.*)",
+        "post": ""
+      }
+    },
+    "raspberry": {
+      "cpu_voltage": {
+        "command": "vcgencmd measure_volts core",
+        "regexp": "(\\d+.\\d+)V",
+        "post": ""
+      },
+      "mem_arm": {
+        "command": "vcgencmd get_mem arm",
+        "regexp": "(\\d+)",
+        "post": ""
+      },
+      "mem_gpu": {
+        "command": "vcgencmd get_mem gpu",
+        "regexp": "(\\d+)",
+        "post": ""
+      }
+    },
+    "memory": {
+      "memory_total": {
+        "command": "cat /proc/meminfo",
+        "regexp": "MemTotal:\\s+(\\d+)",
+        "post": "$1/1024"
+      },
+      "memory_free": {
+        "command": "cat /proc/meminfo",
+        "regexp": "MemFree:\\s+(\\d+)",
+        "post": "$1/1024"
+      },
+      "memory_available": {
+        "command": "cat /proc/meminfo",
+        "regexp": "MemAvailable:\\s+(\\d+)",
+        "post": "$1/1024",
+        "multiline": true
+      }
+    },
+    "network": {
+      "net_received": {
+        "command": "cat /sys/class/net/eth0/statistics/rx_bytes",
+        "regexp": "(.*)",
+        "post": "$1*-1"
+      },
+      "net_send": {
+        "command": "cat /sys/class/net/eth0/statistics/tx_bytes",
+        "regexp": "(.*)",
+        "post": ""
+      }
+    },
+    "sdcard": {
+      "sdcard_root_total": {
+        "command": "df /",
+        "regexp": "\\S+\\s+(\\d+).*\\/$",
+        "post": "$1/1024",
+        "multiline": true
+      },
+      "sdcard_boot_total": {
+        "command": "df /boot",
+        "regexp": "\\S+\\s+(\\d+).*\\/boot$",
+        "post": "$1/1024",
+        "multiline": true
+      },
+      "sdcard_root_used": {
+        "command": "df /",
+        "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/$",
+        "post": "$1/1024",
+        "multiline": true
+      },
+      "sdcard_boot_used": {
+        "command": "df /boot",
+        "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot$",
+        "post": "$1/1024",
+        "multiline": true
+      }
+    },
+    "swap": {
+      "swap_total": {
+        "command": "cat /proc/meminfo",
+        "regexp": "SwapTotal:\\s+(\\d+)",
+        "post": "$1/1024",
+        "multiline": true
+      },
+      "swap_used": {
+        "command": "cat /proc/meminfo",
+        "regexp": "SwapFree:\\s+(\\d+)",
+        "post": "(rpi.swap_total - $1)/1024",
+        "multiline": true
+      }
+    },
+    "temperature": {
+      "soc_temp": {
+        "command": "cat /sys/devices/virtual/thermal/thermal_zone0/temp",
+        "regexp": "(.*)",
+        "post": "$1/1000"
+      }
+    },
+    "uptime": {
+      "uptime": {
+        "command": "cat /proc/uptime",
+        "regexp": "(^\\S+)",
+        "post": ""
+      }
+    },
+    "wlan": {
+      "wifi_received": {
+        "command": "cat /sys/class/net/wlan0/statistics/rx_bytes",
+        "regexp": "(.*)",
+        "post": "$1*-1"
+      },
+      "wifi_send": {
+        "command": "cat /sys/class/net/wlan0/statistics/tx_bytes",
+        "regexp": "(.*)",
+        "post": ""
+      }
+    },
+    "gpios": [],
+    "forceinit": false,
+    "inputPullUp": false,
+    "buttonPullUp": false
+  },
+  "objects": [],
+  "instanceObjects": []
 }

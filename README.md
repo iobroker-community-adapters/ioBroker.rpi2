@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0-alpha.0 (2024-05-23)
 * (Garfonso) Get stuff up to date...
 
 ### 1.3.2 (2022-02-17)
@@ -177,10 +177,10 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 - (Apollon77) Error messages for not existing values are logged only once
 
 ### 1.1.0
- - (Apollon77) Nodejs 10 support 
+ - (Apollon77) Nodejs 10 support
 
 ### 1.0.0 (2018-08-20)
- - (bluefox) Admin3 support 
+ - (bluefox) Admin3 support
 
 ### 0.3.2 (2017-11-29)
  - (Homoran) fixed Mem available readings on Stretch

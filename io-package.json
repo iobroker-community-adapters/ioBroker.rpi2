@@ -1,31 +1,6 @@
 {
     "common": {
         "name": "rpi2",
-        "title": "RPI-Monitor",
-        "titleLang": {
-            "en": "RPI-Monitor",
-            "de": "RPI-Monitor",
-            "ru": "RPI-монитор",
-            "pt": "RPI-Monitor",
-            "nl": "RPI-monitor",
-            "fr": "RPI-Moniteur",
-            "it": "RPI-Monitor",
-            "es": "Monitor RPI",
-            "pl": "Monitor RPI",
-            "zh-cn": "RPI-监视器"
-        },
-        "desc": {
-            "en": "RPI-Monitor",
-            "de": "RPI-Monitor",
-            "ru": "RPI-монитор",
-            "pt": "RPI-Monitor",
-            "nl": "RPI-Monitor",
-            "fr": "RPI-Monitor",
-            "it": "RPI-Monitor",
-            "es": "RPI-Monitor",
-            "pl": "Monitor RPI",
-            "zh-cn": "RPI-监视器"
-        },
         "version": "1.3.2",
         "news": {
             "1.3.2": {
@@ -173,12 +148,39 @@
                 "zh-cn": "修复启动的适配器"
             }
         },
-        "mode": "daemon",
-        "platform": "Javascript/Node.js",
+        "title": "RPI-Monitor",
+        "titleLang": {
+            "en": "RPI-Monitor",
+            "de": "RPI-Monitor",
+            "ru": "RPI-монитор",
+            "pt": "RPI-Monitor",
+            "nl": "RPI-monitor",
+            "fr": "RPI-Moniteur",
+            "it": "RPI-Monitor",
+            "es": "Monitor RPI",
+            "pl": "Monitor RPI",
+            "zh-cn": "RPI-监视器"
+        },
+        "desc": {
+            "en": "RPI-Monitor",
+            "de": "RPI-Monitor",
+            "ru": "RPI-монитор",
+            "pt": "RPI-Monitor",
+            "nl": "RPI-Monitor",
+            "fr": "RPI-Monitor",
+            "it": "RPI-Monitor",
+            "es": "RPI-Monitor",
+            "pl": "Monitor RPI",
+            "zh-cn": "RPI-监视器"
+        },
+        "authors": [
+            "Christian Baumgartner",
+            "husky-koglhof <husky.koglhof@icloud.com>",
+            "Garfonso <garfonso@mobo.info>"
+        ],
         "os": [
             "linux"
         ],
-        "loglevel": "info",
         "keywords": [
             "ioBroker",
             "monitoring",
@@ -188,11 +190,26 @@
             "bananapi",
             "gpio"
         ],
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
+        "platform": "Javascript/Node.js",
         "main": "main.js",
-        "authors": [
-            "Christian Baumgartner",
-            "husky-koglhof <husky.koglhof@icloud.com>"
-        ],
+        "icon": "rpi2.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.rpi2/master/admin/rpi2.png",
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/blob/master/README.md",
+        "loglevel": "info",
+        "tier": 2,
+        "mode": "daemon",
+        "type": "hardware",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "materialize"
+        },
         "osDependencies": {
             "linux": [
                 "build-essential",
@@ -201,25 +218,15 @@
         },
         "dependencies": [
             {
-                "js-controller": ">=3.3.0"
+                "js-controller": ">=3.3.22"
             }
         ],
         "globalDependencies": [
             {
-                "admin": ">=3.0.0"
+                "admin": ">=5.0.0"
             }
         ],
-        "license": "MIT",
-        "singletonHost": true,
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/blob/master/README.md",
-        "icon": "rpi.png",
-        "type": "hardware",
-        "enabled": true,
-        "materialize": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "tier": 2,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.rpi2/master/admin/rpi.png"
+        "singletonHost": true
     },
     "native": {
         "c_cpu": true,
@@ -362,7 +369,10 @@
                 "post": ""
             }
         },
-        "gpios": []
+        "gpios": [],
+        "forceinit": false,
+        "inputPullUp": false,
+        "buttonPullUp": false
     },
     "objects": [],
     "instanceObjects": []

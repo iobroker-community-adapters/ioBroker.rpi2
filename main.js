@@ -5,10 +5,17 @@
  */
 'use strict';
 
-const utils = require('@iobroker/adapter-core'); // Get common adapter utils
+/*
+ * Created with @iobroker/create-adapter v2.6.3
+ */
+
+// The adapter-core module gives you access to the core ioBroker functions
+// you need to create an adapter
+const utils = require('@iobroker/adapter-core');
+
 let gpio;
 let gpioButtons;
-let errorsLogged = {};
+const errorsLogged = {};
 const debounceTimers = [];
 const intervalTimers = [];
 
@@ -16,82 +23,104 @@ const intervalTimers = [];
 // See https://www.npmjs.com/package/rpi-gpio-buttons
 const buttonEvents = [ 'pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released' ];
 
-const adapter = new utils.Adapter({
-    name: 'rpi2',
+class Rpi2 extends utils.Adapter {
 
-    ready: function () {
-        config = adapter.config;
+    /**
+     * @param {Partial<utils.AdapterOptions>} [options={}]
+     */
+    constructor(options) {
+        super({
+            ...options,
+            name: 'rpi2',
+        });
+        this.on('ready', this.onReady.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
+        // this.on('objectChange', this.onObjectChange.bind(this));
+        // this.on('message', this.onMessage.bind(this));
+        this.on('unload', this.onUnload.bind(this));
+    }
+
+    async onReady() {
         objects = {};
 
-        if (adapter.config.forceinit) {
-            adapter.getAdapterObjects((res) => {
-                for (const id of Object.keys(res)) {
-                    if (/^rpi2\.\d+$/.test(id)) {
-                        adapter.log.debug('Skip root object ' + id);
-                        continue;
-                    }
-
-                    adapter.log.debug('Remove ' + id + ': ' + id);
-
-                    adapter.delObject(id, (res, err) => {
-                        if (res !== undefined && res !== null && res !== 'Not exists') adapter.log.error('res from delObject: ' + res);
-                        if (err !== undefined) adapter.log.error('err from delObject: ' + err);
-                    });
-                    adapter.deleteState(id, (res, err) => {
-                        if (res !== undefined && res !== null && res !== 'Not exists') adapter.log.error('res from deleteState: ' + res);
-                        if (err !== undefined) adapter.log.error('err from deleteState: ' + err);
-                    });
+        const adapterObjects = await this.getAdapterObjectsAsync();
+        if (this.config.forceinit) {
+            for (const id of Object.keys(adapterObjects)) {
+                if (/^rpi2\.\d+$/.test(id)) {
+                    this.log.debug('Skip root object ' + id);
+                    continue;
                 }
-                adapter.subscribeStates('*');
-                main();
-            });
+
+                this.log.debug('Remove ' + id + ': ' + id);
+                try {
+                    await this.delObjectAsync(id);
+                    await this.deleteStateAsync(id);
+                } catch (err) {
+                    this.log.error('Could not delete ' + id + ': ' + err);
+                }
+            }
         } else {
-             adapter.getAdapterObjects((res) => {
-                for (const id of Object.keys(res)) {
-                    objects[id] = true; //object already exists.
-                }
-
-                adapter.log.debug('received all objects');
-                adapter.subscribeStates('*');
-                main();
-             });
+            for (const id of Object.keys(adapterObjects)) {
+                objects[id] = true; //object already exists.
+            }
+            this.log.debug('received all objects');
         }
-    },
-    stateChange: function (id, state) {
-        adapter.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
+        await this.subscribeStatesAsync('*');
+        await main(this);
+    }
+
+    onStateChange(id, state) {
+        this.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
         if (state && !state.ack) {
             if (id.indexOf('gpio.') !== -1) {
                 const parts = id.split('.');
                 parts.pop(); // remove state
-                writeGpio(parts.pop(), state.val);
+                writeGpio(this, parts.pop(), state.val);
             }
-        }
-    },
-    unload: async function () {
-        // Cancel any intervals
-        for (const interval of intervalTimers) {
-            clearInterval(interval);
-        }
-        // Cancel any debounce timers
-        for (const timer of debounceTimers) {
-            if (timer != null) {
-                clearTimeout(timer);
-            }
-        };
-        if (gpio) {
-            if (gpioButtons) {
-                await gpioButtons.destroy().catch((err) => {
-                    console.error(`Failed to destroy gpioButtons: ${err}`);
-                });
-            };
-            await gpio.promise.destroy().catch((err) => {
-                console.error(`Failed to destroy gpio: ${err}`);
-            });
         }
     }
-});
 
-function writeGpio(port, value) {
+    async onUnload(callback) {
+        try {
+            // Cancel any intervals
+            for (const interval of intervalTimers) {
+                clearInterval(interval);
+            }
+            // Cancel any debounce timers
+            for (const timer of debounceTimers) {
+                if (timer != null) {
+                    clearTimeout(timer);
+                }
+            }
+            if (gpio) {
+                if (gpioButtons) {
+                    await gpioButtons.destroy().catch((err) => {
+                        console.error(`Failed to destroy gpioButtons: ${err}`);
+                    });
+                }
+                await gpio.promise.destroy().catch((err) => {
+                    console.error(`Failed to destroy gpio: ${err}`);
+                });
+            }
+            callback();
+        } catch (e) {
+            callback();
+        }
+    }
+}
+
+if (require.main !== module) {
+    // Export the constructor in compact mode
+    /**
+     * @param {Partial<utils.AdapterOptions>} [options={}]
+     */
+    module.exports = (options) => new Rpi2(options);
+} else {
+    // otherwise start the instance directly
+    new Rpi2();
+}
+
+function writeGpio(adapter, port, value) {
     port = parseInt(port, 10);
     if (!adapter.config.gpios[port] || !adapter.config.gpios[port].enabled) {
         adapter.log.warn('Port ' + port + ' is not writable, because disabled.');
@@ -107,12 +136,12 @@ function writeGpio(port, value) {
 
     try {
         if (gpio) {
-            gpio.write(port, value, err => {
+            gpio.write(port, value, async err => {
                 if (err) {
                     adapter.log.error(err);
                 } else {
                     adapter.log.debug('Written ' + value + ' into port ' + port);
-                    adapter.setState('gpio.' + port + '.state', value, true);
+                    await adapter.setStateAsync('gpio.' + port + '.state', value, true);
                 }
             });
         } else {
@@ -127,13 +156,12 @@ let objects;
 let exec;
 const rpi      = {};
 const table    = {};
-let config;
 let oldstyle = false;
 
-function main() {
-    if (anyParserConfigEnabled()) {
+async function main(adapter) {
+    if (anyParserConfigEnabled(adapter)) {
         // TODO: Check which Objects we provide
-        intervalTimers.push(setInterval(parser, adapter.config.interval || 60000));
+        intervalTimers.push(setInterval(() => {parser(adapter);}, adapter.config.interval || 60000));
 
         const version = process.version;
         const va = version.split('.');
@@ -145,14 +173,14 @@ function main() {
             adapter.log.debug('NODE Version = ' + version + ', we need new execSync');
             exec     = require('child_process').execSync;
         }
-        parser();
+        await parser(adapter);
     } else {
         adapter.log.info('No parser items enabled - skipping');
     }
-    initPorts();
+    await initPorts(adapter);
 }
 
-function anyParserConfigEnabled() {
+function anyParserConfigEnabled(adapter) {
     for (const configKey of Object.keys(adapter.config)) {
         if (configKey.indexOf('c_') >= 0) {
             adapter.log.debug(`${configKey} looks like a parser item`);
@@ -165,24 +193,18 @@ function anyParserConfigEnabled() {
     return false;
 }
 
-function parser() {
-
+async function parser(adapter) {
     adapter.log.debug('start parsing');
 
     // Workaround, WebStorm
-    if (config === undefined) {
-        config = adapter.config;
-    }
-    for (const c in config) {
-        if (!config.hasOwnProperty(c)) continue;
-
+    const config = adapter.config;
+    for (const c of Object.keys(config)) {
         adapter.log.debug('PARSING: ' + c);
 
         if (c.indexOf('c_') !== 0 && config['c_' + c] === true) {
             table[c] = new Array(20);
             const o = config[c];
-            for (const i in o) {
-                if (!o.hasOwnProperty(i)) continue;
+            for (const i of Object.keys(o)) {
                 adapter.log.debug('    PARSING: ' + i);
                 const object = o[i];
                 const command = object.command;
@@ -246,8 +268,7 @@ function parser() {
     }
 
     // TODO: Parse twice to get post data and evaluate
-    for (const c in config) {
-        if (!config.hasOwnProperty(c)) continue;
+    for (const c of Object.keys(config)) {
         adapter.log.debug('CURRENT = ' + c + ' ' + config['c_' + c]);
         adapter.log.debug(c.indexOf('c_'));
         if (c.indexOf('c_') !== 0 && config['c_' + c]) {
@@ -261,16 +282,12 @@ function parser() {
                     _id:    c
                 };
 
-                adapter.extendObject(c, stateObj);
+                await adapter.extendObjectAsync(c, stateObj);
                 objects[c] = true; //remember that we created the object.
             }
             const o = config[c];
-            for (const i in o) {
-                if (!o.hasOwnProperty(i)) {
-                    continue;
-                }
+            for (const i of Object.keys(o)) {
                 const object = o[i];
-                const command = object.command;
                 const post = object.post;
 
                 adapter.log.debug('---> POST:   ' + post + ' for ' + i + ' in ' + o);
@@ -307,13 +324,12 @@ function parser() {
                                     role:  'value',
                                     type:  'number'
                                 },
-                                type: 'state',
-                                _id: objectName
+                                type: 'state'
                             };
-                            adapter.extendObject(objectName, stateObj);
+                            await adapter.extendObjectAsync(objectName, stateObj);
                             objects[objectName] = true; //remember that we created the object.
                         }
-                        adapter.setState(objectName, {
+                        await adapter.setStateAsync(objectName, {
                             val: value,
                             ack: true
                         });
@@ -352,13 +368,12 @@ function parser() {
                                     role:  'value',
                                     type:  'mixed'
                                 },
-                                type: 'state',
-                                _id: objectName
+                                type: 'state'
                             };
-                            adapter.extendObject(objectName, stateObj);
+                            await adapter.extendObjectAsync(objectName, stateObj);
                             objects[objectName] = true; //remember that we created the object.
                         }
-                        adapter.setState(objectName, {
+                        await adapter.setStateAsync(objectName, {
                             val: value,
                             ack: true
                         });
@@ -376,20 +391,20 @@ function parser() {
     }
 }
 
-function inputPullUp(value) {
+function inputPullUp(adapter, value) {
     return (adapter.config.inputPullUp ? !value : value);
 }
 
-function readValue(port) {
+function readValue(adapter, port) {
     if (!gpio) {
         return adapter.log.error('GPIO is not initialized!');
     }
 
-    gpio.read(port, (err, value) => {
+    gpio.read(port, async (err, value) => {
         if (err) {
             adapter.log.error('Cannot read port ' + port + ': ' + err);
         } else {
-            adapter.setState('gpio.' + port + '.state', inputPullUp(value), true);
+            await adapter.setStateAsync('gpio.' + port + '.state', inputPullUp(adapter, value), true);
         }
     });
 }
@@ -398,28 +413,17 @@ function readValue(port) {
 // handlers, etc. are setup their states are guaranteed to be in place.
 
 // Our own deleteState that logs an error only if it's not, Not Exists
-async function deleteState(stateName) {
+async function deleteState(adapter, stateName) {
     try {
         await adapter.delObjectAsync(stateName);
     } catch (err) {
-        if (err != 'Error: Not exists') {
+        if (err.message !== 'Error: Not exists') {
             throw new Error(`Failed to delete object ${stateName}: ${err}`);
         }
     }
-    await deleteObject(stateName);
 }
 
- async function deleteObject(objectName) {
-    try {
-        await adapter.delStateAsync(objectName);
-    } catch (err) {
-        if (err != 'Error: Not exists') {
-            throw new Error(`Failed to delete object ${objectName}: ${err}`);
-        }
-    }
-}
-
-async function syncPort(port, data) {
+async function syncPort(adapter, port, data) {
     data.isGpio = (data.input === 'in' || data.input === 'out' || data.input === 'outlow' || data.input === 'outhigh');
     data.isButton = (data.input === 'button');
     data.isTempHum = (data.input === 'dht11' || data.input === 'dht22');
@@ -430,7 +434,7 @@ async function syncPort(port, data) {
         await adapter.extendObjectAsync(channelName, {
             type: 'channel',
             common: {
-                name: !data.hasOwnProperty('label') || data.label == '' ? 'GPIO ' + port : data.label,
+                name: data.label === '' ? 'GPIO ' + port : data.label,
                 // TODO: should we do more than just add this as 'info'?
                 role: 'info'
             }
@@ -454,20 +458,20 @@ async function syncPort(port, data) {
         // extendObject creates one if it doesn't exist - same below
         await adapter.extendObjectAsync(stateName, obj);
     } else {
-        await deleteState(stateName);
+        await deleteState(adapter, stateName);
     }
-    await syncPortDirection(port, data);
-    await syncPortButton(port, data);
-    await syncPortTempHum(port, data);
+    await syncPortDirection(adapter, port, data);
+    await syncPortButton(adapter, port, data);
+    await syncPortTempHum(adapter, port, data);
 
     // Delete the channel only after everything will have been removed or
     // we end up with junk in the object tree.
     if (!data.enabled) {
-        await deleteObject(channelName);
+        await deleteState(channelName);
     }
 }
 
-async function syncPortDirection(port, data) {
+async function syncPortDirection(adapter, port, data) {
     const stateName = 'gpio.' + port + '.isInput';
     if (data.enabled) {
         adapter.log.debug(`Creating ${stateName}`);
@@ -486,7 +490,7 @@ async function syncPortDirection(port, data) {
         await adapter.extendObjectAsync(stateName, obj);
         await adapter.setStateAsync(stateName, data.isInput, true);
     } else {
-        await deleteState(stateName);
+        await deleteState(adapter, stateName);
     }
 }
 
@@ -494,7 +498,7 @@ function buttonStateName(port, eventName) {
     return 'gpio.' + port + '.' + eventName;
 }
 
-async function syncPortButton(port, data) {
+async function syncPortButton(adapter, port, data) {
     for (const eventName of buttonEvents) {
         const stateName = buttonStateName(port, eventName);
         if (data.enabled && data.isButton) {
@@ -512,9 +516,9 @@ async function syncPortButton(port, data) {
             };
             await adapter.extendObjectAsync(stateName, obj);
         } else {
-            await deleteState(stateName);
+            await deleteState(adapter, stateName);
         }
-    };
+    }
 }
 
 function temperatureStateName(port) {
@@ -524,7 +528,7 @@ function humidityStateName(port) {
     return 'gpio.' + port + '.humidity';
 }
 
-async function syncPortTempHum(port, data) {
+async function syncPortTempHum(adapter, port, data) {
     if (data.enabled && data.isTempHum) {
         const obj = {
             common: {
@@ -540,7 +544,7 @@ async function syncPortTempHum(port, data) {
         };
         await adapter.extendObjectAsync(temperatureStateName(port), obj);
     } else {
-        await deleteState(temperatureStateName(port));
+        await deleteState(adapter, temperatureStateName(port));
     }
     if (data.enabled && data.isTempHum) {
         const obj = {
@@ -557,13 +561,13 @@ async function syncPortTempHum(port, data) {
         };
         await adapter.extendObjectAsync(humidityStateName(port), obj);
     } else {
-        await deleteState(humidityStateName(port));
+        await deleteState(adapter, humidityStateName(port));
     }
 }
 
 // Setup GPIO ports & buttons
-function setupGpio(gpioPorts, buttonPorts) {
-    if (gpioPorts.length == 0 && buttonPorts.length == 0) return;
+function setupGpio(adapter, gpioPorts, buttonPorts) {
+    if (gpioPorts.length === 0 && buttonPorts.length === 0) return;
 
     adapter.log.debug('Inputs are pull ' + (adapter.config.inputPullUp ? 'up' : 'down') + '.');
     adapter.log.debug('Buttons are pull ' + (adapter.config.buttonPullUp ? 'up' : 'down') + '.');
@@ -576,7 +580,7 @@ function setupGpio(gpioPorts, buttonPorts) {
         adapter.log.error('Cannot initialize/setMode GPIO: ' + e);
         console.error(e);
         if (e.message.includes('NODE_MODULE_VERSION')) {
-            return adapter.terminate("A dependency requires a rebuild.", 13);
+            return adapter.terminate('A dependency requires a rebuild.', 13);
         }
     }
 
@@ -588,19 +592,19 @@ function setupGpio(gpioPorts, buttonPorts) {
         for (const port of gpioPorts) {
             const direction = adapter.config.gpios[port].input;
             adapter.log.debug(`Port ${port} direction: ${direction}`);
-            if (direction == 'in') {
+            if (direction === 'in') {
                 // Input port
                 haveGpioInputs = true;
                 gpio.setup(port, gpio.DIR_IN, gpio.EDGE_BOTH, (err) => {
                     if (err) {
                         adapter.log.error('Cannot setup port ' + port + ' as input: ' + err);
                     } else {
-                        readValue(port);
+                        readValue(adapter, port);
                     }
                 });
             } else {
                 // All the different flavours of output
-                const directionCode = direction == 'outlow' ? gpio.DIR_LOW : direction == 'outhigh' ? gpio.DIR_HIGH : gpio.DIR_OUT;
+                const directionCode = direction === 'outlow' ? gpio.DIR_LOW : direction === 'outhigh' ? gpio.DIR_HIGH : gpio.DIR_OUT;
                 adapter.log.debug(`Port ${port} directionCode: ${directionCode}`);
                 gpio.setup(port, directionCode, (err) => {
                     err && adapter.log.error('Cannot setup port ' + port + ' as output: ' + err);
@@ -613,7 +617,7 @@ function setupGpio(gpioPorts, buttonPorts) {
             adapter.log.debug('Register onchange handler');
             gpio.on('change', (port, value) => {
                 // Ignore buttons as they are handled below
-                if (adapter.config.gpios[port].input == 'in') {
+                if (adapter.config.gpios[port].input === 'in') {
                     adapter.log.debug('GPIO change on port ' + port + ': ' + value);
                     if (debounceTimers[port] != null) {
                         // Timer is running but state changed (must be back) so just cancel timer.
@@ -621,10 +625,10 @@ function setupGpio(gpioPorts, buttonPorts) {
                         debounceTimers[port] = null;
                     } else {
                         // Start a timer and report to state if doesn't revert within given period.
-                        debounceTimers[port] = setTimeout((t_port, t_value) => {
+                        debounceTimers[port] = setTimeout(async (t_port, t_value) => {
                             debounceTimers[t_port] = null;
                             adapter.log.debug(`GPIO debounced on port ${t_port}: ${t_value}`);
-                            adapter.setState('gpio.' + t_port + '.state', inputPullUp(t_value), true);
+                            await adapter.setStateAsync('gpio.' + t_port + '.state', inputPullUp(adapter, t_value), true);
                         }, adapter.config.inputDebounceMs, port, value);
                     }
                 }
@@ -651,7 +655,7 @@ function setupGpio(gpioPorts, buttonPorts) {
                 adapter.log.error('Cannot initialize GPIO Buttons: ' + e);
                 console.error(e);
                 if (e.message.includes('NODE_MODULE_VERSION')) {
-                    return adapter.terminate("A dependency requires a rebuild.", 13);
+                    return adapter.terminate('A dependency requires a rebuild.', 13);
                 }
             }
 
@@ -659,12 +663,12 @@ function setupGpio(gpioPorts, buttonPorts) {
             if (gpioButtons) {
                 for (const eventName of buttonEvents) {
                     adapter.log.debug(`Register button handler for ${eventName}`);
-                    gpioButtons.on(eventName, (port) => {
+                    gpioButtons.on(eventName, async (port) => {
                         adapter.log.debug(`${eventName} triggered for port ${port}`);
                         const stateName = buttonStateName(port, eventName);
-                        adapter.setState(stateName, true, true);
+                        await adapter.setStateAsync(stateName, true, true);
                     });
-                };
+                }
                 // And start button processing
                 gpioButtons.init().catch(err => {
                     adapter.log.error(`An error occurred during buttons init(). ${err.message}`);
@@ -675,10 +679,10 @@ function setupGpio(gpioPorts, buttonPorts) {
 }
 
 // Setup DHTxx/AM23xx sensors
-function setupDht(dhtPorts) {
-    if (dhtPorts.length == 0) return;
-    let pollInterval = adapter.config.dhtPollInterval;
-    if (pollInterval == 0) {
+function setupDht(adapter, dhtPorts) {
+    if (dhtPorts.length === 0) return;
+    const pollInterval = adapter.config.dhtPollInterval;
+    if (pollInterval === 0) {
         adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
     } else if (pollInterval < 350) {
         adapter.log.error(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - disabling`);
@@ -689,7 +693,7 @@ function setupDht(dhtPorts) {
         // Initialise ports, keeping track of those that worked with type
         const dhtInitd = [];
         for (const port of dhtPorts) {
-            const type = adapter.config.gpios[port].input == 'dht11' ? 11 : 22;
+            const type = adapter.config.gpios[port].input === 'dht11' ? 11 : 22;
             try {
                 sensorLib.initialize(type, port);
                 dhtInitd[port] = [type];
@@ -700,15 +704,15 @@ function setupDht(dhtPorts) {
 
         if (dhtInitd.length > 0) {
             // At least one initialised, set polling on configured interval
-            intervalTimers.push(setInterval(() => {
+            intervalTimers.push(setInterval(async () => {
                 for (const [port, type] of Object.entries(dhtInitd)) {
-                    sensorLib.read(type, port, function(err, temperature, humidity) {
+                    sensorLib.read(type, port, async function(err, temperature, humidity) {
                         if (err) {
                             adapter.log.error(`Failed to read DHTxx/AM23xx: ${type}/${port}`);
                         } else {
                             adapter.log.debug(`Read DHTxx/AM23xx: ${type}/${port} : ${temperature}°C, humidity: ${humidity}%`);
-                            adapter.setStateChanged(temperatureStateName(port), temperature, true);
-                            adapter.setStateChanged(humidityStateName(port), humidity, true);
+                            await adapter.setStateChanged(temperatureStateName(port), temperature, true);
+                            await adapter.setStateChanged(humidityStateName(port), humidity, true);
                         }
                     });
                 }
@@ -717,11 +721,11 @@ function setupDht(dhtPorts) {
     }
 }
 
-async function initPorts() {
+async function initPorts(adapter) {
     if (adapter.config.gpios && adapter.config.gpios.length) {
-        let gpioPorts = [];
-        let buttonPorts = [];
-        let dhtPorts = [];
+        const gpioPorts = [];
+        const buttonPorts = [];
+        const dhtPorts = [];
 
         for (let port = 0; port < adapter.config.gpios.length; port++) {
             if (adapter.config.gpios[port]) {
@@ -740,7 +744,7 @@ async function initPorts() {
 
             // syncPort sets up object tree. Do it now so all ready when
             // physical GPIOs are enabled below.
-            await syncPort(port, adapter.config.gpios[port] || {});
+            await syncPort(adapter, port, adapter.config.gpios[port] || {});
 
             if (!adapter.config.gpios[port] || !adapter.config.gpios[port].enabled) continue;
 
@@ -765,8 +769,8 @@ async function initPorts() {
             }
         }
 
-        setupGpio(gpioPorts, buttonPorts);
-        setupDht(dhtPorts);
+        setupGpio(adapter, gpioPorts, buttonPorts);
+        setupDht(adapter, dhtPorts);
     } else {
         adapter.log.info('GPIO ports are not configured');
     }

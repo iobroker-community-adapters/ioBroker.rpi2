@@ -1,19 +1,19 @@
-![Logo](admin/rpi.png)
+![Logo](admin/rpi2.png)
 ioBroker RPI-Monitor Adapter
 ==============
 
-![Number of Installations](http://iobroker.live/badges/rpi2-installed.svg)
-![Number of Installations](http://iobroker.live/badges/rpi2-stable.svg)
-[![NPM version](http://img.shields.io/npm/v/iobroker.rpi2.svg)](https://www.npmjs.com/package/iobroker.rpi2)
-
-[![Translation status](https://weblate.iobroker.net/widgets/adapters/-/rpi2/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
+[![NPM version](https://img.shields.io/npm/v/iobroker.rpi2.svg)](https://www.npmjs.com/package/iobroker.rpi2)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.rpi2.svg)](https://www.npmjs.com/package/iobroker.rpi2)
+![Number of Installations](https://iobroker.live/badges/rpi2-installed.svg)
+![Current version in stable repository](https://iobroker.live/badges/rpi2-stable.svg)
 
+[![NPM](https://nodei.co/npm/iobroker.rpi2.png?downloads=true)](https://nodei.co/npm/iobroker.rpi2/)
 
+**Tests:** ![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.rpi2/workflows/Test%20and%20Release/badge.svg)
 RPI-Monitor implementation for integration into ioBroker. It is the same implementation as for iobroker.rpi, but with GPIOs.
 
 ## Important Information
-Works only with node >= 0.12
+Works only with node >= 18
 
 **ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
 
@@ -148,6 +148,13 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ## Changelog
 
+<!--
+	PLACEHOLDER for the next version:
+	### **WORK IN PROGRESS**
+-->
+### **WORK IN PROGRESS**
+* (Garfonso) Get stuff up to date...
+
 ### 1.3.2 (2022-02-17)
 * Important: This version requires at leas js-controller 3.3
 * (Apollon77) Stop the adapter when GPIO module is configured but not working due to a needed rebuild that js-controller can pick up
@@ -212,7 +219,24 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
  - Initial commit. Alpha Version.
 
 ## License
-
-Copyright (c) 2015-2022 husky-koglhof <husky.koglhof@icloud.com>
-
 MIT License
+
+Copyright (c) 2024 Garfonso <garfonso@mobo.info>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

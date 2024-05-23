@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0-alpha.1 (2024-05-23)
 * (Garfonso) Fix stuff.
 
 ### 2.0.0-alpha.0 (2024-05-23)

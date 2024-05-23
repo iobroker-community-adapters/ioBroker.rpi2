@@ -1,4 +1,5 @@
 {
   "plugins": ["iobroker", "license", "manual-review"],
-  "addPlaceholder": false
+  "addPlaceholder": false,
+  "ioPackageNoPrerelease": true
 }

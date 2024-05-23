@@ -467,7 +467,7 @@ async function syncPort(adapter, port, data) {
     // Delete the channel only after everything will have been removed or
     // we end up with junk in the object tree.
     if (!data.enabled) {
-        await deleteState(channelName);
+        await deleteState(adapter, channelName);
     }
 }
 

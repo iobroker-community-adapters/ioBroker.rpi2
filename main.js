@@ -12,16 +12,10 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const {buttonEvents, GpioControl} = require('./lib/gpioControl');
 
-let gpio;
-let gpioButtons;
 const errorsLogged = {};
-const debounceTimers = [];
 const intervalTimers = [];
-
-// Which button events will we capture and have states for?
-// See https://www.npmjs.com/package/rpi-gpio-buttons
-const buttonEvents = [ 'pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released' ];
 
 class Rpi2 extends utils.Adapter {
 
@@ -67,6 +61,7 @@ class Rpi2 extends utils.Adapter {
         }
         await this.subscribeStatesAsync('*');
         await main(this);
+        this.gpioControl = new GpioControl(this);
     }
 
     onStateChange(id, state) {
@@ -75,7 +70,7 @@ class Rpi2 extends utils.Adapter {
             if (id.indexOf('gpio.') !== -1) {
                 const parts = id.split('.');
                 parts.pop(); // remove state
-                writeGpio(this, parts.pop(), state.val);
+                this.gpioControl.writeGpio(parts.pop(), state.val);
             }
         }
     }
@@ -86,22 +81,7 @@ class Rpi2 extends utils.Adapter {
             for (const interval of intervalTimers) {
                 clearInterval(interval);
             }
-            // Cancel any debounce timers
-            for (const timer of debounceTimers) {
-                if (timer != null) {
-                    clearTimeout(timer);
-                }
-            }
-            if (gpio) {
-                if (gpioButtons) {
-                    await gpioButtons.destroy().catch((err) => {
-                        console.error(`Failed to destroy gpioButtons: ${err}`);
-                    });
-                }
-                await gpio.promise.destroy().catch((err) => {
-                    console.error(`Failed to destroy gpio: ${err}`);
-                });
-            }
+            await this.gpioControl.unload();
             callback();
         } catch (e) {
             callback();
@@ -118,38 +98,6 @@ if (require.main !== module) {
 } else {
     // otherwise start the instance directly
     new Rpi2();
-}
-
-function writeGpio(adapter, port, value) {
-    port = parseInt(port, 10);
-    if (!adapter.config.gpios[port] || !adapter.config.gpios[port].enabled) {
-        adapter.log.warn('Port ' + port + ' is not writable, because disabled.');
-        return;
-    } else if (adapter.config.gpios[port].input === 'in' || adapter.config.gpios[port].input === 'true' || adapter.config.gpios[port].input === true) {
-        return adapter.log.warn('Port ' + port + ' is configured as input and not writable');
-    }
-
-    if (value === 'true')  value = true;
-    if (value === 'false') value = false;
-    if (value === '0')     value = false;
-    value = !!value;
-
-    try {
-        if (gpio) {
-            gpio.write(port, value, async err => {
-                if (err) {
-                    adapter.log.error(err);
-                } else {
-                    adapter.log.debug('Written ' + value + ' into port ' + port);
-                    await adapter.setStateAsync('gpio.' + port + '.state', value, true);
-                }
-            });
-        } else {
-            adapter.log.error('GPIO is not initialized!');
-        }
-    } catch (error) {
-        adapter.log.error('Cannot write port ' + port + ': ' + error);
-    }
 }
 
 let objects;
@@ -395,27 +343,6 @@ async function parser(adapter) {
     }
 }
 
-function inputPullUp(adapter, value) {
-    return (adapter.config.inputPullUp ? !value : value);
-}
-
-function readValue(adapter, port) {
-    if (!gpio) {
-        return adapter.log.error('GPIO is not initialized!');
-    }
-
-    gpio.read(port, async (err, value) => {
-        if (err) {
-            adapter.log.error('Cannot read port ' + port + ': ' + err);
-        } else {
-            await adapter.setStateAsync('gpio.' + port + '.state', inputPullUp(adapter, value), true);
-        }
-    });
-}
-
-// syncPort waits for everything it calls, so upon return, when the GPIO
-// handlers, etc. are setup their states are guaranteed to be in place.
-
 // Our own deleteState that logs an error only if it's not, Not Exists
 async function deleteState(adapter, stateName) {
     try {
@@ -566,119 +493,6 @@ async function syncPortTempHum(adapter, port, data) {
         await adapter.extendObjectAsync(humidityStateName(port), obj);
     } else {
         await deleteState(adapter, humidityStateName(port));
-    }
-}
-
-// Setup GPIO ports & buttons
-function setupGpio(adapter, gpioPorts, buttonPorts) {
-    if (gpioPorts.length === 0 && buttonPorts.length === 0) return;
-
-    adapter.log.debug('Inputs are pull ' + (adapter.config.inputPullUp ? 'up' : 'down') + '.');
-    adapter.log.debug('Buttons are pull ' + (adapter.config.buttonPullUp ? 'up' : 'down') + '.');
-
-    try {
-        gpio = require('rpi-gpio');
-        gpio.setMode(gpio.MODE_BCM);
-    } catch (e) {
-        gpio = null;
-        adapter.log.error('Cannot initialize/setMode GPIO: ' + e);
-        console.error(e);
-        if (e.message.includes('NODE_MODULE_VERSION')) {
-            return adapter.terminate('A dependency requires a rebuild.', 13);
-        }
-    }
-
-    if (gpio) {
-        // Our GPIO init worked, setup regular I/O & buttons.
-        let haveGpioInputs = false;
-
-        // Setup all the regular GPIO input and outputs.
-        for (const port of gpioPorts) {
-            const direction = adapter.config.gpios[port].input;
-            adapter.log.debug(`Port ${port} direction: ${direction}`);
-            if (direction === 'in') {
-                // Input port
-                haveGpioInputs = true;
-                gpio.setup(port, gpio.DIR_IN, gpio.EDGE_BOTH, (err) => {
-                    if (err) {
-                        adapter.log.error('Cannot setup port ' + port + ' as input: ' + err);
-                    } else {
-                        readValue(adapter, port);
-                    }
-                });
-            } else {
-                // All the different flavours of output
-                const directionCode = direction === 'outlow' ? gpio.DIR_LOW : direction === 'outhigh' ? gpio.DIR_HIGH : gpio.DIR_OUT;
-                adapter.log.debug(`Port ${port} directionCode: ${directionCode}`);
-                gpio.setup(port, directionCode, (err) => {
-                    err && adapter.log.error('Cannot setup port ' + port + ' as output: ' + err);
-                });
-            }
-        }
-
-        // Setup input change handler - only has to be done once no matter how many inputs we have.
-        if (haveGpioInputs) {
-            adapter.log.debug('Register onchange handler');
-            gpio.on('change', (port, value) => {
-                // Ignore buttons as they are handled below
-                if (adapter.config.gpios[port].input === 'in') {
-                    adapter.log.debug('GPIO change on port ' + port + ': ' + value);
-                    if (debounceTimers[port] != null) {
-                        // Timer is running but state changed (must be back) so just cancel timer.
-                        clearTimeout(debounceTimers[port]);
-                        debounceTimers[port] = null;
-                    } else {
-                        // Start a timer and report to state if doesn't revert within given period.
-                        debounceTimers[port] = setTimeout(async (t_port, t_value) => {
-                            debounceTimers[t_port] = null;
-                            adapter.log.debug(`GPIO debounced on port ${t_port}: ${t_value}`);
-                            await adapter.setStateAsync('gpio.' + t_port + '.state', inputPullUp(adapter, t_value), true);
-                        }, adapter.config.inputDebounceMs, port, value);
-                    }
-                }
-            });
-        }
-
-        // Setup any buttons using same rpi-gpio object as other I/O.
-        if (buttonPorts.length > 0) {
-            adapter.log.debug(`Setting up button ports: ${buttonPorts}`);
-            try {
-                const rpi_gpio_buttons = require('rpi-gpio-buttons');
-                gpioButtons = new rpi_gpio_buttons({
-                    pins: buttonPorts,
-                    usePullUp: adapter.config.buttonPullUp,
-                    timing: {
-                        debounce: adapter.config.buttonDebounceMs,
-                        pressed: adapter.config.buttonPressMs,
-                        clicked: adapter.config.buttonDoubleMs
-                    },
-                    gpio: gpio
-                });
-            } catch (e) {
-                gpioButtons = null;
-                adapter.log.error('Cannot initialize GPIO Buttons: ' + e);
-                console.error(e);
-                if (e.message.includes('NODE_MODULE_VERSION')) {
-                    return adapter.terminate('A dependency requires a rebuild.', 13);
-                }
-            }
-
-            // Setup events for buttons - only has to be done once no matter how many buttons we have.
-            if (gpioButtons) {
-                for (const eventName of buttonEvents) {
-                    adapter.log.debug(`Register button handler for ${eventName}`);
-                    gpioButtons.on(eventName, async (port) => {
-                        adapter.log.debug(`${eventName} triggered for port ${port}`);
-                        const stateName = buttonStateName(port, eventName);
-                        await adapter.setStateAsync(stateName, true, true);
-                    });
-                }
-                // And start button processing
-                gpioButtons.init().catch(err => {
-                    adapter.log.error(`An error occurred during buttons init(). ${err.message}`);
-                });
-            }
-        }
     }
 }
 

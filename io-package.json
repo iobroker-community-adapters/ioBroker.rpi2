@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.2",
+    "version": "2.0.0-alpha.3",
     "news": {
+      "2.0.0-alpha.3": {
+        "en": "fix crash",
+        "de": "fehlerbehebung",
+        "ru": "исправление",
+        "pt": "corrigir acidente",
+        "nl": "fix crash",
+        "fr": "réparer l'accident",
+        "it": "correzione dell'incidente",
+        "es": "el accidente",
+        "pl": "naprawić awarię",
+        "uk": "виправити аварійний",
+        "zh-cn": "修复崩溃"
+      },
       "2.0.0-alpha.2": {
         "en": "get rid of old sync-exec.",
         "de": "alte sync-exec loswerden.",
@@ -76,18 +89,6 @@
         "es": "Los mensajes de error para valores no existentes se registran una sola vez.",
         "pl": "Komunikaty o błędach dla nieistniejących wartości są rejestrowane tylko raz",
         "zh-cn": "不存在的值的错误消息仅记录一次"
-      },
-      "1.1.0": {
-        "en": "Support for Nodejs 10",
-        "de": "Unterstützung für Nodejs 10",
-        "ru": "Поддержка Nodejs 10",
-        "pt": "Suporte para Nodejs 10",
-        "nl": "Ondersteuning voor Nodejs 10",
-        "fr": "Prise en charge de Nodejs 10",
-        "it": "Supporto per Nodejs 10",
-        "es": "Soporte para Nodejs 10",
-        "pl": "Wsparcie dla Nodejs 10",
-        "zh-cn": "支持Nodejs 10"
       }
     },
     "title": "RPI-Monitor",

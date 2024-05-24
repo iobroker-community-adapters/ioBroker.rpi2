@@ -59,10 +59,10 @@ class Rpi2 extends utils.Adapter {
             }
             this.log.debug('received all objects');
         }
+        this.gpioControl = new GpioControl(this, this.log);
         await this.subscribeStatesAsync('*');
         await main(this);
         await this.initPorts();
-        this.gpioControl = new GpioControl(this, this.log);
     }
 
     async initPorts() {

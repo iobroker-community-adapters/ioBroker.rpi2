@@ -27,8 +27,7 @@
   },
   "optionalDependencies": {
     "node-dht-sensor": "^0.4.3",
-    "rpi-gpio": "^2.1.7",
-    "rpi-gpio-buttons": "^2.0.1"
+    "node-libgpiod": "^0.4.3"
   },
   "engines": {
     "node": ">= 18"

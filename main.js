@@ -163,16 +163,7 @@ async function main(adapter) {
         // TODO: Check which Objects we provide
         intervalTimers.push(setInterval(() => {parser(adapter);}, adapter.config.interval || 60000));
 
-        const version = process.version;
-        const va = version.split('.');
-        if (va[0] === 'v0' && va[1] === '10') {
-            adapter.log.debug('NODE Version = ' + version + ', we need new exec-sync');
-            exec     = require('sync-exec');
-            oldstyle = true;
-        } else {
-            adapter.log.debug('NODE Version = ' + version + ', we need new execSync');
-            exec     = require('child_process').execSync;
-        }
+        exec = require('child_process').execSync;
         await parser(adapter);
     } else {
         adapter.log.info('No parser items enabled - skipping');

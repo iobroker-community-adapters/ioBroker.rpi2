@@ -553,10 +553,10 @@ async function parser(adapter) {
 }
 
 function temperatureStateName(port) {
-    return 'gpio.' + port + '.temperature';
+    return `gpio.${port}.temperature`;
 }
 function humidityStateName(port) {
-    return 'gpio.' + port + '.humidity';
+    return `gpio.${port}.humidity`;
 }
 
 // Setup DHTxx/AM23xx sensors

@@ -62,7 +62,7 @@ class Rpi2 extends utils.Adapter {
         await this.subscribeStatesAsync('*');
         await main(this);
         await this.initPorts();
-        this.gpioControl = new GpioControl(this);
+        this.gpioControl = new GpioControl(this, this.log);
     }
 
     async initPorts() {
@@ -109,7 +109,7 @@ class Rpi2 extends utils.Adapter {
                             dhtPorts.push(port);
                             break;
                         default:
-                            this.adapter.log.error('Cannot setup port ' + port + ': invalid direction type.');
+                            this.log.error('Cannot setup port ' + port + ': invalid direction type.');
                     }
                 }
             }
@@ -117,7 +117,7 @@ class Rpi2 extends utils.Adapter {
             this.gpioControl.setupGpio(gpioPorts, buttonPorts);
             setupDht(this, dhtPorts);
         } else {
-            this.adapter.log.info('GPIO ports are not configured');
+            this.log.info('GPIO ports are not configured');
         }
     }
 
@@ -254,7 +254,7 @@ class Rpi2 extends utils.Adapter {
     async syncPortDirection(port, data) {
         const stateName = 'gpio.' + port + '.isInput';
         if (data.enabled) {
-            this.adapter.log.debug(`Creating ${stateName}`);
+            this.log.debug(`Creating ${stateName}`);
             const obj = {
                 common: {
                     name:  'GPIO ' + port + ' direction',

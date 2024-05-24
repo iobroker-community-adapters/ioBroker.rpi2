@@ -314,7 +314,6 @@ let objects;
 let exec;
 const rpi      = {};
 const table    = {};
-let oldstyle = false;
 
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
@@ -368,11 +367,7 @@ async function parser(adapter) {
 
                 let stdout;
                 try {
-                    if (oldstyle) {
-                        stdout = exec(command).stdout;
-                    } else {
-                        stdout = exec(command).toString();
-                    }
+                    stdout = exec(command).toString();
                     adapter.log.debug('------------- ' + stdout);
                 } catch (er) {
                     adapter.log.debug(er.stack);

@@ -152,6 +152,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) fix crash
+
 ### 2.0.0-alpha.2 (2024-05-24)
 * (Garfonso) get rid of old sync-exec.
 

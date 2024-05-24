@@ -261,7 +261,7 @@ async function parser(adapter) {
     // TODO: Parse twice to get post data and evaluate
     for (const c of Object.keys(config)) {
         adapter.log.debug('CURRENT = ' + c + ' ' + config['c_' + c]);
-        adapter.log.debug(c.indexOf('c_'));
+        adapter.log.debug(String(c.indexOf('c_')));
         if (c.indexOf('c_') !== 0 && config['c_' + c]) {
             if (objects[c] === undefined) {
                 const stateObj = {

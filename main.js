@@ -707,7 +707,7 @@ function setupDht(adapter, dhtPorts) {
         }
 
         if (dhtInitd.length > 0) {
-            // At least one initialised, set polling on configured interval
+            // At least one initialized, set polling on the configured interval
             intervalTimers.push(setInterval(async () => {
                 for (const [port, type] of Object.entries(dhtInitd)) {
                     sensorLib.read(type, port, async function(err, temperature, humidity) {

@@ -135,7 +135,7 @@ class Rpi2 extends utils.Adapter {
 
         const channelName = 'gpio.' + port;
         if (data.enabled) {
-            await this.adapter.extendObjectAsync(channelName, {
+            await this.extendObjectAsync(channelName, {
                 type: 'channel',
                 common: {
                     name: data.label === '' ? 'GPIO ' + port : data.label,
@@ -160,16 +160,16 @@ class Rpi2 extends utils.Adapter {
                 type: 'state'
             };
             // extendObject creates one if it doesn't exist - the same below
-            await this.adapter.extendObjectAsync(stateName, obj);
+            await this.extendObjectAsync(stateName, obj);
         } else {
-            await this.adapter.delObjectAsync(stateName);
+            await this.delObjectAsync(stateName);
         }
         await this.syncPortDirection(port, data);
         await this.syncPortButton(port, data);
         await this.syncPortTempHum(port, data);
 
         if (!data.enabled) {
-            await this.adapter.delObjectAsync(channelName, {recursive: true});
+            await this.delObjectAsync(channelName, {recursive: true});
         }
     }
 
@@ -197,7 +197,7 @@ class Rpi2 extends utils.Adapter {
                 };
                 await this.extendObjectAsync(stateName, obj);
             } else {
-                await this.adapter.delObjectAsync(stateName);
+                await this.delObjectAsync(stateName);
             }
         }
     }
@@ -267,10 +267,10 @@ class Rpi2 extends utils.Adapter {
                 },
                 type: 'state'
             };
-            await this.adapter.extendObjectAsync(stateName, obj);
-            await this.adapter.setStateAsync(stateName, data.isInput, true);
+            await this.extendObjectAsync(stateName, obj);
+            await this.setStateAsync(stateName, data.isInput, true);
         } else {
-            await this.adapter.delObjectAsync(stateName);
+            await this.delObjectAsync(stateName);
         }
     }
 

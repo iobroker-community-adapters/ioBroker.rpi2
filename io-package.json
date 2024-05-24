@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.1",
+    "version": "2.0.0-alpha.2",
     "news": {
+      "2.0.0-alpha.2": {
+        "en": "get rid of old sync-exec.",
+        "de": "alte sync-exec loswerden.",
+        "ru": "избавьтесь от старой синхронизации.",
+        "pt": "se livrar da velha sync-exec.",
+        "nl": "verwijder oude sync-exec.",
+        "fr": "débarrassez-vous de l'ancien synchro-exec.",
+        "it": "sbarazzarsi di vecchio sync-exec.",
+        "es": "get rid of old sync-exec.",
+        "pl": "pozbądź się starego sync- exec.",
+        "uk": "позбутися від старої синхронізації-ексека.",
+        "zh-cn": "摆脱旧的同步执行."
+      },
       "2.0.0-alpha.1": {
         "en": "Fix stuff.",
         "de": "Repariere Sachen.",

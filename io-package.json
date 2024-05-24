@@ -301,7 +301,11 @@
     "gpios": [],
     "forceinit": false,
     "inputPullUp": false,
-    "buttonPullUp": false
+    "buttonPullUp": false,
+    "inputDebounceMs": 30,
+    "buttonPressMs": 200,
+    "buttonDoubleMs": 500,
+    "dhtPollInterval": 15000
   },
   "objects": [],
   "instanceObjects": []

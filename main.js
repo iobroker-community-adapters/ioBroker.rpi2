@@ -275,8 +275,8 @@ class Rpi2 extends utils.Adapter {
     }
 
     onStateChange(id, state) {
-        this.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
         if (state && !state.ack) {
+            this.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
             if (id.indexOf('gpio.') !== -1) {
                 const parts = id.split('.');
                 parts.pop(); // remove state

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.3",
+    "version": "2.0.0-alpha.4",
     "news": {
+      "2.0.0-alpha.4": {
+        "en": "try new gpio lib.",
+        "de": "versuch neue gpio lib.",
+        "ru": "попробуйте новый gpio lib.",
+        "pt": "tente novo gpio lib.",
+        "nl": "probeer nieuwe gpio lib.",
+        "fr": "essayez la nouvelle lib gpio.",
+        "it": "provare nuovo gpio lib.",
+        "es": "prueba nuevo gpio lib.",
+        "pl": "spróbuj nowego gpio lib.",
+        "uk": "спробуйте новий gpio lib.",
+        "zh-cn": "尝试新的gpio lib."
+      },
       "2.0.0-alpha.3": {
         "en": "fix crash",
         "de": "fehlerbehebung",
@@ -77,18 +90,6 @@
         "es": "Configuración GPIO como salida con valor inicial definido",
         "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
         "zh-cn": "GPIO配置为具有定义的初始值的输出"
-      },
-      "1.1.1": {
-        "en": "Error messages for not existing values are logged only once",
-        "de": "Fehlermeldungen für nicht vorhandene Werte werden nur einmal protokolliert",
-        "ru": "Сообщения об ошибках для несуществующих значений регистрируются только один раз",
-        "pt": "Mensagens de erro para valores não existentes são registradas somente uma vez",
-        "nl": "Foutmeldingen voor niet bestaande waarden worden slechts één keer vastgelegd",
-        "fr": "Les messages d'erreur relatifs à des valeurs non existantes ne sont consignés qu'une seule fois.",
-        "it": "I messaggi di errore per i valori non esistenti vengono registrati solo una volta",
-        "es": "Los mensajes de error para valores no existentes se registran una sola vez.",
-        "pl": "Komunikaty o błędach dla nieistniejących wartości są rejestrowane tylko raz",
-        "zh-cn": "不存在的值的错误消息仅记录一次"
       }
     },
     "title": "RPI-Monitor",

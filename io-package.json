@@ -320,7 +320,8 @@
     "inputDebounceMs": 30,
     "buttonPressMs": 200,
     "buttonDoubleMs": 500,
-    "dhtPollInterval": 15000
+    "dhtPollInterval": 15000,
+    "inputPollIntervalMs": 100
   },
   "objects": [],
   "instanceObjects": []

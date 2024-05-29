@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.5",
+    "version": "2.0.0-alpha.6",
     "news": {
+      "2.0.0-alpha.6": {
+        "en": "prevent crash.\ncontrolling gpios works again.",
+        "de": "verhindern absturz.\ndie kontrolle von gpios funktioniert wieder.",
+        "ru": "предотвратить крушение.\nконтроль над гпиозом снова работает.",
+        "pt": "evitar acidente.\ncontrolando gpios funciona novamente.",
+        "nl": "voorkomen crash.\ngpios controleren werkt weer.",
+        "fr": "prévenir l'accident.\ncontrôler gpios fonctionne à nouveau.",
+        "it": "prevenire l'incidente.\ncontrollare gpios funziona di nuovo.",
+        "es": "prevenir el accidente.\ncontrolar los gpios funciona de nuevo.",
+        "pl": "zapobiec awarii.\nkontrolowanie gpios znowu działa.",
+        "uk": "запобігання аварійних ситуацій.\nконтроль роботи gpios знову.",
+        "zh-cn": "防止坠机.\n控制gpios再次工作."
+      },
       "2.0.0-alpha.5": {
         "en": "try another gpio lib.",
         "de": "versuchen sie noch eine gpio lib.",
@@ -79,18 +92,6 @@
         "es": "advertencias de js-controller 3.3 prevenidas",
         "pl": "js-controller 3.3 zablokowano ostrzeżenia",
         "zh-cn": "js-controller 3.3 警告被阻止"
-      },
-      "1.3.0": {
-        "en": "Add support for DHTxx/AM23xx Sensors, Configure internal Pull UP/Down Resistor, Optimizations and fixes",
-        "de": "Unterstützung für DHTxx/AM23xx-Sensoren hinzufügen, internen Pull-Up/Down-Widerstand konfigurieren, Optimierungen und Korrekturen",
-        "ru": "Добавление поддержки датчиков DHTxx / AM23xx, настройка внутреннего резистора Pull Up / Down, оптимизации и исправления",
-        "pt": "Adicionar suporte para sensores DHTxx / AM23xx, configurar resistor interno pull UP / Down, otimizações e correções",
-        "nl": "Ondersteuning toevoegen voor DHTxx/AM23xx-sensoren, interne pull UP/Down-weerstand configureren, optimalisaties en fixes",
-        "fr": "Ajout de la prise en charge des capteurs DHTxx/AM23xx, configuration de la résistance interne Pull UP/Down, optimisations et correctifs",
-        "it": "Aggiungi il supporto per i sensori DHTxx/AM23xx, configura la resistenza interna di pull UP/Down, ottimizzazioni e correzioni",
-        "es": "Agregue soporte para sensores DHTxx / AM23xx, configure la resistencia interna Pull UP / Down, optimizaciones y correcciones",
-        "pl": "Dodaj wsparcie dla czujników DHTxx/AM23xx, skonfiguruj wewnętrzny rezystor pull up/down, optymalizacje i poprawki",
-        "zh-cn": "添加对 DHTxx/AM23xx 传感器的支持、配置内部上拉/下拉电阻、优化和修复"
       }
     },
     "title": "RPI-Monitor",

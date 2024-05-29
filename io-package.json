@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.4",
+    "version": "2.0.0-alpha.5",
     "news": {
+      "2.0.0-alpha.5": {
+        "en": "try another gpio lib.",
+        "de": "versuchen sie noch eine gpio lib.",
+        "ru": "попробуй еще один гпио lib.",
+        "pt": "tente outro gpio lib.",
+        "nl": "probeer nog een gpio lib.",
+        "fr": "essayez une autre lib gpio.",
+        "it": "provare un altro gpio lib.",
+        "es": "prueba otro gpio lib.",
+        "pl": "spróbuj innego gpio lib.",
+        "uk": "спробуйте ще один gpio lib.",
+        "zh-cn": "再试一次gpio lib."
+      },
       "2.0.0-alpha.4": {
         "en": "try new gpio lib.",
         "de": "versuch neue gpio lib.",
@@ -78,18 +91,6 @@
         "es": "Agregue soporte para sensores DHTxx / AM23xx, configure la resistencia interna Pull UP / Down, optimizaciones y correcciones",
         "pl": "Dodaj wsparcie dla czujników DHTxx/AM23xx, skonfiguruj wewnętrzny rezystor pull up/down, optymalizacje i poprawki",
         "zh-cn": "添加对 DHTxx/AM23xx 传感器的支持、配置内部上拉/下拉电阻、优化和修复"
-      },
-      "1.2.0": {
-        "en": "GPIO configuration as output with defined initial value",
-        "de": "GPIO Konfiguration als Ausgang mit definiertem Startwert",
-        "ru": "Конфигурация GPIO как выход с заданным начальным значением",
-        "pt": "Configuração GPIO como saída com valor inicial definido",
-        "nl": "GPIO-configuratie als uitgang met gedefinieerde beginwaarde",
-        "fr": "Configuration GPIO en sortie avec valeur initiale définie",
-        "it": "Configurazione GPIO come output con valore iniziale definito",
-        "es": "Configuración GPIO como salida con valor inicial definido",
-        "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
-        "zh-cn": "GPIO配置为具有定义的初始值的输出"
       }
     },
     "title": "RPI-Monitor",

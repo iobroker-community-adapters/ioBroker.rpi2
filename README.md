@@ -152,6 +152,10 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) prevent crash.
+* (Garfonso) controlling gpios works again.
+
 ### 2.0.0-alpha.5 (2024-05-29)
 * (Garfonso) try another gpio lib.
 

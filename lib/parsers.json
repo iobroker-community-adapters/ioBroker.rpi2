@@ -119,12 +119,12 @@
   },
   "wlan": {
     "wifi_received": {
-      "command": "cat /sys/class/net/wlan0/statistics/rx_bytes",
+      "command": "cat /sys/class/net/wl*/statistics/rx_bytes",
       "regexp": "(.*)",
       "post": "$1*-1"
     },
     "wifi_send": {
-      "command": "cat /sys/class/net/wlan0/statistics/tx_bytes",
+      "command": "cat /sys/class/net/wl*/statistics/tx_bytes",
       "regexp": "(.*)",
       "post": ""
     }

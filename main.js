@@ -12,6 +12,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const parsers = require('./lib/parsers');
 const {buttonEvents, GpioControl} = require('./lib/gpioControl');
 
 const errorsLogged = {};
@@ -324,17 +325,18 @@ async function main(adapter) {
         await parser(adapter);
     } else {
         adapter.log.info('No parser items enabled - skipping');
+        for (const c of Object.keys(parsers)) {
+            adapter.log.debug('Cleaning up ' + c);
+            await adapter.delObjectAsync(adapter.name + '.' + adapter.instance + '.' + c, {recursive: true});
+        }
     }
 }
 
 function anyParserConfigEnabled(adapter) {
-    for (const configKey of Object.keys(adapter.config)) {
-        if (configKey.indexOf('c_') >= 0) {
-            adapter.log.debug(`${configKey} looks like a parser item`);
-            if (adapter.config[configKey] === true) {
-                adapter.log.debug(`${configKey} is enabled`);
-                return true;
-            }
+    for (const parserKey of Object.keys(parsers)) {
+        if (adapter.config['c_' + parserKey] === true) {
+            adapter.log.debug(`${parserKey} is enabled`);
+            return true;
         }
     }
     return false;
@@ -345,12 +347,12 @@ async function parser(adapter) {
 
     // Workaround, WebStorm
     const config = adapter.config;
-    for (const c of Object.keys(config)) {
+    for (const c of Object.keys(parsers)) {
         adapter.log.debug('PARSING: ' + c);
 
-        if (c.indexOf('c_') !== 0 && config['c_' + c] === true) {
+        if (config['c_' + c] === true) {
             table[c] = new Array(20);
-            const o = config[c];
+            const o = parsers[c];
             for (const i of Object.keys(o)) {
                 adapter.log.debug('    PARSING: ' + i);
                 const object = o[i];
@@ -411,10 +413,10 @@ async function parser(adapter) {
     }
 
     // TODO: Parse twice to get post data and evaluate
-    for (const c of Object.keys(config)) {
+    for (const c of Object.keys(parsers)) {
         adapter.log.debug('CURRENT = ' + c + ' ' + config['c_' + c]);
         adapter.log.debug(String(c.indexOf('c_')));
-        if (c.indexOf('c_') !== 0 && config['c_' + c]) {
+        if (config['c_' + c] === true)  {
             if (objects[c] === undefined) {
                 const stateObj = {
                     common: {
@@ -428,7 +430,7 @@ async function parser(adapter) {
                 await adapter.extendObjectAsync(c, stateObj);
                 objects[c] = true; //remember that we created the object.
             }
-            const o = config[c];
+            const o = parsers[c];
             for (const i of Object.keys(o)) {
                 const object = o[i];
                 const post = object.post;

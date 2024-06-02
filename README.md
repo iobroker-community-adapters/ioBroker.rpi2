@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0-alpha.7 (2024-06-02)
 * (Garfonso) move parsers from io-package.json to separate file.
 
 ### 2.0.0-alpha.6 (2024-05-29)

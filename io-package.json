@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.6",
+    "version": "2.0.0-alpha.7",
     "news": {
+      "2.0.0-alpha.7": {
+        "en": "move parsers from io-package.json to separate file.",
+        "de": "verschieben parser von io-package.json in eine eigene Datei.",
+        "ru": "переместить парсеры из io-package.json в отдельный файл.",
+        "pt": "mover parsers de io-package.json para arquivo separado.",
+        "nl": "verplaats parsers van io-package.json naar aparte bestanden.",
+        "fr": "déplacer les analyseurs de io-package.json vers un fichier séparé.",
+        "it": "spostare i parsers da io-package.json a file separati.",
+        "es": "mover parsers de io-package.json a archivo separado.",
+        "pl": "przenieś parsery z jo- package.json do oddzielnego pliku.",
+        "uk": "перемістити парсери від io-package.json до окремого файлу.",
+        "zh-cn": "从 io- package.json 移动解析器到分离文件."
+      },
       "2.0.0-alpha.6": {
         "en": "prevent crash.\ncontrolling gpios works again.",
         "de": "verhindern absturz.\ndie kontrolle von gpios funktioniert wieder.",
@@ -80,18 +93,6 @@
         "pl": "Napraw rzeczy.",
         "uk": "Фіксувати речі.",
         "zh-cn": "修补东西."
-      },
-      "1.3.1": {
-        "en": "js-controller 3.3 warnings prevented",
-        "de": "js-controller 3.3 Warnungen verhindert",
-        "ru": "js-controller 3.3 предупреждения предотвращены",
-        "pt": "Avisos do js-controller 3.3 evitados",
-        "nl": "js-controller 3.3 waarschuwingen voorkomen",
-        "fr": "js-controller 3.3 avertissements empêchés",
-        "it": "js-controller 3.3 avvisi impediti",
-        "es": "advertencias de js-controller 3.3 prevenidas",
-        "pl": "js-controller 3.3 zablokowano ostrzeżenia",
-        "zh-cn": "js-controller 3.3 警告被阻止"
       }
     },
     "title": "RPI-Monitor",

@@ -53,12 +53,12 @@
   },
   "network": {
     "net_received": {
-      "command": "cat /sys/class/net/eth0/statistics/rx_bytes",
+      "command": "cat /sys/class/net/e*/statistics/rx_bytes",
       "regexp": "(.*)",
       "post": "$1*-1"
     },
     "net_send": {
-      "command": "cat /sys/class/net/eth0/statistics/tx_bytes",
+      "command": "cat /sys/class/net/e*/statistics/tx_bytes",
       "regexp": "(.*)",
       "post": ""
     }
@@ -71,8 +71,8 @@
       "multiline": true
     },
     "sdcard_boot_total": {
-      "command": "df /boot",
-      "regexp": "\\S+\\s+(\\d+).*\\/boot$",
+      "command": "df /boot/*",
+      "regexp": "\\S+\\s+(\\d+).*\\/boot",
       "post": "$1/1024",
       "multiline": true
     },
@@ -83,8 +83,8 @@
       "multiline": true
     },
     "sdcard_boot_used": {
-      "command": "df /boot",
-      "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot$",
+      "command": "df /boot/*",
+      "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot",
       "post": "$1/1024",
       "multiline": true
     }

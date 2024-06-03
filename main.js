@@ -115,7 +115,7 @@ class Rpi2 extends utils.Adapter {
                 }
             }
 
-            this.gpioControl.setupGpio(gpioPorts, buttonPorts);
+            await this.gpioControl.setupGpio(gpioPorts, buttonPorts);
             setupDht(this, dhtPorts);
         } else {
             this.log.info('GPIO ports are not configured');

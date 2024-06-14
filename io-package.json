@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.7",
+    "version": "2.0.0-alpha.8",
     "news": {
+      "2.0.0-alpha.8": {
+        "en": "add support for Raspberry 5.\non startup set GPIO outputs from ioBroker states.\nbring back initial read in gpio inputs and our own debounce timers\nswitch to opengpio library.\nfixed: reading network and filesystem statistics.",
+        "de": "unterstützung für Raspberry 5.\nBeim Start GPIO Ausgänge aus ioBroker States setzen.\ngpio-inputs und unseren eigenen debounce-timern wieder verwenden\nauf opengpio bibliothek gewechselt.\nrepariert: netzwerk- und dateisystemstatistik lesen.",
+        "ru": "добавьте поддержку Raspberry 5.\nна стартовый набор GPIO выходов из государств ioBroker.\nвозвратить первоначальное чтение в входе gpio и наши собственные таймеры\nпереключиться на библиотеку opengpio.\nфиксированная: чтение сети и статистики файловой системы.",
+        "pt": "adicionar suporte para framboesa 5.\nna inicialização conjunto GPIO saídas de estados ioBroker.\ntrazer de volta a leitura inicial em entradas de gpio e nossos próprios temporizadores de debounce\nmudar para biblioteca opengpio.\ncorrigido: ler estatísticas de rede e sistema de arquivos.",
+        "nl": "voeg steun voor Raspberry 5.\nop opstarten set GPIO uitgangen uit ioBroker staten.\nterug te brengen eerste lezing in gpio ingangen en onze eigen debounce timers\nschakel over naar de opengpio bibliotheek.\nvaste: het lezen van netwerk- en bestandssysteemstatistieken.",
+        "fr": "ajouter le support pour la framboise 5.\nsur startup set GPIO sorties des états ioBroker.\nramener la lecture initiale dans les entrées de gpio et nos propres minuteurs de débonflage\npasser à la bibliothèque opengpio.\nfixe: lecture des statistiques du réseau et du système de fichiers.",
+        "it": "aggiungere supporto per lampone 5.\nsul set di avvio uscite GPIO da stati ioBroker.\nriportare la lettura iniziale in input gpio e i nostri timer debounce\npassare alla libreria opengpio.\nfisso: lettura della rete e statistica del filesystem.",
+        "es": "añadir soporte para Raspberry 5.\non startup set GPIO outputs from ioBroker states.\ntraer de vuelta la lectura inicial en entradas de gpio y nuestros propios temporizadores de debounce\ncambiar a la biblioteca de opengpio.\nfijo: lectura de redes y estadísticas del sistema de archivos.",
+        "pl": "dodaj wsparcie dla Malina 5.\nna startup set GPIO wyjść ze stanów joBroker.\nprzywrócić początkowy odczyt z wejść gpio i naszych własnych timerów debuuncji\nprzełącz na bibliotekę opengpio.\nstałe: czytanie statystyk sieci i systemu plików.",
+        "uk": "додати підтримку для Raspberry 5.\nна автозапускі GPIO виходи з ioBroker штатів.\nвивести початковий зчитування в gpio вводах і власних дебатів\nперейти до бібліотеки opengpio.\nвиправлено: статистика читання мережі та файлової системи.",
+        "zh-cn": "添加支持 Raspberry 5.\n从ioBroker状态的GPIO输出.\n带回初始读取的gpio输入和我们自己的解跳计时器\n切换到 opengpio 库.\n固定:读取网络和文件系统统计."
+      },
       "2.0.0-alpha.7": {
         "en": "move parsers from io-package.json to separate file.",
         "de": "verschieben parser von io-package.json in eine eigene Datei.",
@@ -80,19 +93,6 @@
         "pl": "pozbądź się starego sync- exec.",
         "uk": "позбутися від старої синхронізації-ексека.",
         "zh-cn": "摆脱旧的同步执行."
-      },
-      "2.0.0-alpha.1": {
-        "en": "Fix stuff.",
-        "de": "Repariere Sachen.",
-        "ru": "Исправление.",
-        "pt": "Corrigir coisas.",
-        "nl": "Dingen repareren.",
-        "fr": "Réparer des trucs.",
-        "it": "Risolvi le cose.",
-        "es": "Arregla cosas.",
-        "pl": "Napraw rzeczy.",
-        "uk": "Фіксувати речі.",
-        "zh-cn": "修补东西."
       }
     },
     "title": "RPI-Monitor",

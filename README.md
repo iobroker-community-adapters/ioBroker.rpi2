@@ -152,6 +152,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) adapter terminates again.
+
 ### 2.0.0-alpha.9 (2024-06-14)
 * (Garfonso) fix code errors
 

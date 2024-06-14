@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.10",
     "news": {
+      "2.0.0-alpha.10": {
+        "en": "adapter terminates again.",
+        "de": "adapter beendet sich wieder sauber.",
+        "ru": "адаптер снова заканчивается.",
+        "pt": "adaptador termina novamente.",
+        "nl": "de adapter eindigt opnieuw.",
+        "fr": "adaptateur se termine à nouveau.",
+        "it": "adattatore termina di nuovo.",
+        "es": "el adaptador termina de nuevo.",
+        "pl": "adapter znów się kończy.",
+        "uk": "перехід знову припиняється.",
+        "zh-cn": "适配器再次终止 ."
+      },
       "2.0.0-alpha.9": {
         "en": "fix code errors",
         "de": "codefehler beheben",
@@ -80,19 +93,6 @@
         "pl": "spróbuj nowego gpio lib.",
         "uk": "спробуйте новий gpio lib.",
         "zh-cn": "尝试新的gpio lib."
-      },
-      "2.0.0-alpha.3": {
-        "en": "fix crash",
-        "de": "fehlerbehebung",
-        "ru": "исправление",
-        "pt": "corrigir acidente",
-        "nl": "fix crash",
-        "fr": "réparer l'accident",
-        "it": "correzione dell'incidente",
-        "es": "el accidente",
-        "pl": "naprawić awarię",
-        "uk": "виправити аварійний",
-        "zh-cn": "修复崩溃"
       }
     },
     "title": "RPI-Monitor",

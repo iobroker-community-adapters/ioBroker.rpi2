@@ -152,6 +152,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) fix code errors
+
 ### 2.0.0-alpha.8 (2024-06-14)
 * (Garfonso) add support for Raspberry 5.
 * (Garfonso) on startup set GPIO outputs from ioBroker states.

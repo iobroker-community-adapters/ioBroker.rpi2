@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.8",
+    "version": "2.0.0-alpha.9",
     "news": {
+      "2.0.0-alpha.9": {
+        "en": "fix code errors",
+        "de": "codefehler beheben",
+        "ru": "ошибки кода",
+        "pt": "corrigir erros de código",
+        "nl": "codefouten herstellen",
+        "fr": "corriger les erreurs de code",
+        "it": "correggere gli errori di codice",
+        "es": "corrige errores de código",
+        "pl": "naprawić błędy kodu",
+        "uk": "виправлення помилок коду",
+        "zh-cn": "修复代码错误"
+      },
       "2.0.0-alpha.8": {
         "en": "add support for Raspberry 5.\non startup set GPIO outputs from ioBroker states.\nbring back initial read in gpio inputs and our own debounce timers\nswitch to opengpio library.\nfixed: reading network and filesystem statistics.",
         "de": "unterstützung für Raspberry 5.\nBeim Start GPIO Ausgänge aus ioBroker States setzen.\ngpio-inputs und unseren eigenen debounce-timern wieder verwenden\nauf opengpio bibliothek gewechselt.\nrepariert: netzwerk- und dateisystemstatistik lesen.",
@@ -80,19 +93,6 @@
         "pl": "naprawić awarię",
         "uk": "виправити аварійний",
         "zh-cn": "修复崩溃"
-      },
-      "2.0.0-alpha.2": {
-        "en": "get rid of old sync-exec.",
-        "de": "alte sync-exec loswerden.",
-        "ru": "избавьтесь от старой синхронизации.",
-        "pt": "se livrar da velha sync-exec.",
-        "nl": "verwijder oude sync-exec.",
-        "fr": "débarrassez-vous de l'ancien synchro-exec.",
-        "it": "sbarazzarsi di vecchio sync-exec.",
-        "es": "get rid of old sync-exec.",
-        "pl": "pozbądź się starego sync- exec.",
-        "uk": "позбутися від старої синхронізації-ексека.",
-        "zh-cn": "摆脱旧的同步执行."
       }
     },
     "title": "RPI-Monitor",

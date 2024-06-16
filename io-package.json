@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.10",
+    "version": "2.0.0-alpha.11",
     "news": {
+      "2.0.0-alpha.11": {
+        "en": "prevent error in debounce timer",
+        "de": "fehler im debounce timer verhindern",
+        "ru": "предотвратить ошибку в раскрывающем таймере",
+        "pt": "evitar erro no temporizador de debutimento",
+        "nl": "voorkomt fout in debounce timer",
+        "fr": "prévenir l'erreur dans le minuteur de débonflage",
+        "it": "prevenire l'errore nel timer debounce",
+        "es": "previene el error en el temporizador de debounce",
+        "pl": "zapobieganie błędom w timerze debuuncji",
+        "uk": "запобігти похибці в часі відхилення",
+        "zh-cn": "防止跳出计时器时出错"
+      },
       "2.0.0-alpha.10": {
         "en": "adapter terminates again.",
         "de": "adapter beendet sich wieder sauber.",
@@ -80,19 +93,6 @@
         "pl": "spróbuj innego gpio lib.",
         "uk": "спробуйте ще один gpio lib.",
         "zh-cn": "再试一次gpio lib."
-      },
-      "2.0.0-alpha.4": {
-        "en": "try new gpio lib.",
-        "de": "versuch neue gpio lib.",
-        "ru": "попробуйте новый gpio lib.",
-        "pt": "tente novo gpio lib.",
-        "nl": "probeer nieuwe gpio lib.",
-        "fr": "essayez la nouvelle lib gpio.",
-        "it": "provare nuovo gpio lib.",
-        "es": "prueba nuevo gpio lib.",
-        "pl": "spróbuj nowego gpio lib.",
-        "uk": "спробуйте новий gpio lib.",
-        "zh-cn": "尝试新的gpio lib."
       }
     },
     "title": "RPI-Monitor",

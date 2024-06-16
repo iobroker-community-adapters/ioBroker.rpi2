@@ -152,6 +152,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) prevent error in debounce timer
+
 ### 2.0.0-alpha.10 (2024-06-14)
 * (Garfonso) adapter terminates again.
 

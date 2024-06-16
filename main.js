@@ -38,6 +38,9 @@ class Rpi2 extends utils.Adapter {
     async onReady() {
         objects = {};
 
+        //sanitize timeouts:
+        this.config.inputDebounceMs = Math.min(Number(this.config.inputDebounceMs) || 30, 10000);
+
         const adapterObjects = await this.getAdapterObjectsAsync();
         if (this.config.forceinit) {
             for (const id of Object.keys(adapterObjects)) {

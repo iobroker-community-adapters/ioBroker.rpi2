@@ -191,11 +191,10 @@
     "forceinit": false,
     "inputPullUp": false,
     "buttonPullUp": false,
-    "inputDebounceMs": 30,
+    "inputDebounceMs": 0,
     "buttonPressMs": 200,
     "buttonDoubleMs": 500,
-    "dhtPollInterval": 15000,
-    "inputPollIntervalMs": 100
+    "dhtPollInterval": 15000
   },
   "objects": [],
   "instanceObjects": []

@@ -39,7 +39,7 @@ class Rpi2 extends utils.Adapter {
         objects = {};
 
         //sanitize timeouts:
-        this.config.inputDebounceMs = Math.min(Number(this.config.inputDebounceMs) || 30, 10000);
+        this.config.inputDebounceMs = Math.min(Number(this.config.inputDebounceMs) || 0, 10000);
 
         const adapterObjects = await this.getAdapterObjectsAsync();
         if (this.config.forceinit) {

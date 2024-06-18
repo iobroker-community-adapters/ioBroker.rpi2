@@ -206,7 +206,8 @@ class Rpi2 extends utils.Adapter {
                 };
                 await this.extendObjectAsync(stateName, obj);
             } else {
-                await this.delObjectAsync(stateName);
+                //await this.delObjectAsync(stateName);
+                //Do not delete 'state' as this is used above. TODO: clean up code, when decided if buttons are ever supported.
             }
         }
     }

@@ -154,6 +154,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 -->
 ### **WORK IN PROGRESS**
 * (Garfonso) invert output in code for GPIO output set to initial value 1.
+* (Garfonso) remove old button states and create input state.
 
 ### 2.0.0-alpha.12 (2024-06-18)
 * (Garfonso) rework debounce mechanism

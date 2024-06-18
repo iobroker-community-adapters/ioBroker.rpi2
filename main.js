@@ -184,6 +184,11 @@ class Rpi2 extends utils.Adapter {
      * @returns {Promise<void>}
      */
     async syncPortButton(port, data) {
+        const buttonEventsOLD = [ 'pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released' ];
+        for (const eventName of buttonEventsOLD) {
+            const stateName = `gpio.${port}.${eventName}`;
+            await this.delObjectAsync(stateName);
+        }
         for (const eventName of buttonEvents) {
             const stateName = `gpio.${port}.${eventName}`;
             if (data.enabled && data.isButton) {

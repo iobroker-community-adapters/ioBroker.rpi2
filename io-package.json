@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.11",
+    "version": "2.0.0-alpha.12",
     "news": {
+      "2.0.0-alpha.12": {
+        "en": "rework debounce mechanism",
+        "de": "debounce mechanismus überarbeitet",
+        "ru": "механизм отключения",
+        "pt": "retrabalho mecanismo de surto",
+        "nl": "rework debounce-mechanisme",
+        "fr": "nouveau mécanisme de débonflage",
+        "it": "meccanismo rework debounce",
+        "es": "rework debounce mechanism",
+        "pl": "przeróbka mechanizmu debuuncji",
+        "uk": "механізм відключення ремесла",
+        "zh-cn": "重修解弹机制"
+      },
       "2.0.0-alpha.11": {
         "en": "prevent error in debounce timer",
         "de": "fehler im debounce timer verhindern",
@@ -80,19 +93,6 @@
         "pl": "zapobiec awarii.\nkontrolowanie gpios znowu działa.",
         "uk": "запобігання аварійних ситуацій.\nконтроль роботи gpios знову.",
         "zh-cn": "防止坠机.\n控制gpios再次工作."
-      },
-      "2.0.0-alpha.5": {
-        "en": "try another gpio lib.",
-        "de": "versuchen sie noch eine gpio lib.",
-        "ru": "попробуй еще один гпио lib.",
-        "pt": "tente outro gpio lib.",
-        "nl": "probeer nog een gpio lib.",
-        "fr": "essayez une autre lib gpio.",
-        "it": "provare un altro gpio lib.",
-        "es": "prueba otro gpio lib.",
-        "pl": "spróbuj innego gpio lib.",
-        "uk": "спробуйте ще один gpio lib.",
-        "zh-cn": "再试一次gpio lib."
       }
     },
     "title": "RPI-Monitor",

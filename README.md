@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0-alpha.12 (2024-06-18)
 * (Garfonso) rework debounce mechanism
 
 ### 2.0.0-alpha.11 (2024-06-16)

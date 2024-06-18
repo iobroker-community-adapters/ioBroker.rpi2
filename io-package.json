@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.12",
+    "version": "2.0.0-alpha.13",
     "news": {
+      "2.0.0-alpha.13": {
+        "en": "invert output in code for GPIO output set to initial value 1.\nremove old button states and create input state.",
+        "de": "invertiere Ausgabe im Code, wenn GPIO Ausgang auf Anfangswert 1 gesetzt ist.\nalte zustände für buttons werden entfernt und eingabezustand erstellt.",
+        "ru": "инвертировать выход в коде для вывода GPIO на исходное значение 1.\nудалить старые состояния кнопок и создать состояние ввода.",
+        "pt": "saída invert no código para saída GPIO definido para valor inicial 1.\nremover estados do botão velho e criar estado de entrada.",
+        "nl": "omkeren output in code voor GPIO uitvoer ingesteld op initiële waarde 1.\nverwijder oude knop statussen en maak invoer status.",
+        "fr": "inverser la sortie en code pour la sortie GPIO définie à la valeur initiale 1.\nsupprimer les anciens états des boutons et créer l'état d'entrée.",
+        "it": "invert output in codice per GPIO output impostato al valore iniziale 1.\nrimuovere gli stati del vecchio pulsante e creare stato di input.",
+        "es": "invert output in code for GPIO output set to initial value 1.\neliminar viejos estados de botón y crear estado de entrada.",
+        "pl": "inwertuj wyjście w kodzie dla wyjścia GPIO ustawionego na wartość początkową 1.\nusuwa stare stany przycisków i tworzy stan wejściowy.",
+        "uk": "вхідний вихід в код для GPIO вихідний набір до початкового значення 1.\nвидаліть старі стани кнопок і створити вхідний стан.",
+        "zh-cn": "gPIO 输出代码中的反转输出设置为初始值 1 .\n删除旧按钮状态并创建输入状态 ."
+      },
       "2.0.0-alpha.12": {
         "en": "rework debounce mechanism",
         "de": "debounce mechanismus überarbeitet",
@@ -80,19 +93,6 @@
         "pl": "przenieś parsery z jo- package.json do oddzielnego pliku.",
         "uk": "перемістити парсери від io-package.json до окремого файлу.",
         "zh-cn": "从 io- package.json 移动解析器到分离文件."
-      },
-      "2.0.0-alpha.6": {
-        "en": "prevent crash.\ncontrolling gpios works again.",
-        "de": "verhindern absturz.\ndie kontrolle von gpios funktioniert wieder.",
-        "ru": "предотвратить крушение.\nконтроль над гпиозом снова работает.",
-        "pt": "evitar acidente.\ncontrolando gpios funciona novamente.",
-        "nl": "voorkomen crash.\ngpios controleren werkt weer.",
-        "fr": "prévenir l'accident.\ncontrôler gpios fonctionne à nouveau.",
-        "it": "prevenire l'incidente.\ncontrollare gpios funziona di nuovo.",
-        "es": "prevenir el accidente.\ncontrolar los gpios funciona de nuevo.",
-        "pl": "zapobiec awarii.\nkontrolowanie gpios znowu działa.",
-        "uk": "запобігання аварійних ситуацій.\nконтроль роботи gpios знову.",
-        "zh-cn": "防止坠机.\n控制gpios再次工作."
       }
     },
     "title": "RPI-Monitor",

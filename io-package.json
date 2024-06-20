@@ -174,7 +174,63 @@
         "admin": ">=5.0.0"
       }
     ],
-    "singletonHost": true
+    "singletonHost": true,
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<=1.0.0",
+            "newVersion>=2.0.0"
+          ]
+        },
+        "title": {
+          "en": "GPIO Breaking Change",
+          "de": "GPIO Veränderung",
+          "ru": "GPIO Перерывы",
+          "pt": "GPIO Mudança de ruptura",
+          "nl": "GPIO Verandering doorbreken",
+          "fr": "GPIO Briser le changement",
+          "it": "GPIO Cambiamento di rottura",
+          "es": "GPIO Cambio de ruptura",
+          "pl": "GPIO Łamanie zmian",
+          "uk": "ГРУП Зміна несправностей",
+          "zh-cn": "科普罗 中断更改"
+        },
+          "text": {
+          "en": "GPIO needed massive changes for support of newer Raspian versions (Bookworm and following). Please check your GPIO configuration and if everything still works. GPIO Button support is removed. If you need it, please discuss in Github, see link.",
+          "de": "GPIO brauchte massive Änderungen für die Unterstützung neuerer Raspian Versionen (Bookworm und nachfolgend). Bitte überprüfen Sie Ihre GPIO-Konfiguration und wenn alles noch funktioniert. GPIO Button-Unterstützung wird entfernt. Wenn Sie es brauchen, diskutieren Sie bitte in Github, siehe Link.",
+          "ru": "GPIO нуждались в массовых изменениях для поддержки более новых версий Raspian (Bookworm и следующий). Пожалуйста, проверьте конфигурацию GPIO и все ли еще работает. Поддержка GPIO Button удалена. Если вам это нужно, пожалуйста, обсудите в Гитубе, см. ссылку.",
+          "pt": "O GPIO precisava de mudanças massivas para o suporte de versões mais recentes do Raspian (Bookworm e seguintes). Por favor, verifique sua configuração GPIO e se tudo ainda funciona. O suporte do botão GPIO é removido. Se precisar, por favor, discuta no Github, veja link.",
+          "nl": "GPIO had massale veranderingen nodig voor ondersteuning van nieuwere Raspian versies (Bookworm en volgende). Controleer uw GPIO configuratie en of alles nog werkt. GPIO-knop ondersteuning is verwijderd. Als je het nodig hebt, bespreek het dan in Github, zie link.",
+          "fr": "GPIO a besoin de changements massifs pour soutenir les nouvelles versions Raspiennes (Bookworm et suivants). Veuillez vérifier votre configuration GPIO et si tout fonctionne encore. Le support du bouton GPIO est enlevé. Si vous en avez besoin, veuillez discuter à Github, voir le lien.",
+          "it": "GPIO aveva bisogno di enormi cambiamenti per il supporto delle nuove versioni Raspian (Bookworm e seguenti). Controllare la configurazione GPIO e se tutto funziona ancora. Il supporto del pulsante GPIO viene rimosso. Se avete bisogno, si prega di discutere a Github, vedere il link.",
+          "es": "GPIO necesitaba cambios masivos para apoyar las nuevas versiones de Raspian (worm y siguientes). Por favor, compruebe su configuración de GPIO y si todo sigue funcionando. GPIO Button support is removed. Si lo necesita, por favor discuta en Github, vea el enlace.",
+          "pl": "GPIO potrzebowało ogromnych zmian dla wsparcia nowszych wersji Raspian (Bookworm i następnie). Proszę sprawdzić konfigurację GPIO i czy wszystko nadal działa. Wsparcie GPIO Button jest usuwane. W razie potrzeby proszę omówić to w Github, zobacz link.",
+          "uk": "GPIO вимагає масивних змін для підтримки нових версій Raspian (Bookworm і наступні). Будь ласка, перевірте налаштування GPIO і якщо все ще працює. При видаленні кнопки GPIO. Якщо вам потрібно, будь ласка, покажіть в Github, див. посилання.",
+          "zh-cn": "GPIO需要大规模修改来支持较新的Raspian版本(Bookdorm and follows). 请检查您的 GPIO 配置, 如果一切都还在工作。 GPIO按钮支持被删除. 如果你需要,请在Github讨论,参见链接."
+        },
+        "link": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/issues/192",
+        "level": "warn",
+        "linkText": {
+          "en": "GPIO Button discussion.",
+          "de": "GPIO Button Diskussion.",
+          "ru": "GPIO Button discussion.",
+          "pt": "Discussão do botão GPIO.",
+          "nl": "GPIO Button discussie.",
+          "fr": "Discussion sur le bouton GPIO.",
+          "it": "GPIO Button discussione.",
+          "es": "GPIO Button discussion.",
+          "pl": "Dyskusja GPIO Button.",
+          "uk": "Обговорення кнопки GPIO.",
+          "zh-cn": "GPIO按钮讨论."
+        },
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
+      }
+    ]
   },
   "native": {
     "c_cpu": true,

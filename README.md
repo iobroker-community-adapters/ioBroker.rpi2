@@ -152,53 +152,17 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### 2.0.0-alpha.13 (2024-06-18)
-* (Garfonso) invert output in code for GPIO output set to initial value 1.
-* (Garfonso) remove old button states and create input state.
-
-### 2.0.0-alpha.12 (2024-06-18)
-* (Garfonso) rework debounce mechanism
-
-### 2.0.0-alpha.11 (2024-06-16)
-* (Garfonso) prevent error in debounce timer
-
-### 2.0.0-alpha.10 (2024-06-14)
-* (Garfonso) adapter terminates again.
-
-### 2.0.0-alpha.9 (2024-06-14)
-* (Garfonso) fix code errors
-
-### 2.0.0-alpha.8 (2024-06-14)
+### **WORK IN PROGRESS**
+* (Garfonso) reworked GPIO input and output to work with Bookworm.
+* (Garfonso) BREAKING CHANGE: removed support for GPIO-Buttons. 
+* (Garfonso) BREAKING CHANGE: remove unsupported button states and create input state.
 * (Garfonso) add support for Raspberry 5.
 * (Garfonso) on startup set GPIO outputs from ioBroker states.
-* (Garfonso) bring back initial read in gpio inputs and our own debounce timers
 * (Garfonso) switch to opengpio library.
 * (Grothesk242) fixed: reading network and filesystem statistics.
-
-### 2.0.0-alpha.7 (2024-06-02)
 * (Garfonso) move parsers from io-package.json to separate file.
-
-### 2.0.0-alpha.6 (2024-05-29)
-* (Garfonso) prevent crash.
-* (Garfonso) controlling gpios works again.
-
-### 2.0.0-alpha.5 (2024-05-29)
-* (Garfonso) try another gpio lib.
-
-### 2.0.0-alpha.4 (2024-05-27)
-* (Garfonso) try new gpio lib.
-
-### 2.0.0-alpha.3 (2024-05-24)
-* (Garfonso) fix crash
-
-### 2.0.0-alpha.2 (2024-05-24)
 * (Garfonso) get rid of old sync-exec.
-
-### 2.0.0-alpha.1 (2024-05-23)
-* (Garfonso) Fix stuff.
-
-### 2.0.0-alpha.0 (2024-05-23)
-* (Garfonso) Get stuff up to date...
+* (Garfonso) Get development stuff up to date...
 
 ### 1.3.2 (2022-02-17)
 * Important: This version requires at leas js-controller 3.3

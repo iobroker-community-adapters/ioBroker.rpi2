@@ -17,7 +17,7 @@ Works only with node >= 18
 
 **ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
 
-For gpio to work, you need to install libgpiod, **before** installing the adapter, like this: `sudo apt install -y libgpiod-dev`
+For gpio to work, you need to install libgpiod, **before** installing the adapter, like this: `sudo apt-get install -y libgpiod-dev`
 
 ## Installation
 After installation you have to configure all required modules via administration page.

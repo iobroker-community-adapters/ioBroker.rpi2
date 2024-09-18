@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.1 (2024-09-18)
 * (Garfonso) make gpio library required dependency
 * (Garfonso) make errors more clear, if gpio library could not be initialized.
 
@@ -180,11 +180,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 * (raintor) Add support for DHTxx/AM23xx Sensors
 * (raintor) Configure internal Pull UP/Down Resistor
 * (raintor) Add port 'label'/'friendly name' to GPIO config
-
-### 1.2.0 (2020-01-17)
-- (janfromberlin) GPIO configuration as output with defined initial value
-- (foxriver76) No longer use adapter.objects
-- (Apollon77) Adjust gpio errors
 
 ## License
 MIT License

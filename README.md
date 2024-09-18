@@ -152,6 +152,10 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) make gpio library required dependency
+* (Garfonso) make errors more clear, if gpio library could not be initialized.
+
 ### 2.0.0 (2024-06-24)
 * (Garfonso) reworked GPIO input and output to work with Bookworm.
 * (Garfonso) BREAKING CHANGE: removed support for GPIO-Buttons. 

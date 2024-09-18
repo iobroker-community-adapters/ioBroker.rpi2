@@ -26,13 +26,13 @@
     "url": "https://github.com/iobroker-community-adapters/ioBroker.rpi2"
   },
   "optionalDependencies": {
-    "opengpio": "^1.0.14",
     "node-dht-sensor": "^0.4.3"
   },
   "engines": {
     "node": ">= 18"
   },
   "dependencies": {
+    "opengpio": "^1.0.14",
     "@iobroker/adapter-core": "^3.1.4",
     "ci": "^2.3.0"
   },

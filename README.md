@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### 2.0.1 (2024-09-18)
+### **WORK IN PROGRESS**
 * (Garfonso) make gpio library required dependency
 * (Garfonso) make errors more clear, if gpio library could not be initialized.
 

@@ -48,16 +48,17 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libgpiod-dev
+          version: 1.0 #string to identify the cache.
       - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
           # install-command: 'npm install'
-      - uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: libgpiod-dev
-          version: 1.0 #string to identify the cache.
+
 
   # Deploys the final package to NPM
   deploy:

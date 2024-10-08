@@ -156,7 +156,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.1.0 (2024-10-08)
 * (jangatzke) add support for gpios on Raspberry Zero.
 
 ### 2.0.1 (2024-10-07)
@@ -181,12 +181,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ### 1.3.1 (2021-07-16)
 * (Apollon77) Prevent js-controller 3.3 warnings
-
-### 1.3.0 (2021-07-16)
-* (asgothian) Fix to get CPU frequencies also on Raspi 4
-* (raintor) Add support for DHTxx/AM23xx Sensors
-* (raintor) Configure internal Pull UP/Down Resistor
-* (raintor) Add port 'label'/'friendly name' to GPIO config
 
 ## License
 MIT License

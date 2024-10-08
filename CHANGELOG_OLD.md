@@ -1,4 +1,10 @@
 # Older Changes
+## 1.3.0 (2021-07-16)
+* (asgothian) Fix to get CPU frequencies also on Raspi 4
+* (raintor) Add support for DHTxx/AM23xx Sensors
+* (raintor) Configure internal Pull UP/Down Resistor
+* (raintor) Add port 'label'/'friendly name' to GPIO config
+
 ## 1.2.0 (2020-01-17)
 - (janfromberlin) GPIO configuration as output with defined initial value
 - (foxriver76) No longer use adapter.objects

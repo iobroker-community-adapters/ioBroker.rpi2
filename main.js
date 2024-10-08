@@ -12,6 +12,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const parsers = require('./lib/parsers');
 const {buttonEvents, GpioControl} = require('./lib/gpioControl');
 
 const errorsLogged = {};
@@ -36,6 +37,9 @@ class Rpi2 extends utils.Adapter {
 
     async onReady() {
         objects = {};
+
+        //sanitize timeouts:
+        this.config.inputDebounceMs = Math.min(Number(this.config.inputDebounceMs) || 0, 10000);
 
         const adapterObjects = await this.getAdapterObjectsAsync();
         if (this.config.forceinit) {
@@ -114,7 +118,7 @@ class Rpi2 extends utils.Adapter {
                 }
             }
 
-            this.gpioControl.setupGpio(gpioPorts, buttonPorts);
+            await this.gpioControl.setupGpio(gpioPorts, buttonPorts);
             setupDht(this, dhtPorts);
         } else {
             this.log.info('GPIO ports are not configured');
@@ -180,6 +184,11 @@ class Rpi2 extends utils.Adapter {
      * @returns {Promise<void>}
      */
     async syncPortButton(port, data) {
+        const buttonEventsOLD = [ 'pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released' ];
+        for (const eventName of buttonEventsOLD) {
+            const stateName = `gpio.${port}.${eventName}`;
+            await this.delObjectAsync(stateName);
+        }
         for (const eventName of buttonEvents) {
             const stateName = `gpio.${port}.${eventName}`;
             if (data.enabled && data.isButton) {
@@ -197,7 +206,8 @@ class Rpi2 extends utils.Adapter {
                 };
                 await this.extendObjectAsync(stateName, obj);
             } else {
-                await this.delObjectAsync(stateName);
+                //await this.delObjectAsync(stateName);
+                //Do not delete 'state' as this is used above. TODO: clean up code, when decided if buttons are ever supported.
             }
         }
     }
@@ -275,8 +285,8 @@ class Rpi2 extends utils.Adapter {
     }
 
     onStateChange(id, state) {
-        this.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
         if (state && !state.ack) {
+            this.log.debug('stateChange for ' + id + ' found state = ' + JSON.stringify(state));
             if (id.indexOf('gpio.') !== -1) {
                 const parts = id.split('.');
                 parts.pop(); // remove state
@@ -324,17 +334,18 @@ async function main(adapter) {
         await parser(adapter);
     } else {
         adapter.log.info('No parser items enabled - skipping');
+        for (const c of Object.keys(parsers)) {
+            adapter.log.debug('Cleaning up ' + c);
+            await adapter.delObjectAsync(adapter.name + '.' + adapter.instance + '.' + c, {recursive: true});
+        }
     }
 }
 
 function anyParserConfigEnabled(adapter) {
-    for (const configKey of Object.keys(adapter.config)) {
-        if (configKey.indexOf('c_') >= 0) {
-            adapter.log.debug(`${configKey} looks like a parser item`);
-            if (adapter.config[configKey] === true) {
-                adapter.log.debug(`${configKey} is enabled`);
-                return true;
-            }
+    for (const parserKey of Object.keys(parsers)) {
+        if (adapter.config['c_' + parserKey] === true) {
+            adapter.log.debug(`${parserKey} is enabled`);
+            return true;
         }
     }
     return false;
@@ -345,12 +356,12 @@ async function parser(adapter) {
 
     // Workaround, WebStorm
     const config = adapter.config;
-    for (const c of Object.keys(config)) {
+    for (const c of Object.keys(parsers)) {
         adapter.log.debug('PARSING: ' + c);
 
-        if (c.indexOf('c_') !== 0 && config['c_' + c] === true) {
+        if (config['c_' + c] === true) {
             table[c] = new Array(20);
-            const o = config[c];
+            const o = parsers[c];
             for (const i of Object.keys(o)) {
                 adapter.log.debug('    PARSING: ' + i);
                 const object = o[i];
@@ -411,10 +422,10 @@ async function parser(adapter) {
     }
 
     // TODO: Parse twice to get post data and evaluate
-    for (const c of Object.keys(config)) {
+    for (const c of Object.keys(parsers)) {
         adapter.log.debug('CURRENT = ' + c + ' ' + config['c_' + c]);
         adapter.log.debug(String(c.indexOf('c_')));
-        if (c.indexOf('c_') !== 0 && config['c_' + c]) {
+        if (config['c_' + c] === true)  {
             if (objects[c] === undefined) {
                 const stateObj = {
                     common: {
@@ -428,7 +439,7 @@ async function parser(adapter) {
                 await adapter.extendObjectAsync(c, stateObj);
                 objects[c] = true; //remember that we created the object.
             }
-            const o = config[c];
+            const o = parsers[c];
             for (const i of Object.keys(o)) {
                 const object = o[i];
                 const post = object.post;

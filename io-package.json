@@ -1,46 +1,45 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.0-alpha.3",
+    "version": "2.0.1",
     "news": {
-      "2.0.0-alpha.3": {
-        "en": "fix crash",
-        "de": "fehlerbehebung",
-        "ru": "исправление",
-        "pt": "corrigir acidente",
-        "nl": "fix crash",
-        "fr": "réparer l'accident",
-        "it": "correzione dell'incidente",
-        "es": "el accidente",
-        "pl": "naprawić awarię",
-        "uk": "виправити аварійний",
-        "zh-cn": "修复崩溃"
+      "2.0.1": {
+        "en": "make gpio library required dependency\nmake errors clearer, if gpio library could not be initialized.",
+        "de": "gpio bibliothek erforderlich abhängigkeit\nfehler deutlicher machen, wenn gpio-bibliothek nicht initialisiert werden konnte.",
+        "ru": "сделать библиотеку gpio необходимой зависимость\nсделать ошибки яснее, если библиотека gpio не может быть инициализирована.",
+        "pt": "fazer gpio biblioteca necessária dependência\nfazer erros mais claros, se a biblioteca de gpio não poderia ser inicializada.",
+        "nl": "gpio-bibliotheek vereiste afhankelijkheid maken\nmaak fouten duidelijker, als gpio-bibliotheek niet geïnitialiseerd kon worden.",
+        "fr": "rendre la bibliothèque gpio nécessaire dépendance\nrendre les erreurs plus claires, si la bibliothèque gpio ne peut pas être initialisée.",
+        "it": "rendere la libreria gpio necessaria dipendenza\nrendere gli errori più chiari, se la libreria di gpio non potrebbe essere inizializzata.",
+        "es": "hacer gpio biblioteca requerida dependencia\naclarar los errores, si la biblioteca de gpio no puede ser inicializada.",
+        "pl": "sprawiają, że biblioteka gpio wymaga zależności\ndokonać błędów jaśniej, jeśli biblioteka gpio nie może być inicjalizowana.",
+        "uk": "зробити бібліотеку gpio необхідною залежностю\nне може бути ініціалізовано.",
+        "zh-cn": "使 gpio 库需要依赖\n如果 gpio 库无法初始化, 则使错误更清晰 ."
       },
-      "2.0.0-alpha.2": {
-        "en": "get rid of old sync-exec.",
-        "de": "alte sync-exec loswerden.",
-        "ru": "избавьтесь от старой синхронизации.",
-        "pt": "se livrar da velha sync-exec.",
-        "nl": "verwijder oude sync-exec.",
-        "fr": "débarrassez-vous de l'ancien synchro-exec.",
-        "it": "sbarazzarsi di vecchio sync-exec.",
-        "es": "get rid of old sync-exec.",
-        "pl": "pozbądź się starego sync- exec.",
-        "uk": "позбутися від старої синхронізації-ексека.",
-        "zh-cn": "摆脱旧的同步执行."
+      "2.0.0": {
+        "en": "reworked GPIO input and output to work with Bookworm.\nBREAKING CHANGE: removed support for GPIO-Buttons. \nBREAKING CHANGE: remove unsupported button states and create input state.\nadd support for Raspberry 5.\non startup set GPIO outputs from ioBroker states.\nswitch to opengpio library.\nfixed: reading network and filesystem statistics.\nmove parsers from io-package.json to separate file.\nget rid of old sync-exec.\nGet development stuff up to date...",
+        "de": "überarbeitete GPIO Eingabe und Ausgabe, um mit Bookworm zu funktionieren.\nBREAKING CHANGE: entfernte Unterstützung für GPIO-Buttons.\nBREAKING CHANGE: Entfernt die nicht mehr unterstützten states für Buttons und erstellt einen Eingabe-State.\nunterstützung für Raspberry 5.\nsetzt beim start GPIO-Ausgänge auf den Wert, der in ioBroker states steht.\nauf opengpio bibliothek umgestiegen.\nfixed: netzwerk- und dateisystemstatistik lesen.\nparsers-Code von io-package.json in eigene JSON verschoben, um die datei zu trennen.\nalte sync-exec loswerden.\nAktualisierter Code und drumherum für einfacherer Weiterentwicklung",
+        "ru": "переработал ввод и вывод GPIO для работы с Bookworm.\nУдаление поддержки для GPIO-буттонов.\nИзменение: удалить неподдерживаемые состояния кнопок и создать состояние ввода.\nдобавьте поддержку Raspberry 5.\nна стартовый набор GPIO выходов из государств ioBroker.\nпереключиться на библиотеку opengpio.\nфиксированная: чтение сети и статистики файловой системы.\nпереместить парсеры из io-package.json в отдельный файл.\nизбавьтесь от старой синхронизации.\nУзнать что-нибудь о развитии...",
+        "pt": "entrada GPIO retrabalhado e saída para trabalhar com Bookworm.\nBREAKING CHANGE: suporte removido para GPIO-Buttons.\nCHANGE DE BREAKING: remover estados de botão não suportados e criar estado de entrada.\nadicionar suporte para framboesa 5.\nna inicialização conjunto GPIO saídas de estados ioBroker.\nmudar para biblioteca opengpio.\ncorrigido: ler estatísticas de rede e sistema de arquivos.\nmover parsers de io-package.json para arquivo separado.\nse livrar da velha sync-exec.\nObter material de desenvolvimento atualizado...",
+        "nl": "herwerkte GPIO input en output om te werken met Boekworm.\nBREAKING VERANDERING: verwijderde ondersteuning voor GPIO-Buttons.\nBREAKING VERANDERING: verwijder niet-ondersteunde knoptoestanden en creëer invoerstatus.\nvoeg steun voor Raspberry 5.\nop opstarten set GPIO uitgangen uit ioBroker staten.\nschakel over naar de opengpio bibliotheek.\nvaste: het lezen van netwerk- en bestandssysteemstatistieken.\nverplaats parsers van io-package.json naar aparte bestanden.\nverwijder oude sync-exec.\nOntwikkelen up-to-date...",
+        "fr": "l'entrée et la sortie GPIO retravaillées pour travailler avec Bookworm.\nCHANGEMENT DE BREAKING: retrait du support pour les boutons GPIO.\nCHANGEMENT DE BREAKING : supprimez les états des boutons non pris en charge et créez l'état d'entrée.\najouter le support pour la framboise 5.\nsur startup set GPIO sorties des états ioBroker.\npasser à la bibliothèque opengpio.\nfixe: lecture des statistiques du réseau et du système de fichiers.\ndéplacer les analyseurs de io-package.json vers un fichier séparé.\ndébarrassez-vous de l'ancien synchro-exec.\nMettez à jour le développement...",
+        "it": "rielaborato GPIO input e output per lavorare con Bookworm.\nBREAKING CHANGE: supporto rimosso per GPIO-Buttons.\nBREAKING CHANGE: rimuovere gli stati del pulsante non supportati e creare stato di ingresso.\naggiungere supporto per lampone 5.\nsul set di avvio uscite GPIO da stati ioBroker.\npassare alla libreria opengpio.\nfisso: lettura della rete e statistica del filesystem.\nspostare i parsers da io-package.json a file separati.\nsbarazzarsi di vecchio sync-exec.\nOttenere materiale di sviluppo fino ad oggi...",
+        "es": "nuevo GPIO entrada y salida para trabajar con Bookworm.\nCAMBIO DE BREAKING: apoyo eliminado para GPIO-Buttons.\nCAMBIO DE BREAKING: eliminar estados de botón sin soporte y crear estado de entrada.\nañadir soporte para Raspberry 5.\non startup set GPIO outputs from ioBroker states.\ncambiar a la biblioteca de opengpio.\nfijo: lectura de redes y estadísticas del sistema de archivos.\nmover parsers de io-package.json a archivo separado.\nget rid of old sync-exec.\nConsigue cosas de desarrollo hasta la fecha...",
+        "pl": "przerobione wejście i wyjście GPIO do pracy z robakiem książkowym.\nZMIANA ZBIORCZA: usunięte wsparcie dla przycisków GPIO.\nZMIANA BREAKING: usunąć nieobsługiwane stany przycisków i utworzyć stan wprowadzania.\ndodaj wsparcie dla Malina 5.\nna startup set GPIO wyjść ze stanów joBroker.\nprzełącz na bibliotekę opengpio.\nstałe: czytanie statystyk sieci i systemu plików.\nprzenieś parsery z jo- package.json do oddzielnego pliku.\npozbądź się starego sync- exec.\nAktualizuj sprawy rozwoju...",
+        "uk": "перероблений вхід GPIO і вихід для роботи з Книжковим черв'яком.\nBREAKING CHANGE: видалена підтримка GPIO-Buttons.\nBREAKING CHANGE: видалення непідтримуваних кнопок станів і створення вхідного стану.\nдодати підтримку для Raspberry 5.\nна автозапускі GPIO виходи з ioBroker штатів.\nперейти до бібліотеки opengpio.\nвиправлено: статистика читання мережі та файлової системи.\nперемістити парсери від io-package.json до окремого файлу.\nпозбутися від старої синхронізації-ексека.\nОтримати розвиток фари до дати ...",
+        "zh-cn": "重新制作GPIO输入和输出,与Booktrom合作.\n断裂变换:取消GPIO按钮支持.\nBreaking Change:删除不支持的按钮状态并创建输入状态.\n添加支持 Raspberry 5.\n从ioBroker状态的GPIO输出.\n切换到 opengpio 库.\n固定:读取网络和文件系统统计.\n从 io- package.json 移动解析器到分离文件.\n摆脱旧的同步执行.\n更新开发内容..."
       },
-      "2.0.0-alpha.1": {
-        "en": "Fix stuff.",
-        "de": "Repariere Sachen.",
-        "ru": "Исправление.",
-        "pt": "Corrigir coisas.",
-        "nl": "Dingen repareren.",
-        "fr": "Réparer des trucs.",
-        "it": "Risolvi le cose.",
-        "es": "Arregla cosas.",
-        "pl": "Napraw rzeczy.",
-        "uk": "Фіксувати речі.",
-        "zh-cn": "修补东西."
+      "1.3.2": {
+        "en": "Requires js-controller 3.3 or higher! Allo js.controller to do a rebuild when GPIO is configured but fails",
+        "de": "Benötigt js-controller 3.3 oder höher! Allo js.controller, um eine Neuerstellung durchzuführen, wenn GPIO konfiguriert ist, aber fehlschlägt",
+        "ru": "Требуется js-контроллер 3.3 или выше! Разрешить js.controller выполнять перестроение, когда GPIO настроен, но не работает",
+        "pt": "Requer js-controller 3.3 ou superior! Allo js.controller para fazer uma reconstrução quando o GPIO está configurado, mas falha",
+        "nl": "Vereist js-controller 3.3 of hoger! Allo js.controller om een rebuild uit te voeren wanneer GPIO is geconfigureerd maar mislukt",
+        "fr": "Nécessite js-controller 3.3 ou supérieur ! Allo js.controller pour effectuer une reconstruction lorsque GPIO est configuré mais échoue",
+        "it": "Richiede js-controller 3.3 o successivo! Allo js.controller per eseguire una ricostruzione quando GPIO è configurato ma non riesce",
+        "es": "¡Requiere js-controller 3.3 o superior! Allo js.controller para hacer una reconstrucción cuando GPIO está configurado pero falla",
+        "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
+        "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建"
       },
       "1.3.1": {
         "en": "js-controller 3.3 warnings prevented",
@@ -156,7 +155,8 @@
     "osDependencies": {
       "linux": [
         "build-essential",
-        "python"
+        "python",
+        "libgpiod-dev"
       ]
     },
     "dependencies": [
@@ -169,7 +169,63 @@
         "admin": ">=5.0.0"
       }
     ],
-    "singletonHost": true
+    "singletonHost": true,
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<2.0.0",
+            "newVersion>=2.0.0"
+          ]
+        },
+        "title": {
+          "en": "GPIO Breaking Change",
+          "de": "GPIO Veränderung",
+          "ru": "GPIO Перерывы",
+          "pt": "GPIO Mudança de ruptura",
+          "nl": "GPIO Verandering doorbreken",
+          "fr": "GPIO Briser le changement",
+          "it": "GPIO Cambiamento di rottura",
+          "es": "GPIO Cambio de ruptura",
+          "pl": "GPIO Łamanie zmian",
+          "uk": "ГРУП Зміна несправностей",
+          "zh-cn": "科普罗 中断更改"
+        },
+        "text": {
+          "en": "GPIO needed massive changes for support of newer Raspian versions (Bookworm and following). Please check your GPIO configuration and if everything still works. GPIO Button support is removed. If you need it, please discuss in Github, see link.",
+          "de": "GPIO brauchte massive Änderungen für die Unterstützung neuerer Raspian Versionen (Bookworm und nachfolgend). Bitte überprüfen Sie Ihre GPIO-Konfiguration und wenn alles noch funktioniert. GPIO Button-Unterstützung wird entfernt. Wenn Sie es brauchen, diskutieren Sie bitte in Github, siehe Link.",
+          "ru": "GPIO нуждались в массовых изменениях для поддержки более новых версий Raspian (Bookworm и следующий). Пожалуйста, проверьте конфигурацию GPIO и все ли еще работает. Поддержка GPIO Button удалена. Если вам это нужно, пожалуйста, обсудите в Гитубе, см. ссылку.",
+          "pt": "O GPIO precisava de mudanças massivas para o suporte de versões mais recentes do Raspian (Bookworm e seguintes). Por favor, verifique sua configuração GPIO e se tudo ainda funciona. O suporte do botão GPIO é removido. Se precisar, por favor, discuta no Github, veja link.",
+          "nl": "GPIO had massale veranderingen nodig voor ondersteuning van nieuwere Raspian versies (Bookworm en volgende). Controleer uw GPIO configuratie en of alles nog werkt. GPIO-knop ondersteuning is verwijderd. Als je het nodig hebt, bespreek het dan in Github, zie link.",
+          "fr": "GPIO a besoin de changements massifs pour soutenir les nouvelles versions Raspiennes (Bookworm et suivants). Veuillez vérifier votre configuration GPIO et si tout fonctionne encore. Le support du bouton GPIO est enlevé. Si vous en avez besoin, veuillez discuter à Github, voir le lien.",
+          "it": "GPIO aveva bisogno di enormi cambiamenti per il supporto delle nuove versioni Raspian (Bookworm e seguenti). Controllare la configurazione GPIO e se tutto funziona ancora. Il supporto del pulsante GPIO viene rimosso. Se avete bisogno, si prega di discutere a Github, vedere il link.",
+          "es": "GPIO necesitaba cambios masivos para apoyar las nuevas versiones de Raspian (worm y siguientes). Por favor, compruebe su configuración de GPIO y si todo sigue funcionando. GPIO Button support is removed. Si lo necesita, por favor discuta en Github, vea el enlace.",
+          "pl": "GPIO potrzebowało ogromnych zmian dla wsparcia nowszych wersji Raspian (Bookworm i następnie). Proszę sprawdzić konfigurację GPIO i czy wszystko nadal działa. Wsparcie GPIO Button jest usuwane. W razie potrzeby proszę omówić to w Github, zobacz link.",
+          "uk": "GPIO вимагає масивних змін для підтримки нових версій Raspian (Bookworm і наступні). Будь ласка, перевірте налаштування GPIO і якщо все ще працює. При видаленні кнопки GPIO. Якщо вам потрібно, будь ласка, покажіть в Github, див. посилання.",
+          "zh-cn": "GPIO需要大规模修改来支持较新的Raspian版本(Bookdorm and follows). 请检查您的 GPIO 配置, 如果一切都还在工作。 GPIO按钮支持被删除. 如果你需要,请在Github讨论,参见链接."
+        },
+        "link": "https://github.com/iobroker-community-adapters/ioBroker.rpi2/issues/192",
+        "level": "warn",
+        "linkText": {
+          "en": "GPIO Button discussion.",
+          "de": "GPIO Button Diskussion.",
+          "ru": "GPIO Button discussion.",
+          "pt": "Discussão do botão GPIO.",
+          "nl": "GPIO Button discussie.",
+          "fr": "Discussion sur le bouton GPIO.",
+          "it": "GPIO Button discussione.",
+          "es": "GPIO Button discussion.",
+          "pl": "Dyskusja GPIO Button.",
+          "uk": "Обговорення кнопки GPIO.",
+          "zh-cn": "GPIO按钮讨论."
+        },
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
+      }
+    ]
   },
   "native": {
     "c_cpu": true,
@@ -182,141 +238,11 @@
     "c_uptime": true,
     "c_wlan": true,
     "interval": 60000,
-    "cpu": {
-      "cpu_frequency": {
-        "command": "test -r /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq || test -r /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq && cat /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq || echo -1000",
-        "regexp": "(.*)",
-        "post": "$1/1000"
-      },
-      "load1,load5,load15": {
-        "command": "cat /proc/loadavg",
-        "regexp": "^(\\S+)\\s(\\S+)\\s(\\S+)",
-        "post": ""
-      },
-      "scaling_governor": {
-        "command": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
-        "regexp": "(.*)",
-        "post": ""
-      }
-    },
-    "raspberry": {
-      "cpu_voltage": {
-        "command": "vcgencmd measure_volts core",
-        "regexp": "(\\d+.\\d+)V",
-        "post": ""
-      },
-      "mem_arm": {
-        "command": "vcgencmd get_mem arm",
-        "regexp": "(\\d+)",
-        "post": ""
-      },
-      "mem_gpu": {
-        "command": "vcgencmd get_mem gpu",
-        "regexp": "(\\d+)",
-        "post": ""
-      }
-    },
-    "memory": {
-      "memory_total": {
-        "command": "cat /proc/meminfo",
-        "regexp": "MemTotal:\\s+(\\d+)",
-        "post": "$1/1024"
-      },
-      "memory_free": {
-        "command": "cat /proc/meminfo",
-        "regexp": "MemFree:\\s+(\\d+)",
-        "post": "$1/1024"
-      },
-      "memory_available": {
-        "command": "cat /proc/meminfo",
-        "regexp": "MemAvailable:\\s+(\\d+)",
-        "post": "$1/1024",
-        "multiline": true
-      }
-    },
-    "network": {
-      "net_received": {
-        "command": "cat /sys/class/net/eth0/statistics/rx_bytes",
-        "regexp": "(.*)",
-        "post": "$1*-1"
-      },
-      "net_send": {
-        "command": "cat /sys/class/net/eth0/statistics/tx_bytes",
-        "regexp": "(.*)",
-        "post": ""
-      }
-    },
-    "sdcard": {
-      "sdcard_root_total": {
-        "command": "df /",
-        "regexp": "\\S+\\s+(\\d+).*\\/$",
-        "post": "$1/1024",
-        "multiline": true
-      },
-      "sdcard_boot_total": {
-        "command": "df /boot",
-        "regexp": "\\S+\\s+(\\d+).*\\/boot$",
-        "post": "$1/1024",
-        "multiline": true
-      },
-      "sdcard_root_used": {
-        "command": "df /",
-        "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/$",
-        "post": "$1/1024",
-        "multiline": true
-      },
-      "sdcard_boot_used": {
-        "command": "df /boot",
-        "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot$",
-        "post": "$1/1024",
-        "multiline": true
-      }
-    },
-    "swap": {
-      "swap_total": {
-        "command": "cat /proc/meminfo",
-        "regexp": "SwapTotal:\\s+(\\d+)",
-        "post": "$1/1024",
-        "multiline": true
-      },
-      "swap_used": {
-        "command": "cat /proc/meminfo",
-        "regexp": "SwapFree:\\s+(\\d+)",
-        "post": "(rpi.swap_total - $1)/1024",
-        "multiline": true
-      }
-    },
-    "temperature": {
-      "soc_temp": {
-        "command": "cat /sys/devices/virtual/thermal/thermal_zone0/temp",
-        "regexp": "(.*)",
-        "post": "$1/1000"
-      }
-    },
-    "uptime": {
-      "uptime": {
-        "command": "cat /proc/uptime",
-        "regexp": "(^\\S+)",
-        "post": ""
-      }
-    },
-    "wlan": {
-      "wifi_received": {
-        "command": "cat /sys/class/net/wlan0/statistics/rx_bytes",
-        "regexp": "(.*)",
-        "post": "$1*-1"
-      },
-      "wifi_send": {
-        "command": "cat /sys/class/net/wlan0/statistics/tx_bytes",
-        "regexp": "(.*)",
-        "post": ""
-      }
-    },
     "gpios": [],
     "forceinit": false,
     "inputPullUp": false,
     "buttonPullUp": false,
-    "inputDebounceMs": 30,
+    "inputDebounceMs": 0,
     "buttonPressMs": 200,
     "buttonDoubleMs": 500,
     "dhtPollInterval": 15000

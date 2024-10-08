@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - "master"
+      - "new-gpio-lib"
     tags:
       # normal versions
       - "v[0-9]+.[0-9]+.[0-9]+"
@@ -29,6 +30,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libgpiod-dev
+          version: 1.0 #string to identify the cache.
       - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '18.x'
@@ -47,12 +52,17 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libgpiod-dev
+          version: 1.0 #string to identify the cache.
       - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
           # install-command: 'npm install'
+
 
   # Deploys the final package to NPM
   deploy:
@@ -71,6 +81,10 @@ jobs:
       contents: write
 
     steps:
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libgpiod-dev
+          version: 1.0 #string to identify the cache.
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '18.x'

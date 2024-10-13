@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "news": {
+      "2.1.0": {
+        "en": "add support for gpios on Raspberry Zero.",
+        "de": "unterstützung für gpios auf Raspberry Zero hinzufügen.",
+        "ru": "добавьте поддержку gpios на Raspberry Zero.",
+        "pt": "adicionar suporte para gpios no Raspberry Zero.",
+        "nl": "voeg ondersteuning voor gpios op Raspberry Zero.",
+        "fr": "ajouter le support pour gpios sur Raspberry Zero.",
+        "it": "aggiungere il supporto per gpios su Raspberry Zero.",
+        "es": "añadir soporte para gpios en Raspberry Zero.",
+        "pl": "dodaj wsparcie dla gpios na Malina Zero.",
+        "uk": "додати підтримку gpios на Raspberry Zero.",
+        "zh-cn": "在Raspberry Zero上添加对gpios的支持."
+      },
       "2.0.1": {
         "en": "make gpio library required dependency\nmake errors clearer, if gpio library could not be initialized.",
         "de": "gpio bibliothek erforderlich abhängigkeit\nfehler deutlicher machen, wenn gpio-bibliothek nicht initialisiert werden konnte.",
@@ -76,18 +89,6 @@
         "es": "Configuración GPIO como salida con valor inicial definido",
         "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
         "zh-cn": "GPIO配置为具有定义的初始值的输出"
-      },
-      "1.1.1": {
-        "en": "Error messages for not existing values are logged only once",
-        "de": "Fehlermeldungen für nicht vorhandene Werte werden nur einmal protokolliert",
-        "ru": "Сообщения об ошибках для несуществующих значений регистрируются только один раз",
-        "pt": "Mensagens de erro para valores não existentes são registradas somente uma vez",
-        "nl": "Foutmeldingen voor niet bestaande waarden worden slechts één keer vastgelegd",
-        "fr": "Les messages d'erreur relatifs à des valeurs non existantes ne sont consignés qu'une seule fois.",
-        "it": "I messaggi di errore per i valori non esistenti vengono registrati solo una volta",
-        "es": "Los mensajes de error para valores no existentes se registran una sola vez.",
-        "pl": "Komunikaty o błędach dla nieistniejących wartości są rejestrowane tylko raz",
-        "zh-cn": "不存在的值的错误消息仅记录一次"
       }
     },
     "title": "RPI-Monitor",

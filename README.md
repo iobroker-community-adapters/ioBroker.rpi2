@@ -156,6 +156,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) fix gpio undefined errors.
+
 ### 2.1.0 (2024-10-13)
 * (jangatzke) add support for gpios on Raspberry Zero.
 

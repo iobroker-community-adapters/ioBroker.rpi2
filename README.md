@@ -156,7 +156,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.1.2 (2024-10-13)
 * (Garfonso) transmit all GPIO changes to iobroker states.
 
 ### 2.1.1 (2024-10-13)
@@ -180,10 +180,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 * (Garfonso) move parsers from io-package.json to separate file.
 * (Garfonso) get rid of old sync-exec.
 * (Garfonso) Get development stuff up to date...
-
-### 1.3.2 (2022-02-17)
-* Important: This version requires at leas js-controller 3.3
-* (Apollon77) Stop the adapter when GPIO module is configured but not working due to a needed rebuild that js-controller can pick up
 
 ## License
 MIT License

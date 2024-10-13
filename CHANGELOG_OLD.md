@@ -1,4 +1,8 @@
 # Older Changes
+## 1.3.2 (2022-02-17)
+* Important: This version requires at leas js-controller 3.3
+* (Apollon77) Stop the adapter when GPIO module is configured but not working due to a needed rebuild that js-controller can pick up
+
 ## 1.3.1 (2021-07-16)
 * (Apollon77) Prevent js-controller 3.3 warnings
 

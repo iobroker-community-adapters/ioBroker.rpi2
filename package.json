@@ -84,7 +84,8 @@
     "check": "tsc --noEmit -p tsconfig.check.json",
     "lint": "eslint .",
     "translate": "translate-adapter",
-    "release": "release-script"
+    "release": "release-script",
+    "preinstall": "sudo apt-get install -y libgpiod-dev || exit 0"
   },
   "readmeFilename": "README.md"
 }

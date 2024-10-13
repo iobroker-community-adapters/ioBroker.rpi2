@@ -156,7 +156,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.1.1 (2024-10-13)
 * (Garfonso) fix gpio undefined errors.
 
 ### 2.1.0 (2024-10-13)
@@ -181,9 +181,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 ### 1.3.2 (2022-02-17)
 * Important: This version requires at leas js-controller 3.3
 * (Apollon77) Stop the adapter when GPIO module is configured but not working due to a needed rebuild that js-controller can pick up
-
-### 1.3.1 (2021-07-16)
-* (Apollon77) Prevent js-controller 3.3 warnings
 
 ## License
 MIT License

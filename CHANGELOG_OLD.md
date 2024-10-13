@@ -1,4 +1,7 @@
 # Older Changes
+## 1.3.1 (2021-07-16)
+* (Apollon77) Prevent js-controller 3.3 warnings
+
 ## 1.3.0 (2021-07-16)
 * (asgothian) Fix to get CPU frequencies also on Raspi 4
 * (raintor) Add support for DHTxx/AM23xx Sensors

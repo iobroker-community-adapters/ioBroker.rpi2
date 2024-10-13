@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "news": {
+      "2.1.1": {
+        "en": "fix gpio undefined errors.",
+        "de": "gpio undefinierte fehler beheben.",
+        "ru": "исправить ошибки gpio.",
+        "pt": "corrigir erros indefinidos do gpio.",
+        "nl": "fix gpio ongedefinieerde fouten.",
+        "fr": "corriger les erreurs non définies de gpio.",
+        "it": "correggere errori gpio non definiti.",
+        "es": "corrige errores sin definir.",
+        "pl": "naprawić nieokreślone błędy gpio.",
+        "uk": "виправити gpio не визначені помилки.",
+        "zh-cn": "修复未定义的 gpio 错误."
+      },
       "2.1.0": {
         "en": "add support for gpios on Raspberry Zero.",
         "de": "unterstützung für gpios auf Raspberry Zero hinzufügen.",
@@ -77,18 +90,6 @@
         "es": "Agregue soporte para sensores DHTxx / AM23xx, configure la resistencia interna Pull UP / Down, optimizaciones y correcciones",
         "pl": "Dodaj wsparcie dla czujników DHTxx/AM23xx, skonfiguruj wewnętrzny rezystor pull up/down, optymalizacje i poprawki",
         "zh-cn": "添加对 DHTxx/AM23xx 传感器的支持、配置内部上拉/下拉电阻、优化和修复"
-      },
-      "1.2.0": {
-        "en": "GPIO configuration as output with defined initial value",
-        "de": "GPIO Konfiguration als Ausgang mit definiertem Startwert",
-        "ru": "Конфигурация GPIO как выход с заданным начальным значением",
-        "pt": "Configuração GPIO como saída com valor inicial definido",
-        "nl": "GPIO-configuratie als uitgang met gedefinieerde beginwaarde",
-        "fr": "Configuration GPIO en sortie avec valeur initiale définie",
-        "it": "Configurazione GPIO come output con valore iniziale definito",
-        "es": "Configuración GPIO como salida con valor inicial definido",
-        "pl": "Konfiguracja GPIO jako wyjście ze zdefiniowaną wartością początkową",
-        "zh-cn": "GPIO配置为具有定义的初始值的输出"
       }
     },
     "title": "RPI-Monitor",

@@ -151,7 +151,7 @@
     "connectionType": "local",
     "dataSource": "poll",
     "adminUI": {
-      "config": "materialize"
+      "config": "json"
     },
     "osDependencies": {
       "linux": [
@@ -162,12 +162,12 @@
     },
     "dependencies": [
       {
-        "js-controller": ">=3.3.22"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.0.0"
+        "admin": ">=7.0.23"
       }
     ],
     "singletonHost": true,

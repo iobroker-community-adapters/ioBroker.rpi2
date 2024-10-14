@@ -93,30 +93,31 @@
         "zh-cn": "js-controller 3.3 警告被阻止"
       }
     },
-    "title": "RPI-Monitor",
     "titleLang": {
-      "en": "RPI-Monitor",
-      "de": "RPI-Monitor",
-      "ru": "RPI-монитор",
-      "pt": "RPI-Monitor",
-      "nl": "RPI-monitor",
-      "fr": "RPI-Moniteur",
-      "it": "RPI-Monitor",
-      "es": "Monitor RPI",
-      "pl": "Monitor RPI",
-      "zh-cn": "RPI-监视器"
+      "en": "RPI Monitor and GPIO",
+      "de": "RPI-Monitor und GPIO",
+      "ru": "Монитор RPI и GPIO",
+      "pt": "Monitor RPI e GPIO",
+      "nl": "RPI-monitor en GPIO",
+      "fr": "Moniteur RPI et GPIO",
+      "it": "Monitoraggio RPI e GPIO",
+      "es": "Monitor RPI y GPIO",
+      "pl": "Monitor RPI i GPIO",
+      "uk": "Монітор RPI та GPIO",
+      "zh-cn": "RPI 监视器和 GPIO"
     },
     "desc": {
-      "en": "RPI-Monitor",
-      "de": "RPI-Monitor",
-      "ru": "RPI-монитор",
-      "pt": "RPI-Monitor",
-      "nl": "RPI-Monitor",
-      "fr": "RPI-Monitor",
-      "it": "RPI-Monitor",
-      "es": "RPI-Monitor",
-      "pl": "Monitor RPI",
-      "zh-cn": "RPI-监视器"
+      "en": "Monitor data from a Raspberry PI and interact with GPIOs.",
+      "de": "Überwachen Sie Daten von einem Raspberry PI und interagieren Sie mit GPIOs.",
+      "ru": "Отслеживайте данные Raspberry PI и взаимодействуйте с GPIO.",
+      "pt": "Monitore dados de um Raspberry PI e interaja com GPIOs.",
+      "nl": "Bewaak gegevens van een Raspberry PI en communiceer met GPIO's.",
+      "fr": "Surveillez les données d'un Raspberry PI et interagissez avec les GPIO.",
+      "it": "Monitora i dati da un Raspberry PI e interagisci con i GPIO.",
+      "es": "Supervise los datos de una Raspberry PI e interactúe con GPIO.",
+      "pl": "Monitoruj dane z Raspberry PI i korzystaj z GPIO.",
+      "uk": "Відстежуйте дані з Raspberry PI та взаємодійте з GPIO.",
+      "zh-cn": "监控来自 Raspberry PI 的数据并与 GPIO 交互。"
     },
     "authors": [
       "Christian Baumgartner",
@@ -127,13 +128,10 @@
       "linux"
     ],
     "keywords": [
-      "ioBroker",
-      "monitoring",
       "raspberry",
-      "orangepi",
-      "odroid",
-      "bananapi",
-      "gpio"
+      "monitoring",
+      "gpio",
+      "raspian"
     ],
     "licenseInformation": {
       "type": "free",

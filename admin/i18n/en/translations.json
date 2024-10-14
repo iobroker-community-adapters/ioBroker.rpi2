@@ -18,7 +18,7 @@
     "Port": "Port",
     "Port numbers relate to Broadcom SOC channel, not physical pins.": "Port numbers relate to Broadcom SOC channel, not physical pins.",
     "RPI-Monitor Adapter settings": "RPI-Monitor Adapter settings",
-    "Raspberry:": "Raspberry",
+    "Raspberry": "Raspberry",
     "SDCard": "SD Card",
     "Swap": "Swap",
     "Temperature": "Temperature",

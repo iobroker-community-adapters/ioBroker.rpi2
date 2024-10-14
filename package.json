@@ -13,13 +13,10 @@
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.rpi2",
   "license": "MIT",
   "keywords": [
-    "ioBroker",
-    "monitoring",
     "raspberry",
-    "orangepi",
-    "odroid",
-    "bananapi",
-    "gpio"
+    "monitoring",
+    "gpio",
+    "raspian"
   ],
   "repository": {
     "type": "git",

@@ -13,6 +13,7 @@
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.rpi2",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "raspberry",
     "monitoring",
     "gpio",

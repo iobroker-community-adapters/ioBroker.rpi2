@@ -156,6 +156,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) rebuild config in JSONConfig.
+
 ### 2.1.2 (2024-10-13)
 * (Garfonso) transmit all GPIO changes to iobroker states.
 

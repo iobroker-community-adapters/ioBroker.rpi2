@@ -156,6 +156,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) temperature has now proper role and type.
+
 ### 2.2.0 (2024-10-15)
 * (Garfonso) rebuild config in JSONConfig.
 

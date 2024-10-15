@@ -1,0 +1,171 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "items": {
+        "_monitoring": {
+            "type": "tab",
+            "label": "Monitoring",
+            "items": {
+                "_explanation": {
+                    "type": "staticText",
+                    "text": "MonitoringExplanation",
+                    "newLine": true
+                },
+                "c_cpu": {
+                    "type": "checkbox",
+                    "label": "CPU",
+                    "newLine": true
+                },
+                "c_raspberry": {
+                    "type": "checkbox",
+                    "label": "Raspberry"
+                },
+                "c_memory": {
+                    "type": "checkbox",
+                    "label": "Memory"
+                },
+                "c_network": {
+                    "type": "checkbox",
+                    "label": "Network",
+                    "newLine": true
+                },
+                "c_sdcard": {
+                    "type": "checkbox",
+                    "label": "SDCard"
+                },
+                "c_swap": {
+                    "type": "checkbox",
+                    "label": "Swap"
+                },
+                "c_temperature": {
+                    "type": "checkbox",
+                    "label": "Temperature",
+                    "newLine": true
+                },
+                "c_uptime": {
+                    "type": "checkbox",
+                    "label": "Uptime"
+                },
+                "c_wlan": {
+                    "type": "checkbox",
+                    "label": "WLAN"
+                }
+            }
+        },
+        "_gpios": {
+            "type": "tab",
+            "label": "GPIOs",
+            "items": {
+                "_explanation": {
+                    "type": "staticText",
+                    "text": "GPIOConfigExplanation",
+                    "newLine": true
+                },
+                "_pullUpWarning": {
+                    "type": "staticText",
+                    "text": "pullupwarning",
+                    "hidden": false,
+                    "style": {
+                        "color": "red",
+                        "font-size": "larger"
+                    },
+                    "newLine": true
+                },
+                "gpioSettings": {
+                    "type": "table",
+                    "newLine": true,
+                    "uniqueColumns": ["gpio"],
+                    "validatorNoSaveOnError": true,
+                    "validator": "if (!data.gpioSettings) return true; const values=[]; for(const r of data.gpioSettings) { if (!(r.gpio !== null && r.gpio !== '' && r.gpio >= 2 && r.gpio <= 27 && !values.includes(r.gpio))) {return false;} values.push(r.gpio); }; return true;",
+                    "items": [
+                        {
+                            "type": "number",
+                            "attr": "gpio",
+                            "title": "GPIO Number",
+                            "tooltip": "Enter number of GPIO to configure",
+                            "sort": true,
+                            "filter": false,
+                            "defaultFunc": "if (!data.gpioSettings) return 2; let def=1; for(const r of globalData.gpioSettings) {def = Math.max(def, r.gpio); }; return def+1;",
+                            "min": 2,
+                            "max": 27,
+                            "step": 1,
+                            "width": "5%",
+                            "validator": "data.gpio !== null && data.gpio !== '' && data.gpio >= 2 && data.gpio <= 27 && globalData.gpioSettings.filter(r => r.gpio === data.gpio).length === 1"
+                        },
+                        {
+                            "type": "select",
+                            "attr": "configuration",
+                            "title": "Type",
+                            "default": "out",
+                            "options": [
+                                {
+                                    "value": "in",
+                                    "label": "in"
+                                },
+                                {
+                                    "value": "out",
+                                    "label": "out"
+                                },
+                                {
+                                    "value": "outhigh",
+                                    "label": "outhigh"
+                                },
+                                {
+                                    "value": "outlow",
+                                    "label": "outlow"
+                                },
+                                {
+                                    "value": "dht11",
+                                    "label": "DHT11"
+                                },
+                                {
+                                    "value": "dht22",
+                                    "label": "DHT22"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "number",
+                            "attr": "debounceOrPoll",
+                            "title": "Debounce / Poll (ms)",
+                            "defaultFunc": "['dht11', 'dht22'].includes(data.configuration) ? 350 : 0",
+                            "hidden": "!['in', 'dht11', 'dht22'].includes(data.configuration)",
+                            "min": 0,
+                            "step": 10
+                        },
+                        {
+                            "type": "checkbox",
+                            "attr": "pullUp",
+                            "title": "Pull Up",
+                            "hidden": "data.configuration !== 'in'",
+                            "default": false
+                        },
+                        {
+                            "type": "checkbox",
+                            "attr": "pullDown",
+                            "title": "Pull Down",
+                            "hidden": "true || !['out', 'outlow','outhigh'].includes(data.configuration)",
+                            "default": false
+                        },
+                        {
+                            "type": "text",
+                            "attr": "label",
+                            "title": "Label",
+                            "placeholder": "GPIO Name"
+                        }
+                    ]
+                },
+                "_GPIOError": {
+                    "type": "staticText",
+                    "text": "GPIOVauleERRORText",
+                    "newLine": true,
+                    "hidden": "if (!data.gpioSettings) return true; const values=[]; for(const r of data.gpioSettings) { if (!(r.gpio !== null && r.gpio !== '' && r.gpio >= 2 && r.gpio <= 27 && !values.includes(r.gpio))) {return false;} values.push(r.gpio); }; return true;",
+                    "hideOnlyControl": true,
+                    "style": {
+                        "color": "red"
+                    }
+                }
+            }
+        }
+    }
+}

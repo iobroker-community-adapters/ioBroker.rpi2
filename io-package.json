@@ -78,7 +78,8 @@
         "it": "Richiede js-controller 3.3 o successivo! Allo js.controller per eseguire una ricostruzione quando GPIO è configurato ma non riesce",
         "es": "¡Requiere js-controller 3.3 o superior! Allo js.controller para hacer una reconstrucción cuando GPIO está configurado pero falla",
         "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
-        "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建"
+        "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建",
+        "uk": "Потрібен js-контролер 3.3 або вище! Allo js.controller для виконання перебудови, коли GPIO налаштовано, але не вдається"
       },
       "1.3.1": {
         "en": "js-controller 3.3 warnings prevented",
@@ -90,7 +91,8 @@
         "it": "js-controller 3.3 avvisi impediti",
         "es": "advertencias de js-controller 3.3 prevenidas",
         "pl": "js-controller 3.3 zablokowano ostrzeżenia",
-        "zh-cn": "js-controller 3.3 警告被阻止"
+        "zh-cn": "js-controller 3.3 警告被阻止",
+        "uk": "попередження js-controller 3.3 запобігли"
       }
     },
     "titleLang": {
@@ -194,7 +196,7 @@
           "zh-cn": "科普罗 中断更改"
         },
         "text": {
-          "en": "GPIO needed massive changes for support of newer Raspian versions (Bookworm and following). Please check your GPIO configuration and if everything still works. GPIO Button support is removed. If you need it, please discuss in Github, see link.",
+          "en": "GPIO needed massive changes for support of newer Raspian versions (Bookworm and following). Please check your GPIO configuration and if everything still works. GPIO Button support is removed. If you need it, please discuss in Github, see link. - Also, keep in mind that hardware pull up / down is still not supported.",
           "de": "GPIO brauchte massive Änderungen für die Unterstützung neuerer Raspian Versionen (Bookworm und nachfolgend). Bitte überprüfen Sie Ihre GPIO-Konfiguration und wenn alles noch funktioniert. GPIO Button-Unterstützung wird entfernt. Wenn Sie es brauchen, diskutieren Sie bitte in Github, siehe Link.",
           "ru": "GPIO нуждались в массовых изменениях для поддержки более новых версий Raspian (Bookworm и следующий). Пожалуйста, проверьте конфигурацию GPIO и все ли еще работает. Поддержка GPIO Button удалена. Если вам это нужно, пожалуйста, обсудите в Гитубе, см. ссылку.",
           "pt": "O GPIO precisava de mudanças massivas para o suporte de versões mais recentes do Raspian (Bookworm e seguintes). Por favor, verifique sua configuração GPIO e se tudo ainda funciona. O suporte do botão GPIO é removido. Se precisar, por favor, discuta no Github, veja link.",
@@ -239,14 +241,7 @@
     "c_uptime": true,
     "c_wlan": true,
     "interval": 60000,
-    "gpios": [],
-    "forceinit": false,
-    "inputPullUp": false,
-    "buttonPullUp": false,
-    "inputDebounceMs": 0,
-    "buttonPressMs": 200,
-    "buttonDoubleMs": 500,
-    "dhtPollInterval": 15000
+    "gpioSettings": []
   },
   "objects": [],
   "instanceObjects": []

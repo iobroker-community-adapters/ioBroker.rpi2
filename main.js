@@ -12,8 +12,9 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const parsers = require('./lib/parsers');
+const parsers = require('./lib/parsers.json');
 const {buttonEvents, GpioControl} = require('./lib/gpioControl');
+const {convertConfig} = require('./lib/configConverter');
 
 const errorsLogged = {};
 const intervalTimers = [];
@@ -37,32 +38,23 @@ class Rpi2 extends utils.Adapter {
 
     async onReady() {
         objects = {};
-
-        //sanitize timeouts:
-        this.config.inputDebounceMs = Math.min(Number(this.config.inputDebounceMs) || 0, 10000);
+        if (convertConfig(this.config, this)) {
+            this.log.info('Config updated, will write new config and restart adapter.');
+            const id = 'system.adapter.' + this.namespace;
+            this.log.error('would write: ' + id + '\nconfig' + JSON.stringify(this.config, null, 2));
+            const instanceObject = await this.getForeignObjectAsync(id);
+            if (instanceObject) {
+                console.log('instanceObject: ' + JSON.stringify(instanceObject));
+                instanceObject.native = this.config;
+                await this.setForeignObject(id, instanceObject);
+            }
+        }
 
         const adapterObjects = await this.getAdapterObjectsAsync();
-        if (this.config.forceinit) {
-            for (const id of Object.keys(adapterObjects)) {
-                if (/^rpi2\.\d+$/.test(id)) {
-                    this.log.debug('Skip root object ' + id);
-                    continue;
-                }
-
-                this.log.debug('Remove ' + id + ': ' + id);
-                try {
-                    await this.delObjectAsync(id);
-                    await this.deleteStateAsync(id);
-                } catch (err) {
-                    this.log.error('Could not delete ' + id + ': ' + err);
-                }
-            }
-        } else {
-            for (const id of Object.keys(adapterObjects)) {
-                objects[id] = true; //object already exists.
-            }
-            this.log.debug('received all objects');
+        for (const id of Object.keys(adapterObjects)) {
+            objects[id] = true; //object already exists.
         }
+        this.log.debug('received all objects');
         this.gpioControl = new GpioControl(this, this.log);
         await this.subscribeStatesAsync('*');
         await main(this);
@@ -70,50 +62,53 @@ class Rpi2 extends utils.Adapter {
     }
 
     async initPorts() {
-        if (this.config.gpios && this.config.gpios.length) {
+        if (this.config.gpioSettings && this.config.gpioSettings.length) {
             const gpioPorts = [];
             const buttonPorts = [];
             const dhtPorts = [];
 
-            for (let port = 0; port < this.config.gpios.length; port++) {
-                if (this.config.gpios[port]) {
-                    /* Ensure backwards compatibility of property .input
-                    * in older versions, it was true for "in" and false for "out"
-                    * in newer versions, it is "in", "out", "outlow" or "outhigh"
-                    * Do this now, so we only have to check for newer versions everywhere else.
-                    */
-                    if (this.config.gpios[port].input === 'true' || this.config.gpios[port].input === true) {
-                        this.config.gpios[port].input = 'in';
-                    }
-                    else if (this.config.gpios[port].input === 'false' || this.config.gpios[port].input === false) {
-                        this.config.gpios[port].input = 'out';
-                    }
-                }
-
+            for (const gpioSetting of this.config.gpioSettings) {
                 // syncPort sets up the object tree.
                 // Do it now so all ready when
                 // physical GPIOs are enabled below.
-                await this.syncPort(port, this.config.gpios[port] || {});
+                await this.syncPort(gpioSetting);
 
-                if (this.config.gpios[port] && this.config.gpios[port].enabled) {
+                // Push port numbers into arrays as required for the setup below.
+                switch (gpioSetting.configuration) {
+                    case 'in':
+                    case 'out':
+                    case 'outlow':
+                    case 'outhigh':
+                        gpioPorts.push(gpioSetting);
+                        break;
+                    case 'button':
+                        buttonPorts.push(gpioSetting);
+                        break;
+                    case 'dht11':
+                    case 'dht22':
+                        dhtPorts.push(gpioSetting);
+                        break;
+                    default:
+                        this.log.error('Cannot setup port ' + gpioSetting.gpio + ': invalid direction type.');
+                }
+            }
 
-                    // Push port numbers into arrays as required for the setup below.
-                    switch (this.config.gpios[port].input) {
-                        case 'in':
-                        case 'out':
-                        case 'outlow':
-                        case 'outhigh':
-                            gpioPorts.push(port);
-                            break;
-                        case 'button':
-                            buttonPorts.push(port);
-                            break;
-                        case 'dht11':
-                        case 'dht22':
-                            dhtPorts.push(port);
-                            break;
-                        default:
-                            this.log.error('Cannot setup port ' + port + ': invalid direction type.');
+            //clean up unsued gpio objects:
+            for (const id of Object.keys(objects)) {
+                let num = -1;
+                if (id.match(/^(rpi2\.\d+\.)?gpio\.\d+$/)) {
+                    if (id.startsWith(this.namespace + '.gpio.')) {
+                        num = parseInt(id.split('.')[3], 10);
+                    }
+                    if (id.startsWith('gpio.')) {
+                        num = parseInt(id.split('.')[1], 10);
+                    }
+                }
+                if (num > 0) {
+                    const configuredPort = this.config.gpioSettings.find(g => g.gpio === num);
+                    if (!configuredPort) {
+                        this.log.debug('Deleting unused gpio settings for ' + num);
+                        await this.delObjectAsync(id, {recursive: true});
                     }
                 }
             }
@@ -127,36 +122,32 @@ class Rpi2 extends utils.Adapter {
 
     /**
      * Create ioBroker Objects for gpio port.
-     * @param port {number}
      * @param data {object} from config.
      * @returns {Promise<void>}
      */
-    async syncPort(port, data) {
-        data.isGpio = (data.input === 'in' || data.input === 'out' || data.input === 'outlow' || data.input === 'outhigh');
-        data.isButton = (data.input === 'button');
-        data.isTempHum = (data.input === 'dht11' || data.input === 'dht22');
-        data.isInput = (data.input === 'in' || data.isButton || data.isTempHum);
+    async syncPort(data) {
+        data.isGpio = (data.configuration === 'in' || data.configuration === 'out' || data.configuration === 'outlow' || data.configuration === 'outhigh');
+        data.isButton = (data.configuration === 'button');
+        data.isTempHum = /** @type {boolean} */ (data.configuration === 'dht11' || data.configuration === 'dht22');
+        data.isInput = /** @type {boolean} */ (data.configuration === 'in' || data.isButton || data.isTempHum);
 
-        const channelName = 'gpio.' + port;
-        if (data.enabled) {
-            await this.extendObjectAsync(channelName, {
-                type: 'channel',
-                common: {
-                    name: data.label === '' ? 'GPIO ' + port : data.label,
-                    // TODO: should we do more than just add this as 'info'?
-                    role: 'info'
-                }
-            });
-        }
+        const channelName = 'gpio.' + data.gpio;
+        await this.extendObject(channelName, {
+            type: 'channel',
+            common: {
+                name: data.label === '' ? 'GPIO ' + data.gpio : data.label,
+                role: 'info'
+            }
+        });
 
-        const stateName = 'gpio.' + port + '.state';
-        if (data.enabled && data.isGpio) {
+        const stateName = 'gpio.' + data.gpio + '.state';
+        if (data.isGpio) {
             const obj = {
                 common: {
-                    name:  'GPIO ' + port,
+                    name:  'GPIO ' + data.gpio,
                     type:  'boolean',
                     role:  data.isInput ? 'indicator' : 'switch',
-                    read:  data.isInput,
+                    read:  /** @type {boolean} */ (data.isInput),
                     write: !data.isInput
                 },
                 native: {
@@ -164,37 +155,32 @@ class Rpi2 extends utils.Adapter {
                 type: 'state'
             };
             // extendObject creates one if it doesn't exist - the same below
-            await this.extendObjectAsync(stateName, obj);
+            await this.extendObject(stateName, obj);
         } else {
             await this.delObjectAsync(stateName);
         }
-        await this.syncPortDirection(port, data);
-        await this.syncPortButton(port, data);
-        await this.syncPortTempHum(port, data);
-
-        if (!data.enabled) {
-            await this.delObjectAsync(channelName, {recursive: true});
-        }
+        await this.syncPortDirection(data);
+        await this.syncPortButton(data);
+        await this.syncPortTempHum(data);
     }
 
     /**
      * Create/Delect Object for GPIO button
-     * @param port {number}
      * @param data {object} from config
      * @returns {Promise<void>}
      */
-    async syncPortButton(port, data) {
+    async syncPortButton(data) {
         const buttonEventsOLD = [ 'pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released' ];
         for (const eventName of buttonEventsOLD) {
-            const stateName = `gpio.${port}.${eventName}`;
+            const stateName = `gpio.${data.gpio}.${eventName}`;
             await this.delObjectAsync(stateName);
         }
         for (const eventName of buttonEvents) {
-            const stateName = `gpio.${port}.${eventName}`;
-            if (data.enabled && data.isButton) {
+            const stateName = `gpio.${data.gpio}.${eventName}`;
+            if (data.isButton) {
                 const obj = {
                     common: {
-                        name:  'GPIO ' + port + ' ' + eventName,
+                        name:  'GPIO ' + data.gpio + ' ' + eventName,
                         type:  'boolean',
                         role:  'button',
                         read:  false,
@@ -204,7 +190,7 @@ class Rpi2 extends utils.Adapter {
                     },
                     type: 'state'
                 };
-                await this.extendObjectAsync(stateName, obj);
+                await this.extendObject(stateName, obj);
             } else {
                 //await this.delObjectAsync(stateName);
                 //Do not delete 'state' as this is used above. TODO: clean up code, when decided if buttons are ever supported.
@@ -214,15 +200,14 @@ class Rpi2 extends utils.Adapter {
 
     /**
      * Create/Delete ioBroker Objects for gpio temperature and humidity.
-     * @param port {number}
      * @param data {object} from config
      * @returns {Promise<void>}
      */
-    async syncPortTempHum(port, data) {
-        if (data.enabled && data.isTempHum) {
+    async syncPortTempHum(data) {
+        if (data.isTempHum) {
             const obj = {
                 common: {
-                    name:  'GPIO ' + port + ' temperature',
+                    name:  'GPIO ' + data.gpio + ' temperature',
                     type:  'number',
                     role:  'value.temperature',
                     read:  true,
@@ -232,14 +217,14 @@ class Rpi2 extends utils.Adapter {
                 },
                 type: 'state'
             };
-            await this.extendObjectAsync(temperatureStateName(port), obj);
+            await this.extendObject(temperatureStateName(data.gpio), obj);
         } else {
-            await this.delObjectAsync(temperatureStateName(port));
+            await this.delObjectAsync(temperatureStateName(data.gpio));
         }
-        if (data.enabled && data.isTempHum) {
+        if (data.isTempHum) {
             const obj = {
                 common: {
-                    name:  'GPIO ' + port + ' temperature',
+                    name:  'GPIO ' + data.gpio + ' temperature',
                     type:  'number',
                     role:  'value.humidity',
                     read:  true,
@@ -249,39 +234,34 @@ class Rpi2 extends utils.Adapter {
                 },
                 type: 'state'
             };
-            await this.extendObjectAsync(humidityStateName(port), obj);
+            await this.extendObjectAsync(humidityStateName(data.gpio), obj);
         } else {
-            await this.delObjectAsync(humidityStateName(port));
+            await this.delObjectAsync(humidityStateName(data.gpio));
         }
     }
 
     /**
      * Create ioBroker Objects for gpio button.
-     * @param port
      * @param data
      * @returns {Promise<void>}
      */
-    async syncPortDirection(port, data) {
-        const stateName = 'gpio.' + port + '.isInput';
-        if (data.enabled) {
-            this.log.debug(`Creating ${stateName}`);
-            const obj = {
-                common: {
-                    name:  'GPIO ' + port + ' direction',
-                    type:  'boolean',
-                    role:  'state',
-                    read:  true,
-                    write: false
-                },
-                native: {
-                },
-                type: 'state'
-            };
-            await this.extendObjectAsync(stateName, obj);
-            await this.setStateAsync(stateName, data.isInput, true);
-        } else {
-            await this.delObjectAsync(stateName);
-        }
+    async syncPortDirection(data) {
+        const stateName = 'gpio.' + data.gpio + '.isInput';
+        this.log.debug(`Creating ${stateName}`);
+        const obj = {
+            common: {
+                name:  'GPIO ' + data.gpio + ' direction',
+                type:  'boolean',
+                role:  'state',
+                read:  true,
+                write: false
+            },
+            native: {
+            },
+            type: 'state'
+        };
+        await this.extendObject(stateName, obj);
+        await this.setState(stateName, data.isInput, true);
     }
 
     onStateChange(id, state) {
@@ -568,32 +548,27 @@ function humidityStateName(port) {
 // Setup DHTxx/AM23xx sensors
 function setupDht(adapter, dhtPorts) {
     if (dhtPorts.length === 0) return;
-    const pollInterval = adapter.config.dhtPollInterval;
-    if (pollInterval === 0) {
-        adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
-    } else if (pollInterval < 350) {
-        adapter.log.error(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - disabling`);
-    } else {
-        // Config is good
-        const sensorLib = require('node-dht-sensor');
 
-        // Initialise ports, keeping track of those that worked with type
-        const dhtInitd = [];
-        for (const port of dhtPorts) {
-            const type = adapter.config.gpios[port].input === 'dht11' ? 11 : 22;
-            try {
-                sensorLib.initialize(type, port);
-                dhtInitd[port] = [type];
-            } catch (err) {
-                adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${port}`);
+    // Initialise ports, keeping track of those that worked with type
+    const dhtInitd = [];
+    for (const gpioSetting of dhtPorts) {
+        const type = gpioSetting.configuration === 'dht11' ? 11 : 22;
+        try {
+            const sensorLib = require('node-dht-sensor');
+            sensorLib.initialize(type, gpioSetting.gpio);
+            dhtInitd[gpioSetting.gpio] = [type];
+
+            let pollInterval = gpioSetting.debounceOrPoll;
+            if (pollInterval === 0) {
+                adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
             }
-        }
-
-        if (dhtInitd.length > 0) {
-            // At least one initialized, set polling on the configured interval
+            if (pollInterval < 350) {
+                adapter.log.warn(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - setting to 350ms`);
+                pollInterval = 350;
+            }
             intervalTimers.push(setInterval(async () => {
                 for (const [port, type] of Object.entries(dhtInitd)) {
-                    sensorLib.read(type, port, async function(err, temperature, humidity) {
+                    sensorLib.read(type, port, async function (err, temperature, humidity) {
                         if (err) {
                             adapter.log.error(`Failed to read DHTxx/AM23xx: ${type}/${port}`);
                         } else {
@@ -603,7 +578,9 @@ function setupDht(adapter, dhtPorts) {
                         }
                     });
                 }
-            }, pollInterval));
+            }, gpioSetting.debounceOrPoll));
+        } catch (err) {
+            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}`);
         }
     }
 }

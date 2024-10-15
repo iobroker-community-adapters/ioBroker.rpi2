@@ -41,7 +41,6 @@ class Rpi2 extends utils.Adapter {
         if (convertConfig(this.config, this)) {
             this.log.info('Config updated, will write new config and restart adapter.');
             const id = 'system.adapter.' + this.namespace;
-            this.log.error('would write: ' + id + '\nconfig' + JSON.stringify(this.config, null, 2));
             const instanceObject = await this.getForeignObjectAsync(id);
             if (instanceObject) {
                 console.log('instanceObject: ' + JSON.stringify(instanceObject));

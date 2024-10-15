@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "news": {
+      "2.2.1": {
+        "en": "temperature has now proper role and type.",
+        "de": "temperatur hat jetzt richtige rolle und typ.",
+        "ru": "температура теперь имеет надлежащую роль и тип.",
+        "pt": "temperatura tem agora o papel e tipo adequados.",
+        "nl": "de temperatuur heeft nu de juiste rol en type.",
+        "fr": "la température a maintenant un rôle et un type appropriés.",
+        "it": "la temperatura ha ora un ruolo e un tipo adeguato.",
+        "es": "la temperatura tiene ahora el papel y el tipo adecuados.",
+        "pl": "temperatura ma teraz właściwą rolę i typ.",
+        "uk": "температура тепер має належну роль і тип.",
+        "zh-cn": "温度现在有合适的角色和类型."
+      },
       "2.2.0": {
         "en": "rebuild config in JSONConfig.",
         "de": "Umbau der config auf JSONConfig.",
@@ -80,19 +93,6 @@
         "pl": "przerobione wejście i wyjście GPIO do pracy z robakiem książkowym.\nZMIANA ZBIORCZA: usunięte wsparcie dla przycisków GPIO.\nZMIANA BREAKING: usunąć nieobsługiwane stany przycisków i utworzyć stan wprowadzania.\ndodaj wsparcie dla Malina 5.\nna startup set GPIO wyjść ze stanów joBroker.\nprzełącz na bibliotekę opengpio.\nstałe: czytanie statystyk sieci i systemu plików.\nprzenieś parsery z jo- package.json do oddzielnego pliku.\npozbądź się starego sync- exec.\nAktualizuj sprawy rozwoju...",
         "uk": "перероблений вхід GPIO і вихід для роботи з Книжковим черв'яком.\nBREAKING CHANGE: видалена підтримка GPIO-Buttons.\nBREAKING CHANGE: видалення непідтримуваних кнопок станів і створення вхідного стану.\nдодати підтримку для Raspberry 5.\nна автозапускі GPIO виходи з ioBroker штатів.\nперейти до бібліотеки opengpio.\nвиправлено: статистика читання мережі та файлової системи.\nперемістити парсери від io-package.json до окремого файлу.\nпозбутися від старої синхронізації-ексека.\nОтримати розвиток фари до дати ...",
         "zh-cn": "重新制作GPIO输入和输出,与Booktrom合作.\n断裂变换:取消GPIO按钮支持.\nBreaking Change:删除不支持的按钮状态并创建输入状态.\n添加支持 Raspberry 5.\n从ioBroker状态的GPIO输出.\n切换到 opengpio 库.\n固定:读取网络和文件系统统计.\n从 io- package.json 移动解析器到分离文件.\n摆脱旧的同步执行.\n更新开发内容..."
-      },
-      "1.3.2": {
-        "en": "Requires js-controller 3.3 or higher! Allo js.controller to do a rebuild when GPIO is configured but fails",
-        "de": "Benötigt js-controller 3.3 oder höher! Allo js.controller, um eine Neuerstellung durchzuführen, wenn GPIO konfiguriert ist, aber fehlschlägt",
-        "ru": "Требуется js-контроллер 3.3 или выше! Разрешить js.controller выполнять перестроение, когда GPIO настроен, но не работает",
-        "pt": "Requer js-controller 3.3 ou superior! Allo js.controller para fazer uma reconstrução quando o GPIO está configurado, mas falha",
-        "nl": "Vereist js-controller 3.3 of hoger! Allo js.controller om een rebuild uit te voeren wanneer GPIO is geconfigureerd maar mislukt",
-        "fr": "Nécessite js-controller 3.3 ou supérieur ! Allo js.controller pour effectuer une reconstruction lorsque GPIO est configuré mais échoue",
-        "it": "Richiede js-controller 3.3 o successivo! Allo js.controller per eseguire una ricostruzione quando GPIO è configurato ma non riesce",
-        "es": "¡Requiere js-controller 3.3 o superior! Allo js.controller para hacer una reconstrucción cuando GPIO está configurado pero falla",
-        "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
-        "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建",
-        "uk": "Потрібен js-контролер 3.3 або вище! Allo js.controller для виконання перебудови, коли GPIO налаштовано, але не вдається"
       }
     },
     "titleLang": {

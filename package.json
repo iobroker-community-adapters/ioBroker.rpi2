@@ -1,6 +1,6 @@
 {
   "name": "iobroker.rpi2",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "RPI-Monitor for ioBroker Installations",
   "author": {
     "name": "husky-koglhof",

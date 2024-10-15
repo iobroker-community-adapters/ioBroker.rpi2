@@ -1,4 +1,16 @@
 # Older Changes
+## 2.0.0 (2024-06-24)
+* (Garfonso) reworked GPIO input and output to work with Bookworm.
+* (Garfonso) BREAKING CHANGE: removed support for GPIO-Buttons. 
+* (Garfonso) BREAKING CHANGE: remove unsupported button states and create input state.
+* (Garfonso) add support for Raspberry 5.
+* (Garfonso) on startup set GPIO outputs from ioBroker states.
+* (Garfonso) switch to opengpio library.
+* (Grothesk242) fixed: reading network and filesystem statistics.
+* (Garfonso) move parsers from io-package.json to separate file.
+* (Garfonso) get rid of old sync-exec.
+* (Garfonso) Get development stuff up to date...
+
 ## 1.3.2 (2022-02-17)
 * Important: This version requires at leas js-controller 3.3
 * (Apollon77) Stop the adapter when GPIO module is configured but not working due to a needed rebuild that js-controller can pick up

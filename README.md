@@ -156,7 +156,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.2.0 (2024-10-15)
 * (Garfonso) rebuild config in JSONConfig.
 
 ### 2.1.2 (2024-10-13)
@@ -171,18 +171,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 ### 2.0.1 (2024-10-07)
 * (Garfonso) make gpio library required dependency
 * (Garfonso) make errors clearer, if gpio library could not be initialized.
-
-### 2.0.0 (2024-06-24)
-* (Garfonso) reworked GPIO input and output to work with Bookworm.
-* (Garfonso) BREAKING CHANGE: removed support for GPIO-Buttons. 
-* (Garfonso) BREAKING CHANGE: remove unsupported button states and create input state.
-* (Garfonso) add support for Raspberry 5.
-* (Garfonso) on startup set GPIO outputs from ioBroker states.
-* (Garfonso) switch to opengpio library.
-* (Grothesk242) fixed: reading network and filesystem statistics.
-* (Garfonso) move parsers from io-package.json to separate file.
-* (Garfonso) get rid of old sync-exec.
-* (Garfonso) Get development stuff up to date...
 
 ## License
 MIT License

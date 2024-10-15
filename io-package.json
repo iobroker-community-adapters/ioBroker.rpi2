@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.1.2",
+    "version": "2.2.0",
     "news": {
+      "2.2.0": {
+        "en": "rebuild config in JSONConfig.",
+        "de": "Umbau der config auf JSONConfig.",
+        "ru": "восстановить конфигурацию в JSONConfig.",
+        "pt": "reconstruir a configuração em JSONConfig.",
+        "nl": "config opnieuw opbouwen in JSONConfig.",
+        "fr": "reconstruire la configuration de JSONConfig.",
+        "it": "ricostruire la configurazione in JSONConfig.",
+        "es": "reconstruir config en JSONConfig.",
+        "pl": "odbudowa konfiguracji w JSONConfig.",
+        "uk": "rebuild config в JSONConfig.",
+        "zh-cn": "在 JSONConfig 中重建配置."
+      },
       "2.1.2": {
         "en": "transmit all GPIO changes to iobroker states.",
         "de": "alle GPIO-Änderungen an iobroker States übertragen.",
@@ -80,19 +93,6 @@
         "pl": "Wymaga kontrolera js w wersji 3.3 lub nowszej! Allo js.controller do przebudowy, gdy GPIO jest skonfigurowane, ale się nie powiedzie",
         "zh-cn": "需要 js-controller 3.3 或更高版本！ Allo js.controller 在配置 GPIO 但失败时进行重建",
         "uk": "Потрібен js-контролер 3.3 або вище! Allo js.controller для виконання перебудови, коли GPIO налаштовано, але не вдається"
-      },
-      "1.3.1": {
-        "en": "js-controller 3.3 warnings prevented",
-        "de": "js-controller 3.3 Warnungen verhindert",
-        "ru": "js-controller 3.3 предупреждения предотвращены",
-        "pt": "Avisos do js-controller 3.3 evitados",
-        "nl": "js-controller 3.3 waarschuwingen voorkomen",
-        "fr": "js-controller 3.3 avertissements empêchés",
-        "it": "js-controller 3.3 avvisi impediti",
-        "es": "advertencias de js-controller 3.3 prevenidas",
-        "pl": "js-controller 3.3 zablokowano ostrzeżenia",
-        "zh-cn": "js-controller 3.3 警告被阻止",
-        "uk": "попередження js-controller 3.3 запобігли"
       }
     },
     "titleLang": {

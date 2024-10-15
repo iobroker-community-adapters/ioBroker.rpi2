@@ -306,7 +306,6 @@ const table    = {};
 
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
-        // TODO: Check which Objects we provide
         intervalTimers.push(setInterval(() => {parser(adapter);}, adapter.config.interval || 60000));
 
         exec = require('child_process').execSync;
@@ -415,7 +414,7 @@ async function parser(adapter) {
                     _id:    c
                 };
 
-                await adapter.extendObjectAsync(c, stateObj);
+                await adapter.extendObject(c, stateObj);
                 objects[c] = true; //remember that we created the object.
             }
             const o = parsers[c];
@@ -447,19 +446,18 @@ async function parser(adapter) {
                         const objectName = adapter.name + '.' + adapter.instance + '.' + c + '.' + name;
                         adapter.log.debug('SETSTATE FOR ' + objectName + ' VALUE = ' + value);
                         if (objects[objectName] === undefined) {
-                            // TODO Create an Object tree
                             const stateObj = {
                                 common: {
                                     name:  objectName, // You can add here some description
                                     read:  true,
                                     write: false,
                                     state: 'state',
-                                    role:  'value',
+                                    role:  object.role || 'value',
                                     type:  'number'
                                 },
                                 type: 'state'
                             };
-                            await adapter.extendObjectAsync(objectName, stateObj);
+                            await adapter.extendObject(objectName, stateObj);
                             objects[objectName] = true; //remember that we created the object.
                         }
                         await adapter.setStateAsync(objectName, {
@@ -491,19 +489,18 @@ async function parser(adapter) {
                         const objectName = adapter.name + '.' + adapter.instance + '.' + c + '.' + i;
                         adapter.log.debug('SETSTATE FOR ' + objectName + ' VALUE = ' + value);
                         if (objects[objectName] === undefined) {
-                            // TODO Create an Objecttree
                             const stateObj = {
                                 common: {
                                     name:  objectName, // You can add here some description
                                     read:  true,
                                     write: false,
                                     state: 'state',
-                                    role:  'value',
-                                    type:  'mixed'
+                                    role:  object.role || 'value',
+                                    type:  ['number', 'boolean', 'string'].includes(typeof value) ? typeof value : 'mixed'
                                 },
                                 type: 'state'
                             };
-                            await adapter.extendObjectAsync(objectName, stateObj);
+                            await adapter.extendObject(objectName, stateObj);
                             objects[objectName] = true; //remember that we created the object.
                         }
                         await adapter.setStateAsync(objectName, {

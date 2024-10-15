@@ -107,7 +107,8 @@
     "soc_temp": {
       "command": "cat /sys/devices/virtual/thermal/thermal_zone0/temp",
       "regexp": "(.*)",
-      "post": "$1/1000"
+      "post": "$1/1000",
+      "role": "value.temperature"
     }
   },
   "uptime": {

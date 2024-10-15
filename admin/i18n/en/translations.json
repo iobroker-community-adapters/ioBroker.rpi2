@@ -29,5 +29,9 @@
     "in": "Input",
     "out": "Output",
     "outhigh": "Output, initial value 1",
-    "outlow": "Output, initial value 0"
+    "outlow": "Output, initial value 0",
+    "GPIOConfigExplanation": "Add GPIO configurations here. Press on +, select if input or output and so on. Port numbers relate to Broadcom SOC channel, not physical pins. For inputs enter a debounce time in milliseconds into the Debounce / Poll column. For DHT11/22 Temperature sensors, the value in that column will be the poll interval.",
+    "MonitoringExplanation": "Select which elements to monitor. They will be polled on a regular basis and states will be created as needed.",
+    "pullupwarning": "WARNING: Pull up / Pull down is not really supported, currently. It should be in future, but it never was in the past. Be sure not to break anything.",
+    "GPIOVauleERRORText": "Error: GPIO must not be empty, must be unique and between 2 and 27."
 }

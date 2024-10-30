@@ -1,65 +1,123 @@
 {
     "i18n": true,
     "type": "tabs",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
     "items": {
         "_monitoring": {
-            "type": "tab",
+            "type": "panel",
             "label": "Monitoring",
             "items": {
                 "_explanation": {
                     "type": "staticText",
                     "text": "MonitoringExplanation",
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_cpu": {
                     "type": "checkbox",
                     "label": "CPU",
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_raspberry": {
                     "type": "checkbox",
-                    "label": "Raspberry"
+                    "label": "Raspberry",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_memory": {
                     "type": "checkbox",
-                    "label": "Memory"
+                    "label": "Memory",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_network": {
                     "type": "checkbox",
                     "label": "Network",
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_sdcard": {
                     "type": "checkbox",
-                    "label": "SDCard"
+                    "label": "SDCard",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_swap": {
                     "type": "checkbox",
-                    "label": "Swap"
+                    "label": "Swap",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_temperature": {
                     "type": "checkbox",
                     "label": "Temperature",
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_uptime": {
                     "type": "checkbox",
-                    "label": "Uptime"
+                    "label": "Uptime",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "c_wlan": {
                     "type": "checkbox",
-                    "label": "WLAN"
+                    "label": "WLAN",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         },
         "_gpios": {
-            "type": "tab",
+            "type": "panel",
             "label": "GPIOs",
             "items": {
                 "_explanation": {
                     "type": "staticText",
                     "text": "GPIOConfigExplanation",
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "_pullUpWarning": {
                     "type": "staticText",
@@ -69,12 +127,24 @@
                         "color": "red",
                         "font-size": "larger"
                     },
-                    "newLine": true
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "gpioSettings": {
                     "type": "table",
                     "newLine": true,
-                    "uniqueColumns": ["gpio"],
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "uniqueColumns": [
+                        "gpio"
+                    ],
                     "validatorNoSaveOnError": true,
                     "validator": "if (!data.gpioSettings) return true; const values=[]; for(const r of data.gpioSettings) { if (!(r.gpio !== null && r.gpio !== '' && r.gpio >= 2 && r.gpio <= 27 && !values.includes(r.gpio))) {return false;} values.push(r.gpio); }; return true;",
                     "items": [
@@ -161,6 +231,11 @@
                     "newLine": true,
                     "hidden": "if (!data.gpioSettings) return true; const values=[]; for(const r of data.gpioSettings) { if (!(r.gpio !== null && r.gpio !== '' && r.gpio >= 2 && r.gpio <= 27 && !values.includes(r.gpio))) {return false;} values.push(r.gpio); }; return true;",
                     "hideOnlyControl": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
                     "style": {
                         "color": "red"
                     }

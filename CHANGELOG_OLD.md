@@ -1,4 +1,7 @@
 # Older Changes
+## 2.1.0 (2024-10-13)
+* (jangatzke) add support for gpios on Raspberry Zero.
+
 ## 2.0.1 (2024-10-07)
 * (Garfonso) make gpio library required dependency
 * (Garfonso) make errors clearer, if gpio library could not be initialized.

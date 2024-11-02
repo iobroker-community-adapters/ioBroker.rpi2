@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "news": {
+      "2.2.2": {
+        "en": "responsive design for settings page added",
+        "de": "responsive design für einstellungsseite hinzugefügt",
+        "ru": "адаптивный дизайн для настроек добавлена страница",
+        "pt": "design responsivo para configurações página adicionada",
+        "nl": "responsief ontwerp voor instellingen pagina toegevoegd",
+        "fr": "conception réactive pour les paramètres page ajoutée",
+        "it": "design reattivo per le impostazioni pagina aggiunto",
+        "es": "diseño sensible para la página de configuración añadido",
+        "pl": "responsive design for settings page added",
+        "uk": "адаптивний дизайн для сторінки налаштувань",
+        "zh-cn": "添加了设置的响应性设计"
+      },
       "2.2.1": {
         "en": "temperature has now proper role and type.",
         "de": "temperatur hat jetzt richtige rolle und typ.",
@@ -80,19 +93,6 @@
         "pl": "sprawiają, że biblioteka gpio wymaga zależności\ndokonać błędów jaśniej, jeśli biblioteka gpio nie może być inicjalizowana.",
         "uk": "зробити бібліотеку gpio необхідною залежностю\nне може бути ініціалізовано.",
         "zh-cn": "使 gpio 库需要依赖\n如果 gpio 库无法初始化, 则使错误更清晰 ."
-      },
-      "2.0.0": {
-        "en": "reworked GPIO input and output to work with Bookworm.\nBREAKING CHANGE: removed support for GPIO-Buttons. \nBREAKING CHANGE: remove unsupported button states and create input state.\nadd support for Raspberry 5.\non startup set GPIO outputs from ioBroker states.\nswitch to opengpio library.\nfixed: reading network and filesystem statistics.\nmove parsers from io-package.json to separate file.\nget rid of old sync-exec.\nGet development stuff up to date...",
-        "de": "überarbeitete GPIO Eingabe und Ausgabe, um mit Bookworm zu funktionieren.\nBREAKING CHANGE: entfernte Unterstützung für GPIO-Buttons.\nBREAKING CHANGE: Entfernt die nicht mehr unterstützten states für Buttons und erstellt einen Eingabe-State.\nunterstützung für Raspberry 5.\nsetzt beim start GPIO-Ausgänge auf den Wert, der in ioBroker states steht.\nauf opengpio bibliothek umgestiegen.\nfixed: netzwerk- und dateisystemstatistik lesen.\nparsers-Code von io-package.json in eigene JSON verschoben, um die datei zu trennen.\nalte sync-exec loswerden.\nAktualisierter Code und drumherum für einfacherer Weiterentwicklung",
-        "ru": "переработал ввод и вывод GPIO для работы с Bookworm.\nУдаление поддержки для GPIO-буттонов.\nИзменение: удалить неподдерживаемые состояния кнопок и создать состояние ввода.\nдобавьте поддержку Raspberry 5.\nна стартовый набор GPIO выходов из государств ioBroker.\nпереключиться на библиотеку opengpio.\nфиксированная: чтение сети и статистики файловой системы.\nпереместить парсеры из io-package.json в отдельный файл.\nизбавьтесь от старой синхронизации.\nУзнать что-нибудь о развитии...",
-        "pt": "entrada GPIO retrabalhado e saída para trabalhar com Bookworm.\nBREAKING CHANGE: suporte removido para GPIO-Buttons.\nCHANGE DE BREAKING: remover estados de botão não suportados e criar estado de entrada.\nadicionar suporte para framboesa 5.\nna inicialização conjunto GPIO saídas de estados ioBroker.\nmudar para biblioteca opengpio.\ncorrigido: ler estatísticas de rede e sistema de arquivos.\nmover parsers de io-package.json para arquivo separado.\nse livrar da velha sync-exec.\nObter material de desenvolvimento atualizado...",
-        "nl": "herwerkte GPIO input en output om te werken met Boekworm.\nBREAKING VERANDERING: verwijderde ondersteuning voor GPIO-Buttons.\nBREAKING VERANDERING: verwijder niet-ondersteunde knoptoestanden en creëer invoerstatus.\nvoeg steun voor Raspberry 5.\nop opstarten set GPIO uitgangen uit ioBroker staten.\nschakel over naar de opengpio bibliotheek.\nvaste: het lezen van netwerk- en bestandssysteemstatistieken.\nverplaats parsers van io-package.json naar aparte bestanden.\nverwijder oude sync-exec.\nOntwikkelen up-to-date...",
-        "fr": "l'entrée et la sortie GPIO retravaillées pour travailler avec Bookworm.\nCHANGEMENT DE BREAKING: retrait du support pour les boutons GPIO.\nCHANGEMENT DE BREAKING : supprimez les états des boutons non pris en charge et créez l'état d'entrée.\najouter le support pour la framboise 5.\nsur startup set GPIO sorties des états ioBroker.\npasser à la bibliothèque opengpio.\nfixe: lecture des statistiques du réseau et du système de fichiers.\ndéplacer les analyseurs de io-package.json vers un fichier séparé.\ndébarrassez-vous de l'ancien synchro-exec.\nMettez à jour le développement...",
-        "it": "rielaborato GPIO input e output per lavorare con Bookworm.\nBREAKING CHANGE: supporto rimosso per GPIO-Buttons.\nBREAKING CHANGE: rimuovere gli stati del pulsante non supportati e creare stato di ingresso.\naggiungere supporto per lampone 5.\nsul set di avvio uscite GPIO da stati ioBroker.\npassare alla libreria opengpio.\nfisso: lettura della rete e statistica del filesystem.\nspostare i parsers da io-package.json a file separati.\nsbarazzarsi di vecchio sync-exec.\nOttenere materiale di sviluppo fino ad oggi...",
-        "es": "nuevo GPIO entrada y salida para trabajar con Bookworm.\nCAMBIO DE BREAKING: apoyo eliminado para GPIO-Buttons.\nCAMBIO DE BREAKING: eliminar estados de botón sin soporte y crear estado de entrada.\nañadir soporte para Raspberry 5.\non startup set GPIO outputs from ioBroker states.\ncambiar a la biblioteca de opengpio.\nfijo: lectura de redes y estadísticas del sistema de archivos.\nmover parsers de io-package.json a archivo separado.\nget rid of old sync-exec.\nConsigue cosas de desarrollo hasta la fecha...",
-        "pl": "przerobione wejście i wyjście GPIO do pracy z robakiem książkowym.\nZMIANA ZBIORCZA: usunięte wsparcie dla przycisków GPIO.\nZMIANA BREAKING: usunąć nieobsługiwane stany przycisków i utworzyć stan wprowadzania.\ndodaj wsparcie dla Malina 5.\nna startup set GPIO wyjść ze stanów joBroker.\nprzełącz na bibliotekę opengpio.\nstałe: czytanie statystyk sieci i systemu plików.\nprzenieś parsery z jo- package.json do oddzielnego pliku.\npozbądź się starego sync- exec.\nAktualizuj sprawy rozwoju...",
-        "uk": "перероблений вхід GPIO і вихід для роботи з Книжковим черв'яком.\nBREAKING CHANGE: видалена підтримка GPIO-Buttons.\nBREAKING CHANGE: видалення непідтримуваних кнопок станів і створення вхідного стану.\nдодати підтримку для Raspberry 5.\nна автозапускі GPIO виходи з ioBroker штатів.\nперейти до бібліотеки opengpio.\nвиправлено: статистика читання мережі та файлової системи.\nперемістити парсери від io-package.json до окремого файлу.\nпозбутися від старої синхронізації-ексека.\nОтримати розвиток фари до дати ...",
-        "zh-cn": "重新制作GPIO输入和输出,与Booktrom合作.\n断裂变换:取消GPIO按钮支持.\nBreaking Change:删除不支持的按钮状态并创建输入状态.\n添加支持 Raspberry 5.\n从ioBroker状态的GPIO输出.\n切换到 opengpio 库.\n固定:读取网络和文件系统统计.\n从 io- package.json 移动解析器到分离文件.\n摆脱旧的同步执行.\n更新开发内容..."
       }
     },
     "titleLang": {

@@ -156,6 +156,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (simatec) responsive design for settings page added
+
 ### 2.2.1 (2024-10-15)
 * (Garfonso) temperature has now proper role and type.
 

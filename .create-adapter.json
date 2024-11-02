@@ -1,0 +1,46 @@
+{
+    "plugins": [
+        "iobroker",
+        "license",
+        "manual-review"
+    ],
+    "addPlaceholder": false,
+    "ioPackageNoPrerelease": false,
+    "replay": "/home/achim/development/iobroker/ioBroker.rpi2/.releaseconfig.json",
+    "adapterName": "rpi2",
+    "title": "RPI Monitor and GPIO",
+    "description": "Monitor data from a Raspberry PI and interact with GPIOs.",
+    "keywords": [
+        "raspberry",
+        "monitoring",
+        "gpio",
+        "raspian"
+    ],
+    "expert": "yes",
+    "features": [
+        "adapter"
+    ],
+    "adminFeatures": [],
+    "type": "hardware",
+    "startMode": "daemon",
+    "connectionType": "local",
+    "dataSource": "push",
+    "connectionIndicator": "no",
+    "language": "JavaScript",
+    "nodeVersion": "18",
+    "adminUi": "json",
+    "tools": [
+        "ESLint",
+        "type checking"
+    ],
+    "releaseScript": "yes",
+    "indentation": "Space (4)",
+    "quotes": "single",
+    "authorName": "Garfonso",
+    "authorGithub": "iobroker-community-adapters",
+    "authorEmail": "garfonso@mobo.info",
+    "gitRemoteProtocol": "SSH",
+    "license": "MIT License",
+    "dependabot": "yes",
+    "creatorVersion": "2.6.5"
+}

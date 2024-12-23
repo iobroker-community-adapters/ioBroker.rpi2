@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.2.2",
+    "version": "2.3.0",
     "news": {
+      "2.3.0": {
+        "en": "correct interpretation of start value setting. Output with initial value 0/1 will set GPIO accordingly during startup. Output without an initial state will not set GPIO at all.",
+        "de": "Interpretation der Startwerteinstellung korrigiert. Ausgang mit dem Anfangswert 0/1 setzt den GPIO beim Start entsprechend. Ausgang ohne Ausgangszustand wird GPIO beim Starten überhaupt nicht setzen.",
+        "ru": "правильная интерпретация стартового значения. Выход с первоначальным значением 0/1 установит GPIO соответственно во время запуска. Выход без начального состояния не будет устанавливать GPIO вообще.",
+        "pt": "interpretação correta da definição de valor inicial. A saída com valor inicial 0/1 definirá GPIO de acordo durante a inicialização. A saída sem um estado inicial não vai definir GPIO em absoluto.",
+        "nl": "correcte interpretatie van de instelling van de startwaarde. Uitvoer met initiële waarde 0/1 zal GPIO dienovereenkomstig instellen tijdens het opstarten. Uitvoer zonder begintoestand zal GPIO helemaal niet instellen.",
+        "fr": "interprétation correcte de la valeur de début. La sortie avec la valeur initiale 0/1 définira GPIO en conséquence lors du démarrage. La sortie sans état initial ne définira pas GPIO du tout.",
+        "it": "corretta interpretazione dell'impostazione del valore di inizio. L'uscita con valore iniziale 0/1 imposta GPIO di conseguenza durante l'avvio. L'uscita senza uno stato iniziale non imposta affatto GPIO.",
+        "es": "correcta interpretación de la configuración del valor inicial. La salida con valor inicial 0/1 establecerá GPIO en consecuencia durante la puesta en marcha. La salida sin un estado inicial no establecerá GPIO en absoluto.",
+        "pl": "poprawna interpretacja ustawienia wartości początkowej. Wyjście o wartości początkowej 0 / 1 ustawi odpowiednio GPIO podczas uruchamiania. Wyjście bez stanu początkowego w ogóle nie ustawi GPIO.",
+        "uk": "правильне тлумачення параметра початкового значення. Вихід з початковою вартістю 0/1 буде встановлювати GPIO відповідно під час запуску. Вихід без початкового стану не буде встановлювати GPIO на всіх.",
+        "zh-cn": "对起始值设置的正确解释。 初始值0/1的产出将在启动期间相应设置GPIO. 没有初始状态的输出将根本不设置 GPIO ."
+      },
       "2.2.2": {
         "en": "responsive design for settings page added",
         "de": "responsive design für einstellungsseite hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "dodaj wsparcie dla gpios na Malina Zero.",
         "uk": "додати підтримку gpios на Raspberry Zero.",
         "zh-cn": "在Raspberry Zero上添加对gpios的支持."
-      },
-      "2.0.1": {
-        "en": "make gpio library required dependency\nmake errors clearer, if gpio library could not be initialized.",
-        "de": "gpio bibliothek erforderlich abhängigkeit\nfehler deutlicher machen, wenn gpio-bibliothek nicht initialisiert werden konnte.",
-        "ru": "сделать библиотеку gpio необходимой зависимость\nсделать ошибки яснее, если библиотека gpio не может быть инициализирована.",
-        "pt": "fazer gpio biblioteca necessária dependência\nfazer erros mais claros, se a biblioteca de gpio não poderia ser inicializada.",
-        "nl": "gpio-bibliotheek vereiste afhankelijkheid maken\nmaak fouten duidelijker, als gpio-bibliotheek niet geïnitialiseerd kon worden.",
-        "fr": "rendre la bibliothèque gpio nécessaire dépendance\nrendre les erreurs plus claires, si la bibliothèque gpio ne peut pas être initialisée.",
-        "it": "rendere la libreria gpio necessaria dipendenza\nrendere gli errori più chiari, se la libreria di gpio non potrebbe essere inizializzata.",
-        "es": "hacer gpio biblioteca requerida dependencia\naclarar los errores, si la biblioteca de gpio no puede ser inicializada.",
-        "pl": "sprawiają, że biblioteka gpio wymaga zależności\ndokonać błędów jaśniej, jeśli biblioteka gpio nie może być inicjalizowana.",
-        "uk": "зробити бібліотеку gpio необхідною залежностю\nне може бути ініціалізовано.",
-        "zh-cn": "使 gpio 库需要依赖\n如果 gpio 库无法初始化, 则使错误更清晰 ."
       }
     },
     "titleLang": {

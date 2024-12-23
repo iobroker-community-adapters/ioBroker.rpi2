@@ -1,4 +1,7 @@
 # Older Changes
+## 2.1.1 (2024-10-13)
+* (Garfonso) fix gpio undefined errors.
+
 ## 2.1.0 (2024-10-13)
 * (jangatzke) add support for gpios on Raspberry Zero.
 

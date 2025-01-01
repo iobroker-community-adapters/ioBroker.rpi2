@@ -30,7 +30,7 @@
     "node": ">= 18"
   },
   "dependencies": {
-    "opengpio": "^1.0.16",
+    "opengpio": "^1.0.17",
     "@iobroker/adapter-core": "^3.2.2",
     "ci": "^2.3.0"
   },

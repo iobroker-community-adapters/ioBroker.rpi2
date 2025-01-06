@@ -71,7 +71,7 @@
       "multiline": true
     },
     "sdcard_boot_total": {
-      "command": "df /boot/*",
+      "command": "test -n \"$(ls /boot)\" && df /boot/*",
       "regexp": "\\S+\\s+(\\d+).*\\/boot",
       "post": "$1/1024",
       "multiline": true
@@ -83,7 +83,7 @@
       "multiline": true
     },
     "sdcard_boot_used": {
-      "command": "df /boot/*",
+      "command": "test -n \"$(ls /boot)\" && df /boot/*",
       "regexp": "\\S+\\s+\\d+\\s+(\\d+).*\\/boot",
       "post": "$1/1024",
       "multiline": true

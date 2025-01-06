@@ -156,7 +156,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.3.1 (2025-01-06)
 * (Garfonso) fixed: GPIO library failed to load after recent dependency update.
 
 ### 2.3.0 (2024-12-23)
@@ -170,9 +170,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ### 2.2.0 (2024-10-15)
 * (Garfonso) rebuild config in JSONConfig.
-
-### 2.1.2 (2024-10-13)
-* (Garfonso) transmit all GPIO changes to iobroker states.
 
 ## License
 MIT License

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "news": {
+      "2.3.1": {
+        "en": "fixed: GPIO library failed to load after recent dependency update.",
+        "de": "behoben: Die GPIO-Bibliothek konnte nach dem aktuellen Abhängigkeitsupdate nicht geladen werden.",
+        "ru": "фиксированный: библиотека GPIO не загрузилась после недавнего обновления зависимости.",
+        "pt": "corrigido: Biblioteca GPIO não conseguiu carregar após atualização recente de dependência.",
+        "nl": "vast: GPIO-bibliotheek kon niet worden geladen na recente afhankelijkheidsupdate.",
+        "fr": "corrigé : la bibliothèque GPIO n'a pas réussi à se charger après la mise à jour récente de la dépendance.",
+        "it": "fisso: la libreria GPIO non è riuscita a caricare dopo il recente aggiornamento della dipendenza.",
+        "es": "fijo: la biblioteca GPIO no se carga después de la actualización reciente de dependencia.",
+        "pl": "stałe: biblioteka GPIO nie wczytała się po ostatniej aktualizacji zależności.",
+        "uk": "виправлено: Бібліотека GPIO не вдалося завантажити після останнього оновлення залежності.",
+        "zh-cn": "固定: GPIO 库在最近依赖更新后无法加载 ."
+      },
       "2.3.0": {
         "en": "correct interpretation of start value setting. Output with initial value 0/1 will set GPIO accordingly during startup. Output without an initial state will not set GPIO at all.",
         "de": "Interpretation der Startwerteinstellung korrigiert. Ausgang mit dem Anfangswert 0/1 setzt den GPIO beim Start entsprechend. Ausgang ohne Ausgangszustand wird GPIO beim Starten überhaupt nicht setzen.",
@@ -80,19 +93,6 @@
         "pl": "naprawić nieokreślone błędy gpio.",
         "uk": "виправити gpio не визначені помилки.",
         "zh-cn": "修复未定义的 gpio 错误."
-      },
-      "2.1.0": {
-        "en": "add support for gpios on Raspberry Zero.",
-        "de": "unterstützung für gpios auf Raspberry Zero hinzufügen.",
-        "ru": "добавьте поддержку gpios на Raspberry Zero.",
-        "pt": "adicionar suporte para gpios no Raspberry Zero.",
-        "nl": "voeg ondersteuning voor gpios op Raspberry Zero.",
-        "fr": "ajouter le support pour gpios sur Raspberry Zero.",
-        "it": "aggiungere il supporto per gpios su Raspberry Zero.",
-        "es": "añadir soporte para gpios en Raspberry Zero.",
-        "pl": "dodaj wsparcie dla gpios na Malina Zero.",
-        "uk": "додати підтримку gpios на Raspberry Zero.",
-        "zh-cn": "在Raspberry Zero上添加对gpios的支持."
       }
     },
     "titleLang": {

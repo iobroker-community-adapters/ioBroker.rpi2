@@ -1,4 +1,7 @@
 # Older Changes
+## 2.1.2 (2024-10-13)
+* (Garfonso) transmit all GPIO changes to iobroker states.
+
 ## 2.1.1 (2024-10-13)
 * (Garfonso) fix gpio undefined errors.
 

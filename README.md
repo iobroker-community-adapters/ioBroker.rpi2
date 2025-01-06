@@ -177,7 +177,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 ## License
 MIT License
 
-Copyright (c) 2024 Garfonso <garfonso@mobo.info>
+Copyright (c) 2024-2025 Garfonso <garfonso@mobo.info>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

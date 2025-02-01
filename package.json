@@ -24,7 +24,7 @@
     "url": "https://github.com/iobroker-community-adapters/ioBroker.rpi2"
   },
   "optionalDependencies": {
-    "node-dht-sensor": "^0.4.3"
+    "node-dht-sensor": "^0.4.4"
   },
   "engines": {
     "node": ">= 18"

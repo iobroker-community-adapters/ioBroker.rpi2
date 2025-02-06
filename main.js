@@ -576,7 +576,7 @@ function setupDht(adapter, dhtPorts) {
                 }
             }, gpioSetting.debounceOrPoll));
         } catch (err) {
-            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}`);
+            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}: ${err}`);
         }
     }
 }

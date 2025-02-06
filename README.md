@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.3.2 (2025-02-06)
 * (asgothian) added support for NVMe temperature (needs additional configuration, see README)
 * (Garfonso) fixed inital values for outputs.
 
@@ -167,9 +167,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ### 2.2.1 (2024-10-15)
 * (Garfonso) temperature has now proper role and type.
-
-### 2.2.0 (2024-10-15)
-* (Garfonso) rebuild config in JSONConfig.
 
 ## License
 MIT License

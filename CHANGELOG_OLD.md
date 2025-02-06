@@ -1,4 +1,7 @@
 # Older Changes
+## 2.2.0 (2024-10-15)
+* (Garfonso) rebuild config in JSONConfig.
+
 ## 2.1.2 (2024-10-13)
 * (Garfonso) transmit all GPIO changes to iobroker states.
 

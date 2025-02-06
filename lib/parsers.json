@@ -109,6 +109,13 @@
       "regexp": "(.*)",
       "post": "$1/1000",
       "role": "value.temperature"
+    },
+    "nvme_temp": {
+       "command": "test -e /usr/sbin/nvme && sudo nvme smart-log /dev/nvme0 || echo \"0\"",
+       "regexp": "temperature\\s+:\\s+(\\d+)",
+       "post": "%1",
+       "role": "value.temperature",
+       "multiline": true
     }
   },
   "uptime": {

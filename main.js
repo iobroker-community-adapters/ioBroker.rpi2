@@ -21,7 +21,7 @@ const intervalTimers = [];
 
 class Rpi2 extends utils.Adapter {
     /**
-     * @param [options]
+     * @param [options] {object} Adapter options
      */
     constructor(options) {
         super({
@@ -122,7 +122,7 @@ class Rpi2 extends utils.Adapter {
      * Create ioBroker Objects for gpio port.
      *
      * @param data {object} from config.
-     * @returns
+     * @returns {Promise<void>}
      */
     async syncPort(data) {
         data.isGpio =
@@ -170,7 +170,7 @@ class Rpi2 extends utils.Adapter {
      * Create/Delect Object for GPIO button
      *
      * @param data {object} from config
-     * @returns
+     * @returns {Promise<void>}
      */
     async syncPortButton(data) {
         const buttonEventsOLD = ['pressed', 'clicked', 'clicked_pressed', 'double_clicked', 'released'];
@@ -204,7 +204,7 @@ class Rpi2 extends utils.Adapter {
      * Create/Delete ioBroker Objects for gpio temperature and humidity.
      *
      * @param data {object} from config
-     * @returns
+     * @returns {Promise<void>}
      */
     async syncPortTempHum(data) {
         if (data.isTempHum) {
@@ -242,10 +242,10 @@ class Rpi2 extends utils.Adapter {
     }
 
     /**
-     * Create ioBroker Objects for gpio button.
+     * Create ioBroker Objects for a gpio button.
      *
-     * @param data
-     * @returns
+     * @param data {object} from config
+     * @returns {Promise<void>}
      */
     async syncPortDirection(data) {
         const stateName = `gpio.${data.gpio}.isInput`;
@@ -285,6 +285,7 @@ class Rpi2 extends utils.Adapter {
             await this.gpioControl.unload();
             callback();
         } catch (e) {
+            this.log.warn(`Error on unload: ${e}`);
             callback();
         }
     }
@@ -293,7 +294,7 @@ class Rpi2 extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param [options]
+     * @param [options] {object} Adapter options
      */
     module.exports = options => new Rpi2(options);
 } else {
@@ -480,7 +481,7 @@ async function parser(adapter) {
                             try {
                                 value = eval(post.replace('$1', value));
                             } catch (e) {
-                                adapter.log.error(`Cannot evaluate: ${post.replace('$1', value)}`);
+                                adapter.log.error(`Cannot evaluate: ${post.replace('$1', value)}: ${e}`);
                                 value = NaN;
                             }
                         }

@@ -106,12 +106,14 @@ class Rpi2 extends utils.Adapter {
                     const configuredPort = this.config.gpioSettings.find(g => g.gpio === num);
                     if (!configuredPort) {
                         this.log.debug(`Deleting unused gpio settings for ${num}`);
-                        await this.delObjectAsync(id, { recursive: true });
+                        await this.delObjectAsync(id, {recursive: true});
                     }
                 }
             }
 
-            await this.gpioControl.setupGpio(gpioPorts, buttonPorts);
+            if (this.gpioControl) {
+                await this.gpioControl.setupGpio(gpioPorts, buttonPorts);
+            }
             setupDht(this, dhtPorts);
         } else {
             this.log.info('GPIO ports are not configured');
@@ -235,7 +237,7 @@ class Rpi2 extends utils.Adapter {
                 native: {},
                 type: 'state',
             };
-            await this.extendObjectAsync(humidityStateName(data.gpio), obj);
+            await this.extendObject(humidityStateName(data.gpio), obj);
         } else {
             await this.delObjectAsync(humidityStateName(data.gpio));
         }
@@ -271,7 +273,11 @@ class Rpi2 extends utils.Adapter {
             if (id.indexOf('gpio.') !== -1) {
                 const parts = id.split('.');
                 parts.pop(); // remove state
-                this.gpioControl.writeGpio(parts.pop(), state.val);
+                if (this.gpioControl) {
+                    this.gpioControl.writeGpio(parts.pop(), state.val);
+                } else {
+                    this.log.warn('GPIO Control not initialised');
+                }
             }
         }
     }
@@ -282,7 +288,9 @@ class Rpi2 extends utils.Adapter {
             for (const interval of intervalTimers) {
                 clearInterval(interval);
             }
-            await this.gpioControl.unload();
+            if (this.gpioControl) {
+                await this.gpioControl.unload();
+            }
             callback();
         } catch (e) {
             this.log.warn(`Error on unload: ${e}`);
@@ -441,10 +449,11 @@ async function parser(adapter) {
 
                         // TODO: Check if value is number and format it 2 Digits
                         if (!isNaN(value)) {
-                            value = parseFloat(value);
                             const re = new RegExp(/^\d+\.\d+$/);
                             if (re.exec(value)) {
                                 value = parseFloat(value.toFixed(2));
+                            } else {
+                                value = parseFloat(value);
                             }
                         }
 
@@ -487,10 +496,11 @@ async function parser(adapter) {
                         }
                         // TODO: Check if value is number and format it 2 Digits
                         if (!isNaN(value)) {
-                            value = parseFloat(value);
                             const r = new RegExp(/^\d+\.\d+$/);
                             if (r.exec(value)) {
                                 value = parseFloat(value.toFixed(2));
+                            } else {
+                                value = parseFloat(value); //not sure.. kind of fallback? Regex seems a bit strict.
                             }
                         }
 

@@ -25,5 +25,7 @@
     "Pull Up": "Tirer vers le haut",
     "Pull Down": "Abattre",
     "Label": "Étiquette",
-    "GPIOVauleERRORText": "Erreur : Le numéro GPIO ne doit pas être vide, doit être unique et compris entre 2 et 27."
+    "GPIOVauleERRORText": "Erreur : Le numéro GPIO ne doit pas être vide, doit être unique et compris entre 2 et 27.",
+    "Invert": "Inverser",
+    "invertTooltip": "Habituellement vrai -> gpio 1, false -> gpio 0. Si vous voulez qu'il l'inverse, cochez cette case."
 }

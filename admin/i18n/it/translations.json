@@ -25,5 +25,7 @@
     "Pull Up": "Tirati su",
     "Pull Down": "Tirare giù",
     "Label": "Etichetta",
-    "GPIOVauleERRORText": "Errore: il numero GPIO non deve essere vuoto, deve essere univoco e compreso tra 2 e 27."
+    "GPIOVauleERRORText": "Errore: il numero GPIO non deve essere vuoto, deve essere univoco e compreso tra 2 e 27.",
+    "Invert": "Invertire",
+    "invertTooltip": "Di solito TRUE -> GPIO 1, FALSE -> GPIO 0. Se vuoi che lo inverte, controlla questa casella."
 }

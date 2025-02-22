@@ -25,5 +25,7 @@
     "Pull Up": "Pull Up",
     "Pull Down": "Pull Down",
     "Label": "Label",
-    "GPIOVauleERRORText": "Error: GPIO Number must not be empty, must be unique and between 2 and 27."
+    "GPIOVauleERRORText": "Error: GPIO Number must not be empty, must be unique and between 2 and 27.",
+    "Invert": "Invert",
+    "invertTooltip": "Usually true -> GPIO 1, false -> GPIO 0. If you want it to invert that, check this box."
 }

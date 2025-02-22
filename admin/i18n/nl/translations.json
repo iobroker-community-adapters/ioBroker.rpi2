@@ -25,5 +25,7 @@
     "Pull Up": "Trek omhoog",
     "Pull Down": "Trek naar beneden",
     "Label": "Label",
-    "GPIOVauleERRORText": "Fout: GPIO-nummer mag niet leeg zijn, moet uniek zijn en tussen 2 en 27 liggen."
+    "GPIOVauleERRORText": "Fout: GPIO-nummer mag niet leeg zijn, moet uniek zijn en tussen 2 en 27 liggen.",
+    "Invert": "Omkeren",
+    "invertTooltip": "Meestal True -> GPIO 1, False -> GPIO 0. Als u wilt dat het dat omkeert, vink dan dit vakje aan."
 }

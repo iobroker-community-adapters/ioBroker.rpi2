@@ -25,5 +25,7 @@
     "Pull Up": "Levantar",
     "Pull Down": "Derribar",
     "Label": "Etiqueta",
-    "GPIOVauleERRORText": "Error: el número GPIO no debe estar vacío, debe ser único y estar entre 2 y 27."
+    "GPIOVauleERRORText": "Error: el número GPIO no debe estar vacío, debe ser único y estar entre 2 y 27.",
+    "Invert": "Invertir",
+    "invertTooltip": "Por lo general, verdadero -> GPIO 1, FALSO -> GPIO 0. Si desea que lo invierta, marque esta casilla."
 }

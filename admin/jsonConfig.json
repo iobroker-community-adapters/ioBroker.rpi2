@@ -220,8 +220,8 @@
                         {
                             "type": "checkbox",
                             "attr": "invert",
-                            "title": "Invert value",
-                            "tooltip": "Usually true -> GPIO 1, false -> GPIO 0. If you want it to inver that, check this box.",
+                            "title": "Invert",
+                            "tooltip": "invertTooltip",
                             "default": false
                         },
                         {

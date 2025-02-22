@@ -25,5 +25,7 @@
     "Pull Up": "拉起",
     "Pull Down": "下拉",
     "Label": "标签",
-    "GPIOVauleERRORText": "错误：GPIO 编号不能为空，必须唯一且介于 2 到 27 之间。"
+    "GPIOVauleERRORText": "错误：GPIO 编号不能为空，必须唯一且介于 2 到 27 之间。",
+    "Invert": "倒置",
+    "invertTooltip": "通常是true-> gpio 1，false-> gpio 0。如果要倒倒，请选中该框。"
 }

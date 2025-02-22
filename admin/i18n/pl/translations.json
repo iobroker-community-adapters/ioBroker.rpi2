@@ -25,5 +25,7 @@
     "Pull Up": "Zatrzymać się",
     "Pull Down": "Rozbierać",
     "Label": "Etykieta",
-    "GPIOVauleERRORText": "Błąd: Numer GPIO nie może być pusty, musi być unikalny i zawierać się w przedziale od 2 do 27."
+    "GPIOVauleERRORText": "Błąd: Numer GPIO nie może być pusty, musi być unikalny i zawierać się w przedziale od 2 do 27.",
+    "Invert": "Odwracać",
+    "invertTooltip": "Zwykle True -> GPIO 1, False -> GPIO 0. Jeśli chcesz, aby to odwrócił, zaznacz to pole."
 }

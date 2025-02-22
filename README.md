@@ -152,6 +152,12 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Garfonso) read sate of GPIO outputs during adapter startup.
+* (Garfonso) re-read GPIO input, if set by user (with ack=false).
+* (Garfonso) add option to invert true/false mapping to 1/0.
+* (Garfonso) Allow multiple instances of this adapter per host.
+
 ### 2.3.2 (2025-02-06)
 * (asgothian) added support for NVMe temperature (needs additional configuration, see README)
 * (Garfonso) fixed inital values for outputs.

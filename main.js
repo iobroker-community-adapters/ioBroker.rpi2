@@ -449,11 +449,10 @@ async function parser(adapter) {
 
                         // TODO: Check if value is number and format it 2 Digits
                         if (!isNaN(value)) {
+                            value = parseFloat(value);
                             const re = new RegExp(/^\d+\.\d+$/);
-                            if (re.exec(value)) {
+                            if (!re.exec(value.toString())) {
                                 value = parseFloat(value.toFixed(2));
-                            } else {
-                                value = parseFloat(value);
                             }
                         }
 
@@ -496,11 +495,10 @@ async function parser(adapter) {
                         }
                         // TODO: Check if value is number and format it 2 Digits
                         if (!isNaN(value)) {
+                            value = parseFloat(value);
                             const r = new RegExp(/^\d+\.\d+$/);
-                            if (r.exec(value)) {
+                            if (r.exec(value.toString())) {
                                 value = parseFloat(value.toFixed(2));
-                            } else {
-                                value = parseFloat(value); //not sure.. kind of fallback? Regex seems a bit strict.
                             }
                         }
 

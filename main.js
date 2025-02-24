@@ -106,7 +106,7 @@ class Rpi2 extends utils.Adapter {
                     const configuredPort = this.config.gpioSettings.find(g => g.gpio === num);
                     if (!configuredPort) {
                         this.log.debug(`Deleting unused gpio settings for ${num}`);
-                        await this.delObjectAsync(id, {recursive: true});
+                        await this.delObjectAsync(id, { recursive: true });
                     }
                 }
             }

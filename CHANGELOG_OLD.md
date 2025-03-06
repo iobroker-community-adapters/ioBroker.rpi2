@@ -1,4 +1,7 @@
 # Older Changes
+## 2.2.1 (2024-10-15)
+* (Garfonso) temperature has now proper role and type.
+
 ## 2.2.0 (2024-10-15)
 * (Garfonso) rebuild config in JSONConfig.
 

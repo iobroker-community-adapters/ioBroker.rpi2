@@ -152,7 +152,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.4.0 (2025-03-06)
 * (Garfonso) read the current state of GPIO outputs during adapter startup.
 * (Garfonso) re-read GPIO input, if set by the user (with ack=false).
 * (Garfonso) add an option to invert true/false mapping to 1/0.
@@ -171,9 +171,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ### 2.2.2 (2024-11-02)
 * (simatec) responsive design for settings page added
-
-### 2.2.1 (2024-10-15)
-* (Garfonso) temperature has now proper role and type.
 
 ## License
 MIT License

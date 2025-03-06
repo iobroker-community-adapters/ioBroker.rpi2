@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.3.2",
+    "version": "2.4.0",
     "news": {
+      "2.4.0": {
+        "en": "read the current state of GPIO outputs during adapter startup.\nre-read GPIO input, if set by the user (with ack=false).\nadd an option to invert true/false mapping to 1/0.\nAllow multiple instances of this adapter per host.\ntried to improve initialization of GPIO inputs.",
+        "de": "lesen des aktuellen Zustands der GPIO-Ausgänge beim Adapter-Start.\ngPIO-Eingänge erneut lesen, wenn vom Benutzer versehentlich gesteuert (mit ack=false).\nEine option hinzugefügt zur Invertierung von true/false mapping auf 1/0.\nMehrere Instanzen dieses Adapters pro Host erlaubt.\nVersucht, die Initialisierung der GPIO-Eingänge zu verbessern.",
+        "ru": "ознакомьтесь с текущим состоянием выводов GPIO во время запуска адаптера.\nперечитайте ввод GPIO, если он установлен пользователем (с ack=false).\nдобавить опцию инвертировать истинное/ложное отображение до 1/0.\nРазрешить несколько экземпляров этого адаптера на хост.\nпытался улучшить инициализацию входов GPIO.",
+        "pt": "leia o estado atual de saídas GPIO durante a inicialização do adaptador.\nre-leia entrada GPIO, se definido pelo usuário (com ack=false).\nadicionar uma opção para inverter mapeamento verdadeiro / falso para 1/0.\nPermitir várias instâncias deste adaptador por host.\ntentou melhorar a inicialização de entradas GPIO.",
+        "nl": "lees de huidige staat van GPIO-uitgangen tijdens het opstarten van de adapter.\nherlees GPIO-invoer, indien ingesteld door de gebruiker (met ack=false).\nvoeg een optie toe om true/false mapping om te keren naar 1/0.\nMeerdere instanties van deze adapter per host toestaan.\ngeprobeerd om de initialisatie van GPIO ingangen te verbeteren.",
+        "fr": "lire l'état actuel des sorties GPIO lors du démarrage de l'adaptateur.\nrelire l'entrée GPIO, si définie par l'utilisateur (avec ack=false).\najouter une option pour inverser true/false mapping au 1/0.\nAutoriser plusieurs instances de cet adaptateur par hôte.\na essayé d'améliorer l'initialisation des entrées GPIO.",
+        "it": "leggere lo stato attuale delle uscite GPIO durante l'avvio dell'adattatore.\nre-read GPIO input, se impostato dall'utente (con ack=false).\naggiungere un'opzione per invertire la mappatura vera/falsa a 1/0.\nConsentire più istanze di questo adattatore per host.\nha cercato di migliorare l'inizializzazione degli ingressi GPIO.",
+        "es": "leer el estado actual de salidas GPIO durante la puesta en marcha del adaptador.\nvolver a leer la entrada GPIO, si se establece por el usuario (con ack=false).\nañadir una opción para invertir la cartografía verdadera/falsa a 1/0.\nPermitir múltiples instancias de este adaptador por host.\ntrató de mejorar la inicialización de los insumos de GPIO.",
+        "pl": "czytaj aktualny stan wyjść GPIO podczas uruchamiania adaptera.\nre- read GPIO input, if set by the user (with ack = false).\ndodaj opcję, aby odwrócić prawdziwe / fałszywe odwzorowanie do 1 / 0.\nZezwala na wiele instancji tego adaptera na hosta.\npróbował poprawić inicjalizację wejść GPIO.",
+        "uk": "читати поточний стан виходів GPIO під час запуску адаптера.\nперечитати вхід GPIO, якщо встановити користувачем (з ack=false).\nдодати варіант для інвертації true/false до 1/0.\nДозволити кілька екземплярів цього адаптера за господар.\nнамагалася вдосконалити ініціалізацію вводів GPIO.",
+        "zh-cn": "读取适配器启动期间GPIO输出的当前状态.\n重读 GPIO 输入,如果由用户设置(带有 ack=false).\n将反向真实/假映射的选项添加到 1/0.\n每个主机允许此适配器的多个实例 .\n尝试改进GPIO投入的初始化."
+      },
       "2.3.2": {
         "en": "added support for NVMe temperature (needs additional configuration, see README)\nfixed inital values for outputs.",
         "de": "Unterstützung für NVMe-Temperatur (benötigt zusätzliche Konfiguration, siehe README) hinzugefügt\nInitalwerte für Ausgänge repariert.",
@@ -80,19 +93,6 @@
         "pl": "odbudowa konfiguracji w JSONConfig.",
         "uk": "rebuild config в JSONConfig.",
         "zh-cn": "在 JSONConfig 中重建配置."
-      },
-      "2.1.2": {
-        "en": "transmit all GPIO changes to iobroker states.",
-        "de": "alle GPIO-Änderungen an iobroker States übertragen.",
-        "ru": "передавать все изменения GPIO в состояния iobroker.",
-        "pt": "transmitir todas as mudanças GPIO para estados iobroker.",
-        "nl": "alle GPIO-wijzigingen doorgeven aan iobroker-toestanden.",
-        "fr": "transmettre tous les changements GPIO aux états iobroker.",
-        "it": "trasmettere tutti i cambiamenti GPIO agli stati iobroker.",
-        "es": "transmitir todos los cambios de GPIO a los estados de iobroker.",
-        "pl": "przesyłać wszystkie zmiany GPIO do stanów iobrokerów.",
-        "uk": "передача всіх змін GPIO в іоброкерські стани.",
-        "zh-cn": "将所有 GPIO 更改传送到 iobroster 状态 ."
       }
     },
     "titleLang": {

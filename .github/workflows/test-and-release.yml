@@ -39,6 +39,9 @@ jobs:
           make -j$(nproc)
           sudo make install
           sudo ldconfig
+      - name: Find libgpiod
+        run: |
+          find /usr/local -iname '*gpiod*'
       - name: Upload libgpiod artifact
         id: upload
         uses: actions/upload-artifact@v4

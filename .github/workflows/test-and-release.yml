@@ -25,14 +25,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install build dependencies
-        run: sudo apt update && sudo apt install -y git cmake g++ libtool pkg-config autoconf automake
+        run: |
+          sudo apt update
+          sudo apt install -y git build-essential autoconf automake libtool pkg-config autoconf-archive
       - name: Build libgpiod 2.x
         run: |
           mkdir -p /tmp/libgpiod-build
           git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git /tmp/libgpiod-build
           cd /tmp/libgpiod-build
           git checkout v2.2.x
-          ./autogen.sh
+          autoreconf -fi
           ./configure
           make -j$(nproc)
           sudo make install

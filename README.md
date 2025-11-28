@@ -13,7 +13,6 @@ ioBroker RPI-Monitor Adapter
 RPI-Monitor implementation for integration into ioBroker. It is the same implementation as for iobroker.rpi, but with GPIOs.
 
 ## Important Information
-Works only with node >= 18
 
 **ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
 

@@ -33,8 +33,7 @@ jobs:
           wget https://mirrors.edge.kernel.org/pub/software/libs/libgpiod/libgpiod-2.2.1.tar.xz
           tar -xvf libgpiod-2.2.1.tar.xz
           cd libgpiod-2.2.1
-          ./autogen.sh --enable-bindings-cxx
-          CFLAGS="-fPIC" CXXFLAGS="-fPIC" ./configure --prefix=/usr/local
+          CFLAGS="-fPIC" CXXFLAGS="-fPIC" ./configure --prefix=/usr/local --enable-tools --enable-bindings-cxx
           make -j$(nproc)
           sudo make install
           sudo ldconfig

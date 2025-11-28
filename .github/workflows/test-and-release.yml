@@ -23,7 +23,7 @@ jobs:
     outputs:
       libgpiod_path: ${{ steps.upload.outputs.artifact-path }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Install build dependencies
         run: |
           sudo apt update
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-libgpiod
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:
@@ -87,7 +87,7 @@ jobs:
         node-version: [20.x, 22.x, 24.x]
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:
@@ -126,7 +126,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:

@@ -29,10 +29,11 @@ e.g. rpi.0.cpu
 Be sure, that python and build-essential are installed:
 
 ```
-sudo apt-get update
-sudo apt-get install -y build-essential python
-sudo apt-get install -y libgpiod-dev
+sudo apt update
+sudo apt install -y build-essential python
+sudo apt install -y libgpiod-dev
 ```
+
 (the last one is only necessary, if you want to work with GPIOs)
 
 Following Objects are available after selection:
@@ -152,6 +153,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@klein0r) NodeJS 20.x (or newer) is required
+
 ### 2.4.0 (2025-03-06)
 * (Garfonso) read the current state of GPIO outputs during adapter startup.
 * (Garfonso) re-read GPIO input, if set by the user (with ack=false).

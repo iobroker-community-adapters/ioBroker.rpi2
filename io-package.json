@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "2.4.0",
+    "version": "3.0.0",
     "news": {
+      "3.0.0": {
+        "en": "NodeJS 20.x (or newer) is required\nUpdated opengpio to v2 (works on Debian trixie)",
+        "de": "NodeJS 20.x (oder neuer) ist erforderlich\nAktualisierte opengpio auf v2 (Arbeiten auf Debian-Trixie)",
+        "ru": "NodeJS 20.x (или новее)\nОбновленный opengpio до v2 (работает над Debian trixie)",
+        "pt": "NodeJS 20.x (ou mais recente) é necessário\nAtualizado opengpio para v2 (funciona em Debian trixie)",
+        "nl": "NodeJS 20.x (of nieuwer) is vereist\nBijgewerkt opengpio naar v2 (werken op Debian trixie)",
+        "fr": "NodeJS 20.x (ou plus récent) est nécessaire\nMise à jour opengpio to v2 (travaille sur Debian trixie)",
+        "it": "NodeJS 20.x (o più recente) è richiesto\nOpengpio aggiornato a v2 (opera su trixie Debian)",
+        "es": "NodeJS 20.x (o nuevo) es necesario\nOpengpio actualizado a v2 (trabajos en el trixie de Debian)",
+        "pl": "NodeJS 20.x (lub nowszy) jest wymagany\nAktualizacja opengpio do v2 (działa na trixie Debiana)",
+        "uk": "NodeJS 20.x (або новіший) обов'язковий\nОновлено opengpio в v2 (працює на Debian trixie)",
+        "zh-cn": "需要节点JS 20.x(或更新)\n更新了 opengpio 到 v2( debian trixie 上的工作)"
+      },
       "2.4.0": {
         "en": "read the current state of GPIO outputs during adapter startup.\nre-read GPIO input, if set by the user (with ack=false).\nadd an option to invert true/false mapping to 1/0.\nAllow multiple instances of this adapter per host.\ntried to improve initialization of GPIO inputs.",
         "de": "lesen des aktuellen Zustands der GPIO-Ausgänge beim Adapter-Start.\ngPIO-Eingänge erneut lesen, wenn vom Benutzer versehentlich gesteuert (mit ack=false).\nEine option hinzugefügt zur Invertierung von true/false mapping auf 1/0.\nMehrere Instanzen dieses Adapters pro Host erlaubt.\nVersucht, die Initialisierung der GPIO-Eingänge zu verbessern.",
@@ -80,19 +93,6 @@
         "pl": "temperatura ma teraz właściwą rolę i typ.",
         "uk": "температура тепер має належну роль і тип.",
         "zh-cn": "温度现在有合适的角色和类型."
-      },
-      "2.2.0": {
-        "en": "rebuild config in JSONConfig.",
-        "de": "Umbau der config auf JSONConfig.",
-        "ru": "восстановить конфигурацию в JSONConfig.",
-        "pt": "reconstruir a configuração em JSONConfig.",
-        "nl": "config opnieuw opbouwen in JSONConfig.",
-        "fr": "reconstruire la configuration de JSONConfig.",
-        "it": "ricostruire la configurazione in JSONConfig.",
-        "es": "reconstruir config en JSONConfig.",
-        "pl": "odbudowa konfiguracji w JSONConfig.",
-        "uk": "rebuild config в JSONConfig.",
-        "zh-cn": "在 JSONConfig 中重建配置."
       }
     },
     "titleLang": {

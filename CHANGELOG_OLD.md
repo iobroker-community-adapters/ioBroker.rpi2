@@ -1,4 +1,7 @@
 # Older Changes
+## 2.2.2 (2024-11-02)
+* (simatec) responsive design for settings page added
+
 ## 2.2.1 (2024-10-15)
 * (Garfonso) temperature has now proper role and type.
 

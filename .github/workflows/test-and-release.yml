@@ -37,15 +37,13 @@ jobs:
           make -j$(nproc)
           sudo make install
           sudo ldconfig
-      - name: Find libgpiod
-        run: |
-          find /usr/local -iname '*gpiod*'
       - name: Upload libgpiod artifact
         id: upload
         uses: actions/upload-artifact@v4
         with:
           name: libgpiod-2.2.x
           path: |
+            /usr/local/bin/gpiodetect
             /usr/local/include/gpiod.h
             /usr/local/include/gpiod.hpp
             /usr/local/include/gpiodcxx
@@ -61,13 +59,18 @@ jobs:
     needs: build-libgpiod
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod artifact
+      - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:
           name: libgpiod-2.2.x
-          path: /usr/local
-      - name: Ensure library path
-        run: sudo ldconfig /usr/local/lib
+          path: libgpiod
+      - name: Install libgpiod into system
+        run: |
+          sudo cp libgpiod/bin/gpiodetect /usr/local/bin/
+          sudo cp -r libgpiod/include/* /usr/local/include/
+          sudo cp -r libgpiod/lib/* /usr/local/lib/
+
+          sudo ldconfig
       - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '20.x'
@@ -85,13 +88,18 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod artifact
+      - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:
           name: libgpiod-2.2.x
-          path: /usr/local
-      - name: Ensure library path
-        run: sudo ldconfig /usr/local/lib
+          path: libgpiod
+      - name: Install libgpiod into system
+        run: |
+          sudo cp libgpiod/bin/gpiodetect /usr/local/bin/
+          sudo cp -r libgpiod/include/* /usr/local/include/
+          sudo cp -r libgpiod/lib/* /usr/local/lib/
+
+          sudo ldconfig
       - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -119,13 +127,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod artifact
+      - name: Download libgpiod
         uses: actions/download-artifact@v4
         with:
           name: libgpiod-2.2.x
-          path: /usr/local
-      - name: Ensure library path
-        run: sudo ldconfig /usr/local/lib
+          path: libgpiod
+      - name: Install libgpiod into system
+        run: |
+          sudo cp libgpiod/bin/gpiodetect /usr/local/bin/
+          sudo cp -r libgpiod/include/* /usr/local/include/
+          sudo cp -r libgpiod/lib/* /usr/local/lib/
+
+          sudo ldconfig
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '20.x'

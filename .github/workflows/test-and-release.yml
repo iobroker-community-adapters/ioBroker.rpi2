@@ -47,7 +47,8 @@ jobs:
           path: |
             /usr/local/include/gpiod.h
             /usr/local/include/gpiod/*.h
-            /usr/local/lib/libgpiod*
+            /usr/local/lib/libgpiod*.so*
+            /usr/local/lib/libgpiod*.a
             /usr/local/lib/pkgconfig/libgpiod.pc
 
   check-and-lint:
@@ -65,7 +66,7 @@ jobs:
         run: |
           sudo cp -r libgpiod/include/* /usr/local/include/
           sudo cp -r libgpiod/lib/* /usr/local/lib/
-          sudo cp libgpiod/libgpiod.pc /usr/local/lib/pkgconfig/
+          sudo cp libgpiod/pkgconfig/libgpiod.pc /usr/local/lib/pkgconfig/
 
           sudo ldconfig
       - uses: ioBroker/testing-action-check@v1
@@ -94,7 +95,7 @@ jobs:
         run: |
           sudo cp -r libgpiod/include/* /usr/local/include/
           sudo cp -r libgpiod/lib/* /usr/local/lib/
-          sudo cp libgpiod/libgpiod.pc /usr/local/lib/pkgconfig/
+          sudo cp libgpiod/pkgconfig/libgpiod.pc /usr/local/lib/pkgconfig/
 
           sudo ldconfig
       - uses: ioBroker/testing-action-adapter@v1
@@ -133,7 +134,7 @@ jobs:
         run: |
           sudo cp -r libgpiod/include/* /usr/local/include/
           sudo cp -r libgpiod/lib/* /usr/local/lib/
-          sudo cp libgpiod/libgpiod.pc /usr/local/lib/pkgconfig/
+          sudo cp libgpiod/pkgconfig/libgpiod.pc /usr/local/lib/pkgconfig/
 
           sudo ldconfig
       - uses: ioBroker/testing-action-deploy@v1

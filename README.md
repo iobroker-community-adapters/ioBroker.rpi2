@@ -154,6 +154,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 -->
 ### **WORK IN PROGRESS**
 * (@klein0r) NodeJS 20.x (or newer) is required
+* (@klein0r) Updated opengpio to v2 (works on Debian trixie)
 
 ### 2.4.0 (2025-03-06)
 * (Garfonso) read the current state of GPIO outputs during adapter startup.

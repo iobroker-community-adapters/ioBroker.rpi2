@@ -27,14 +27,12 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt update
-          sudo apt install -y git build-essential autoconf automake libtool pkg-config autoconf-archive
+          sudo apt install -y build-essential autoconf automake libtool pkg-config autoconf-archive
       - name: Build libgpiod 2.x
         run: |
-          mkdir -p /tmp/libgpiod-build
-          git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git /tmp/libgpiod-build
-          cd /tmp/libgpiod-build
-          git checkout v2.2.x
-          autoreconf -fi
+          wget https://mirrors.edge.kernel.org/pub/software/libs/libgpiod/libgpiod-2.2.1.tar.xz
+          tar -xvf libgpiod-2.2.1.tar.xz
+          cd libgpiod-2.2.1
           ./autogen.sh --enable-bindings-cxx
           CFLAGS="-fPIC" CXXFLAGS="-fPIC" ./configure --prefix=/usr/local
           make -j$(nproc)

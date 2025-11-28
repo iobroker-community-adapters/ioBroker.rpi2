@@ -122,7 +122,6 @@
                 "_pullUpWarning": {
                     "type": "staticText",
                     "text": "pullupwarning",
-                    "hidden": false,
                     "style": {
                         "color": "red",
                         "font-size": "larger"

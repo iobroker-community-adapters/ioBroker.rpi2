@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "news": {
+      "3.0.1": {
+        "en": "Updated logo, workflows and documentation\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required",
+        "de": "Aktualisiertes Logo, Workflows und Dokumentation\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind erforderlich",
+        "ru": "Обновленный логотип, рабочие процессы и документация\nadmin 7.6.17 и js-контроллер 6.0.11 (или более поздние)",
+        "pt": "Logotipo atualizado, fluxos de trabalho e documentação\nadmin 7.6.17 e js-controller 6.0.11 (ou posterior) são necessários",
+        "nl": "Bijgewerkt logo, workflows en documentatie\nadmin 7.6.17 en js-controller 6.0.11 (of later) zijn vereist",
+        "fr": "Logo, flux de travail et documentation actualisés\nadmin 7.6.17 et js-contrôleur 6.0.11 (ou plus tard) sont requis",
+        "it": "Logo aggiornato, flussi di lavoro e documentazione\nadmin 7.6.17 e js-controller 6.0.11 (o successivo) sono richiesti",
+        "es": "Logos actualizados, flujos de trabajo y documentación\nadmin 7.6.17 y js-controller 6.0.11 (o posterior) son necesarios",
+        "pl": "Aktualizacja logo, przepływów roboczych i dokumentacji\nwymagany jest admin 7.6.17 i kontroler js- 6.0.11 (lub późniejszy)",
+        "uk": "Оновлений логотип, робочі процеси та документація\nadmin 7.6.17 та js-controller 6.0.11 (або пізніше) обов’язкові",
+        "zh-cn": "更新的标志、工作流程和文件\n需要admin 7.6.17和js控制器 6.0.11(或以后)"
+      },
       "3.0.0": {
         "en": "NodeJS 20.x (or newer) is required\nUpdated opengpio to v2 (works on Debian trixie)",
         "de": "NodeJS 20.x (oder neuer) ist erforderlich\nAktualisierte opengpio auf v2 (Arbeiten auf Debian-Trixie)",
@@ -80,19 +93,6 @@
         "pl": "responsive design for settings page added",
         "uk": "адаптивний дизайн для сторінки налаштувань",
         "zh-cn": "添加了设置的响应性设计"
-      },
-      "2.2.1": {
-        "en": "temperature has now proper role and type.",
-        "de": "temperatur hat jetzt richtige rolle und typ.",
-        "ru": "температура теперь имеет надлежащую роль и тип.",
-        "pt": "temperatura tem agora o papel e tipo adequados.",
-        "nl": "de temperatuur heeft nu de juiste rol en type.",
-        "fr": "la température a maintenant un rôle et un type appropriés.",
-        "it": "la temperatura ha ora un ruolo e un tipo adeguato.",
-        "es": "la temperatura tiene ahora el papel y el tipo adecuados.",
-        "pl": "temperatura ma teraz właściwą rolę i typ.",
-        "uk": "температура тепер має належну роль і тип.",
-        "zh-cn": "温度现在有合适的角色和类型."
       }
     },
     "titleLang": {

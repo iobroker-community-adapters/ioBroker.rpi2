@@ -163,7 +163,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 3.0.1 (2025-11-28)
 * (@klein0r) Updated logo, workflows and documentation
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required
 
@@ -184,9 +184,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 ### 2.3.1 (2025-01-06)
 * (Garfonso) fixed: GPIO library failed to load after recent dependency update.
-
-### 2.3.0 (2024-12-23)
-* (Garfonso) correct interpretation of start value setting. Output with initial value 0/1 will set GPIO accordingly during startup. Output without an initial state will not set GPIO at all.
 
 ## License
 MIT License

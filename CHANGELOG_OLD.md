@@ -1,4 +1,7 @@
 # Older Changes
+## 2.3.0 (2024-12-23)
+* (Garfonso) correct interpretation of start value setting. Output with initial value 0/1 will set GPIO accordingly during startup. Output without an initial state will not set GPIO at all.
+
 ## 2.2.2 (2024-11-02)
 * (simatec) responsive design for settings page added
 

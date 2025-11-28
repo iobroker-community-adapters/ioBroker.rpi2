@@ -32,8 +32,8 @@ jobs:
           git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git /tmp/libgpiod-build
           cd /tmp/libgpiod-build
           git checkout v2.2.x
-          mkdir build && cd build
-          cmake ..
+          ./autogen.sh
+          ./configure
           make -j$(nproc)
           sudo make install
           sudo ldconfig

@@ -1,7 +1,5 @@
 name: Test and Release
 
-# Run this job on all pushes and pull requests
-# as well as tags with a semantic version
 on:
   push:
     branches:
@@ -19,17 +17,42 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Performs quick checks before the expensive test runs
+  build-libgpiod:
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+    runs-on: ubuntu-latest
+    outputs:
+      libgpiod_path: ${{ steps.upload.outputs.artifact-path }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install build dependencies
+        run: sudo apt update && sudo apt install -y git cmake g++ libtool pkg-config autoconf automake
+      - name: Build libgpiod 2.x
+        run: |
+          git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git
+          cd libgpiod
+          git checkout v2.2.x
+          mkdir build && cd build
+          cmake ..
+          make -j$(nproc)
+          sudo make install
+          sudo ldconfig
+      - name: Upload libgpiod artifact
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: libgpiod
+          path: /usr/local
+
   check-and-lint:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
-
     runs-on: ubuntu-latest
-
+    needs: build-libgpiod
     steps:
-      - uses: awalsh128/cache-apt-pkgs-action@v1
+      - uses: actions/checkout@v3
+      - name: Download libgpiod
+        uses: actions/download-artifact@v4
         with:
-          packages: libgpiod-dev
-          version: 2.2 #string to identify the cache.
+          name: libgpiod
       - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '20.x'
@@ -37,21 +60,20 @@ jobs:
           # install-command: 'npm install'
           lint: true
 
-  # Runs adapter tests on all supported node versions and OSes
   adapter-tests:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
-
     runs-on: ${{ matrix.os }}
+    needs: build-libgpiod
     strategy:
       matrix:
         node-version: [20.x, 22.x, 24.x]
         os: [ubuntu-latest]
-
     steps:
-      - uses: awalsh128/cache-apt-pkgs-action@v1
+      - uses: actions/checkout@v3
+      - name: Download libgpiod
+        uses: actions/download-artifact@v4
         with:
-          packages: libgpiod-dev
-          version: 2.2 #string to identify the cache.
+          name: libgpiod
       - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -78,16 +100,16 @@ jobs:
       id-token: write
 
     steps:
-      - uses: awalsh128/cache-apt-pkgs-action@v1
+      - uses: actions/checkout@v3
+      - name: Download libgpiod
+        uses: actions/download-artifact@v4
         with:
-          packages: libgpiod-dev
-          version: 2.2 #string to identify the cache.
+          name: libgpiod
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '20.x'
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
           # install-command: 'npm install'
-          # npm-token: ${{ secrets.NPM_TOKEN }}  # Commented out for migration to Trusted Publishing
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
 #          # When using Sentry for error reporting, Sentry can be informed about new releases

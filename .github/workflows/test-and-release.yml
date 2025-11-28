@@ -35,7 +35,7 @@ jobs:
           cd /tmp/libgpiod-build
           git checkout v2.2.x
           autoreconf -fi
-          ./configure
+          CFLAGS="-fPIC" CXXFLAGS="-fPIC" ./configure --prefix=/usr/local
           make -j$(nproc)
           sudo make install
           sudo ldconfig
@@ -48,10 +48,14 @@ jobs:
         with:
           name: libgpiod-2.2.x-minimal
           path: |
-            /usr/local/include/gpiod.h*
-            /usr/local/include/gpiod/*
+            /usr/local/include/gpiod.h
+            /usr/local/include/gpiod.hpp
+            /usr/local/include/gpiodcxx
+            /usr/local/include/gpiod/*.h
             /usr/local/lib/libgpiod*.so*
             /usr/local/lib/libgpiod*.a
+            /usr/local/lib/libgpiodcxx*.so*
+            /usr/local/lib/libgpiodcxx*.a
 
   check-and-lint:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
@@ -59,17 +63,13 @@ jobs:
     needs: build-libgpiod
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod
+      - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2.x-minimal
-          path: libgpiod
-      - name: Install libgpiod into system
-        run: |
-          sudo cp -r libgpiod/include/* /usr/local/include/
-          sudo cp -r libgpiod/lib/* /usr/local/lib/
-
-          sudo ldconfig
+          name: libgpiod-2.2-fPIC
+          path: /usr/local
+      - name: Ensure library path
+        run: sudo ldconfig /usr/local/lib
       - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '20.x'
@@ -87,17 +87,13 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod
+      - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2.x-minimal
-          path: libgpiod
-      - name: Install libgpiod into system
-        run: |
-          sudo cp -r libgpiod/include/* /usr/local/include/
-          sudo cp -r libgpiod/lib/* /usr/local/lib/
-
-          sudo ldconfig
+          name: libgpiod-2.2-fPIC
+          path: /usr/local
+      - name: Ensure library path
+        run: sudo ldconfig /usr/local/lib
       - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -125,17 +121,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Download libgpiod
+      - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2.x-minimal
-          path: libgpiod
-      - name: Install libgpiod into system
-        run: |
-          sudo cp -r libgpiod/include/* /usr/local/include/
-          sudo cp -r libgpiod/lib/* /usr/local/lib/
-
-          sudo ldconfig
+          name: libgpiod-2.2-fPIC
+          path: /usr/local
+      - name: Ensure library path
+        run: sudo ldconfig /usr/local/lib
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '20.x'

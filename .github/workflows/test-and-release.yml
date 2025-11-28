@@ -45,8 +45,8 @@ jobs:
         with:
           name: libgpiod-2.2.x-minimal
           path: |
-            /usr/local/include/gpiod.h
-            /usr/local/include/gpiod/*.h
+            /usr/local/include/gpiod.h*
+            /usr/local/include/gpiod/*
             /usr/local/lib/libgpiod*.so*
             /usr/local/lib/libgpiod*.a
 

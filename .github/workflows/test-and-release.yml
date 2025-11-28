@@ -28,8 +28,9 @@ jobs:
         run: sudo apt update && sudo apt install -y git cmake g++ libtool pkg-config autoconf automake
       - name: Build libgpiod 2.x
         run: |
-          git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git
-          cd libgpiod
+          mkdir -p /tmp/libgpiod-build
+          git clone https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git /tmp/libgpiod-build
+          cd /tmp/libgpiod-build
           git checkout v2.2.x
           mkdir build && cd build
           cmake ..

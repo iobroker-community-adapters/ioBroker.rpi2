@@ -35,6 +35,7 @@ jobs:
           cd /tmp/libgpiod-build
           git checkout v2.2.x
           autoreconf -fi
+          ./autogen.sh --enable-bindings-cxx
           CFLAGS="-fPIC" CXXFLAGS="-fPIC" ./configure --prefix=/usr/local
           make -j$(nproc)
           sudo make install
@@ -46,7 +47,7 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: libgpiod-2.2.x-minimal
+          name: libgpiod-2.2.x
           path: |
             /usr/local/include/gpiod.h
             /usr/local/include/gpiod.hpp
@@ -66,7 +67,7 @@ jobs:
       - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2-fPIC
+          name: libgpiod-2.2.x
           path: /usr/local
       - name: Ensure library path
         run: sudo ldconfig /usr/local/lib
@@ -90,7 +91,7 @@ jobs:
       - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2-fPIC
+          name: libgpiod-2.2.x
           path: /usr/local
       - name: Ensure library path
         run: sudo ldconfig /usr/local/lib
@@ -124,7 +125,7 @@ jobs:
       - name: Download libgpiod artifact
         uses: actions/download-artifact@v4
         with:
-          name: libgpiod-2.2-fPIC
+          name: libgpiod-2.2.x
           path: /usr/local
       - name: Ensure library path
         run: sudo ldconfig /usr/local/lib

@@ -26,18 +26,19 @@ RPI-Monitor implementation for integration into ioBroker. It is the same impleme
 
 **ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
 
-For gpio to work, you need to install libgpiod, **before** installing the adapter, like this: `sudo apt-get install -y libgpiod-dev`
+For gpio to work, you need to install `libgpiod` in version `2.x`, **before** installing the adapter (see below)!
 
 ## Installation
+
 After installation you have to configure all required modules via administration page.
 
 After start of iobroker.rpi, all selected modules generates
 an object tree in ioBroker within rpi.<instance>.<modulename>
-e.g. rpi.0.cpu
+e.g. `rpi.0.cpu`
 
 Be sure, that python and build-essential are installed:
 
-```
+```bash
 sudo apt update
 sudo apt install -y build-essential python
 sudo apt install -y libgpiod-dev
@@ -162,6 +163,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@klein0r) Updated logo, workflows and documentation
+
 ### 3.0.0 (2025-11-28)
 * (@klein0r) NodeJS 20.x (or newer) is required
 * (@klein0r) Updated opengpio to v2 (works on Debian trixie)

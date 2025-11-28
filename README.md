@@ -1,15 +1,25 @@
-![Logo](admin/rpi2.png)
-ioBroker RPI-Monitor Adapter
-==============
+# ioBroker.rpi2
 
-[![NPM version](https://img.shields.io/npm/v/iobroker.rpi2.svg)](https://www.npmjs.com/package/iobroker.rpi2)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.rpi2.svg)](https://www.npmjs.com/package/iobroker.rpi2)
-![Number of Installations](https://iobroker.live/badges/rpi2-installed.svg)
-![Current version in stable repository](https://iobroker.live/badges/rpi2-stable.svg)
+[![NPM version](https://img.shields.io/npm/v/iobroker.rpi2?style=flat-square)](https://www.npmjs.com/package/iobroker.rpi2)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.rpi2?label=npm%20downloads&style=flat-square)](https://www.npmjs.com/package/iobroker.rpi2)
+![node-lts](https://img.shields.io/node/v-lts/iobroker.rpi2?style=flat-square)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.rpi2?label=npm%20dependencies&style=flat-square)
 
-[![NPM](https://nodei.co/npm/iobroker.rpi2.png?downloads=true)](https://nodei.co/npm/iobroker.rpi2/)
+![GitHub](https://img.shields.io/github/license/iobroker-community-adapters/iobroker.rpi2?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/iobroker-community-adapters/iobroker.rpi2?logo=github&style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/iobroker-community-adapters/iobroker.rpi2?logo=github&style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/iobroker-community-adapters/iobroker.rpi2?logo=github&style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/iobroker-community-adapters/iobroker.rpi2?logo=github&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/iobroker-community-adapters/iobroker.rpi2/test-and-release.yml?branch=master&logo=github&style=flat-square)
 
-**Tests:** ![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.rpi2/workflows/Test%20and%20Release/badge.svg)
+## Versions
+
+![Beta](https://img.shields.io/npm/v/iobroker.rpi2.svg?color=red&label=beta)
+![Stable](http://iobroker.live/badges/rpi2-stable.svg)
+![Installed](http://iobroker.live/badges/rpi2-installed.svg)
+
+RPI-Monitor Adapter for ioBroker
+
 RPI-Monitor implementation for integration into ioBroker. It is the same implementation as for iobroker.rpi, but with GPIOs.
 
 ## Important Information

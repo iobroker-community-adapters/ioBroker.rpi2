@@ -225,6 +225,46 @@
           "agree",
           "cancel"
         ]
+      },
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<3.0.0",
+            "newVersion>=3.0.0"
+          ]
+        },
+        "title": {
+          "en": "libgpiod-dev 2.x required",
+          "de": "libgpiod-dev 2.x erforderlich",
+          "ru": "libgpiod-dev 2.x требуется",
+          "pt": "libgpiod- dev 2. x necessário",
+          "nl": "libgpiod-dev 2.x vereist",
+          "fr": "libgpiod-dev 2.x requis",
+          "it": "libgpiod-dev 2.x richiesto",
+          "es": "libgpiod-dev 2.x requerido",
+          "pl": "libgpiod- dev 2.x wymagane",
+          "uk": "libgpiod-dev 2.x необхідний",
+          "zh-cn": "需要使用 libgpiod-dev 2.x 软件"
+        },
+        "text": {
+          "en": "Version 3.x requires libgpiod-dev >= 2.x on your system (like Debian 13). Check the availability of that version before upgrading.",
+          "de": "Version 3.x erfordert libgpiod-dev >= 2.x auf Ihrem System (wie Debian 13). Überprüfen Sie die Verfügbarkeit dieser Version vor dem Upgrade.",
+          "ru": "Версия 3.x требует libgpiod-dev 2.x в вашей системе (например, Debian 13). Проверьте наличие этой версии перед обновлением.",
+          "pt": "Versão 3.x requer libgpiod-dev >= 2.x em seu sistema (como Debian 13). Verifique a disponibilidade dessa versão antes de atualizar.",
+          "nl": "Versie 3.x vereist libgpiod-dev >= 2.x op uw systeem (zoals Debian 13). Controleer de beschikbaarheid van die versie voordat u upgrade.",
+          "fr": "La version 3.x nécessite libgpiod-dev >= 2.x sur votre système (comme Debian 13). Vérifiez la disponibilité de cette version avant de la mettre à jour.",
+          "it": "Versione 3.x richiede libgpiod-dev >= 2.x sul tuo sistema (come Debian 13). Controllare la disponibilità di quella versione prima dell'aggiornamento.",
+          "es": "Versión 3.x requiere libgpiod-dev 2.x en su sistema (como Debian 13). Compruebe la disponibilidad de esa versión antes de actualizar.",
+          "pl": "Wersja 3.x wymaga libgpiod- dev > = 2.x w systemie (jak Debian 13). Sprawdź dostępność tej wersji przed aktualizacją.",
+          "uk": "Версія 3.x вимагає libgpiod-dev >= 2.x на вашу систему (наприклад, Debian 13). Перевірити наявність такої версії до оновлення.",
+          "zh-cn": "3.x版本需要 libgpiod-dev {} 2.x在你的系统中(如Debian 13). 升级前检查该版本的可用性 ."
+        },
+        "level": "warn",
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
       }
     ]
   },

@@ -163,7 +163,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version
 
 ### 3.0.1 (2025-11-28)
@@ -184,9 +184,6 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 ### 2.3.2 (2025-02-06)
 * (asgothian) added support for NVMe temperature (needs additional configuration, see README)
 * (Garfonso) fixed inital values for outputs.
-
-### 2.3.1 (2025-01-06)
-* (Garfonso) fixed: GPIO library failed to load after recent dependency update.
 
 ## License
 MIT License

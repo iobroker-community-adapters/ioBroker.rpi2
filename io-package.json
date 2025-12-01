@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "news": {
+      "3.0.2": {
+        "en": "Check for required libgpiod-dev package version",
+        "de": "Überprüfen Sie die erforderliche libgpiod-dev-Paketversion",
+        "ru": "Проверьте требуемую версию пакета libgpiod-dev",
+        "pt": "Verificar a versão necessária do pacote libgpiod- dev",
+        "nl": "Controleren op vereiste libgpiod-dev pakketversie",
+        "fr": "Vérifiez la version requise du paquet libgpiod-dev",
+        "it": "Controllare la versione del pacchetto libgpiod-dev richiesta",
+        "es": "Consulta la versión requerida del paquete libgpiod-dev",
+        "pl": "Sprawdź wymaganą wersję pakietu libgpiod- dev",
+        "uk": "Перевірте необхідну версію пакета libgpiod-dev",
+        "zh-cn": "检查所需的 libgpiod- dev 软件包版本"
+      },
       "3.0.1": {
         "en": "Updated logo, workflows and documentation\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required",
         "de": "Aktualisiertes Logo, Workflows und Dokumentation\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind erforderlich",
@@ -80,19 +93,6 @@
         "pl": "poprawna interpretacja ustawienia wartości początkowej. Wyjście o wartości początkowej 0 / 1 ustawi odpowiednio GPIO podczas uruchamiania. Wyjście bez stanu początkowego w ogóle nie ustawi GPIO.",
         "uk": "правильне тлумачення параметра початкового значення. Вихід з початковою вартістю 0/1 буде встановлювати GPIO відповідно під час запуску. Вихід без початкового стану не буде встановлювати GPIO на всіх.",
         "zh-cn": "对起始值设置的正确解释。 初始值0/1的产出将在启动期间相应设置GPIO. 没有初始状态的输出将根本不设置 GPIO ."
-      },
-      "2.2.2": {
-        "en": "responsive design for settings page added",
-        "de": "responsive design für einstellungsseite hinzugefügt",
-        "ru": "адаптивный дизайн для настроек добавлена страница",
-        "pt": "design responsivo para configurações página adicionada",
-        "nl": "responsief ontwerp voor instellingen pagina toegevoegd",
-        "fr": "conception réactive pour les paramètres page ajoutée",
-        "it": "design reattivo per le impostazioni pagina aggiunto",
-        "es": "diseño sensible para la página de configuración añadido",
-        "pl": "responsive design for settings page added",
-        "uk": "адаптивний дизайн для сторінки налаштувань",
-        "zh-cn": "添加了设置的响应性设计"
       }
     },
     "titleLang": {

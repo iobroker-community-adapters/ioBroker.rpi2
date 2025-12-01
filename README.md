@@ -163,6 +163,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@klein0r) Check for required libgpiod-dev package version
+
 ### 3.0.1 (2025-11-28)
 * (@klein0r) Updated logo, workflows and documentation
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required

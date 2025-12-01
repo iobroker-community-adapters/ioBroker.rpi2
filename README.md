@@ -24,7 +24,7 @@ RPI-Monitor implementation for integration into ioBroker. It is the same impleme
 
 ## Important Information
 
-**ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group (recommended) or running ioBroker under `root` (less secure).
+**ioBroker needs special permissions to control GPIOs.** On most Linux distributions this can be achieved by adding the ioBroker user to the `gpio` group.
 
 For gpio to work, you need to install `libgpiod` in version `2.x`, **before** installing the adapter (see below)!
 

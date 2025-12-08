@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download libgpiod
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: libgpiod-2.2.x
           path: libgpiod
@@ -89,7 +89,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download libgpiod
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: libgpiod-2.2.x
           path: libgpiod
@@ -128,7 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download libgpiod
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: libgpiod-2.2.x
           path: libgpiod

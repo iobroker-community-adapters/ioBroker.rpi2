@@ -39,7 +39,7 @@ jobs:
           sudo ldconfig
       - name: Upload libgpiod artifact
         id: upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: libgpiod-2.2.x
           path: |

@@ -124,7 +124,8 @@
     "authors": [
       "Christian Baumgartner",
       "husky-koglhof <husky.koglhof@icloud.com>",
-      "Garfonso <garfonso@mobo.info>"
+      "Garfonso <garfonso@mobo.info>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
     ],
     "os": [
       "linux"

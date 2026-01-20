@@ -107,8 +107,9 @@ On configuration page you can select following modules:
 ### NVME temperature
 Since adapter version 2.3.2 you can read NVMe temperature. To do this, you need to install `nvme-cli` package on your system. 
 You can do this with the following command: `sudo apt-get install nvme-cli`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. Open it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker` and add the following line:
-`nvme smart-log /dev/nvme0` to the bottom.
+sudoers file `/etc/sudoers.d/iobroker`. Open it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker` and add the following line to the bottom:
+
+```iobroker ALL=(ALL) NOPASSWD: /usr/sbin/nvme smart-log /dev/nvme0```
 
 ## GPIOs
 You can read and control GPIOs too.

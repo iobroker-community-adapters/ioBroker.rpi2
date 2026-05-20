@@ -110,6 +110,12 @@
       "post": "$1/1000",
       "role": "value.temperature"
     },
+    "fan_activity": {
+      "command": "cat /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input",
+      "regexp": "(.*)",
+      "post": "",
+      "role": "value.speed"
+    },
     "nvme_temp": {
        "command": "test -e /usr/sbin/nvme && sudo nvme smart-log /dev/nvme0 || echo \"0\"",
        "regexp": "temperature\\s+:\\s+(\\d+)",

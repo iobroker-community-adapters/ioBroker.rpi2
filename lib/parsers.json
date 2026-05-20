@@ -111,8 +111,8 @@
       "role": "value.temperature"
     },
     "fan_activity": {
-      "command": "cat /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input",
-      "regexp": "(.*)",
+      "command": "test -r /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input && cat /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input || echo \"0\"",
+      "regexp": "(\\d+)",
       "post": "",
       "role": "value.speed"
     },

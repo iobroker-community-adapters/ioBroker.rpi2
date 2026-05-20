@@ -171,7 +171,7 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 ### **WORK IN PROGRESS**
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
-- (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM on supported devices.
+- (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version

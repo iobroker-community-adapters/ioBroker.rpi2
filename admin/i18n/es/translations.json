@@ -7,7 +7,7 @@
     "Swap": "Swap",
     "Temperature": "Temperature",
     "Uptime": "Uptime",
-    "WLAN": "WLAN",
+    "WLAN": "WiFi",
     "MonitoringExplanation": "Seleccione qué elementos monitorear. Serán encuestados periódicamente y se crearán estados según sea necesario.",
     "Monitoring": "Escucha",
     "GPIOs": "GPIO",

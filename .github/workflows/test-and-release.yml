@@ -71,7 +71,7 @@ jobs:
           sudo cp -r libgpiod/lib/* /usr/local/lib/
 
           sudo ldconfig
-      - uses: ioBroker/testing-action-check@v1
+      - uses: ioBroker/testing-action-check@v2
         with:
           node-version: '24.x'
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'

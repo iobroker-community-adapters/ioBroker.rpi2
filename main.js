@@ -286,7 +286,7 @@ class Rpi2 extends utils.Adapter {
         try {
             // Cancel any intervals
             for (const interval of intervalTimers) {
-                clearInterval(interval);
+                this.clearInterval(interval);
             }
             if (this.gpioControl) {
                 await this.gpioControl.unload();
@@ -318,7 +318,7 @@ const table = {};
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
         intervalTimers.push(
-            setInterval(() => {
+            adapter.setInterval(() => {
                 parser(adapter);
             }, adapter.config.interval || 60000),
         );
@@ -602,7 +602,7 @@ function setupDht(adapter, dhtPorts) {
             );
 
             intervalTimers.push(
-                setInterval(() => {
+                adapter.setInterval(() => {
                     adapter.log.debug(`Polling DHTxx/AM23xx type ${type} on GPIO ${gpio}`);
                     sensorLib.read(type, gpio, async function (err, temperature, humidity) {
                         if (err) {

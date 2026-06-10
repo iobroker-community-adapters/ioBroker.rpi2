@@ -69,24 +69,28 @@ This is the **ioBroker.rpi2** adapter for monitoring Raspberry Pi systems and co
 - Use semantic versioning for adapter releases
 - Include proper JSDoc comments for public methods
 
-**Timer and Resource Cleanup Example:**
+**Timer and Resource Cleanup — IMPORTANT:**
+
+Always use the **adapter's own timer methods** (`this.setInterval`, `this.clearInterval`, `this.setTimeout`, `this.clearTimeout`) instead of the global Node.js equivalents (`setInterval`, `clearInterval`, `setTimeout`, `clearTimeout`). The adapter methods are managed by the ioBroker framework and are automatically cleaned up on adapter unload. Store handles in an array and clear them explicitly in `onUnload` with `this.clearInterval` / `this.clearTimeout`.
+
 ```javascript
-private connectionTimer?: NodeJS.Timeout;
+const intervalTimers = [];
 
 async onReady() {
-  this.connectionTimer = setInterval(() => this.checkConnection(), 30000);
+    intervalTimers.push(
+        this.setInterval(() => this.checkConnection(), 30000)
+    );
 }
 
 onUnload(callback) {
-  try {
-    if (this.connectionTimer) {
-      clearInterval(this.connectionTimer);
-      this.connectionTimer = undefined;
+    try {
+        for (const timer of intervalTimers) {
+            this.clearInterval(timer);
+        }
+        callback();
+    } catch (e) {
+        callback();
     }
-    callback();
-  } catch (e) {
-    callback();
-  }
 }
 ```
 

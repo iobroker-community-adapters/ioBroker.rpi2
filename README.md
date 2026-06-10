@@ -198,6 +198,7 @@ After that, restart the rpi2 adapter.
 - (copilot) **ENHANCED**: Added debug/info logging for DHT sensor initialization and polling
 - (copilot) **ENHANCED**: Added helpful message when node-dht-sensor fails to load (Pi 5 libgpiod hint)
 - (copilot) **ENHANCED**: README: added Raspberry Pi 5 libgpiod setup instructions for DHT sensors
+- (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version

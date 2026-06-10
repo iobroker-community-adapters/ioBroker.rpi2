@@ -286,7 +286,7 @@ class Rpi2 extends utils.Adapter {
         try {
             // Cancel any intervals
             for (const interval of intervalTimers) {
-                clearInterval(interval);
+                this.clearInterval(interval);
             }
             if (this.gpioControl) {
                 await this.gpioControl.unload();
@@ -318,7 +318,7 @@ const table = {};
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
         intervalTimers.push(
-            setInterval(() => {
+            adapter.setInterval(() => {
                 parser(adapter);
             }, adapter.config.interval || 60000),
         );
@@ -566,42 +566,59 @@ function setupDht(adapter, dhtPorts) {
         return;
     }
 
-    // Initialise ports, keeping track of those that worked with type
-    const dhtInitd = [];
+    let sensorLib;
+    try {
+        sensorLib = require('node-dht-sensor');
+        adapter.log.debug('node-dht-sensor library loaded successfully');
+    } catch (err) {
+        adapter.log.error(`Failed to load node-dht-sensor library: ${err}`);
+        adapter.log.error(
+            'For Raspberry Pi 5 and newer (libgpiod), reinstall node-dht-sensor with: npm install node-dht-sensor --use_libgpiod=true in the adapter directory',
+        );
+        return;
+    }
+
     for (const gpioSetting of dhtPorts) {
         const type = gpioSetting.configuration === 'dht11' ? 11 : 22;
+        const gpio = gpioSetting.gpio;
         try {
-            const sensorLib = require('node-dht-sensor');
-            sensorLib.initialize(type, gpioSetting.gpio);
-            dhtInitd[gpioSetting.gpio] = [type];
+            adapter.log.debug(`Initializing DHTxx/AM23xx sensor type ${type} on GPIO ${gpio}`);
+            sensorLib.initialize(type, gpio);
 
             let pollInterval = gpioSetting.debounceOrPoll;
             if (pollInterval === 0) {
-                adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
+                adapter.log.warn(`DHTxx/AM23xx on GPIO ${gpio} configured but polling disabled`);
+                continue;
             }
             if (pollInterval < 350) {
-                adapter.log.warn(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - setting to 350ms`);
+                adapter.log.warn(
+                    `DHTxx/AM23xx polling interval seems too short (${pollInterval}ms) for GPIO ${gpio} - setting to 350ms`,
+                );
                 pollInterval = 350;
             }
+
+            adapter.log.info(
+                `DHTxx/AM23xx sensor type ${type} initialized on GPIO ${gpio}, polling every ${pollInterval}ms`,
+            );
+
             intervalTimers.push(
-                setInterval(async () => {
-                    for (const [port, type] of Object.entries(dhtInitd)) {
-                        sensorLib.read(type, port, async function (err, temperature, humidity) {
-                            if (err) {
-                                adapter.log.error(`Failed to read DHTxx/AM23xx: ${type}/${port}`);
-                            } else {
-                                adapter.log.debug(
-                                    `Read DHTxx/AM23xx: ${type}/${port} : ${temperature}°C, humidity: ${humidity}%`,
-                                );
-                                await adapter.setStateChanged(temperatureStateName(port), temperature, true);
-                                await adapter.setStateChanged(humidityStateName(port), humidity, true);
-                            }
-                        });
-                    }
-                }, gpioSetting.debounceOrPoll),
+                adapter.setInterval(() => {
+                    adapter.log.debug(`Polling DHTxx/AM23xx type ${type} on GPIO ${gpio}`);
+                    sensorLib.read(type, gpio, async function (err, temperature, humidity) {
+                        if (err) {
+                            adapter.log.error(`Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}`);
+                        } else {
+                            adapter.log.debug(
+                                `Read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${temperature}°C, humidity: ${humidity}%`,
+                            );
+                            await adapter.setStateChanged(temperatureStateName(gpio), temperature, true);
+                            await adapter.setStateChanged(humidityStateName(gpio), humidity, true);
+                        }
+                    });
+                }, pollInterval),
             );
         } catch (err) {
-            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}: ${err}`);
+            adapter.log.error(`Failed to initialise DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}`);
         }
     }
 }

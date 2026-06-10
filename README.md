@@ -160,6 +160,25 @@ You can read from DHT11, DHT22 and AM2302 temperature/humidity sensors.
 
 Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https://www.npmjs.com/package/node-dht-sensor) package page. Multiple sensors can be connected to *multiple* pins (this is *not* a bus system) as discussed.
 
+### Raspberry Pi 5 (and newer) — libgpiod requirement
+
+On **Raspberry Pi 5** (and other boards using the RP1 southbridge, e.g. Debian 12 Bookworm / 13 Trixie), the legacy BCM2835 library is not compatible. The `node-dht-sensor` module **must** be compiled with `libgpiod` support.
+
+Make sure `libgpiod-dev` and `pkg-config` are installed:
+
+```bash
+sudo apt-get install -y libgpiod-dev pkg-config
+```
+
+Then reinstall the adapter's native module inside the adapter directory (usually `/opt/iobroker/node_modules/iobroker.rpi2`):
+
+```bash
+cd /opt/iobroker/node_modules/iobroker.rpi2
+npm install node-dht-sensor --use_libgpiod=true
+```
+
+After that, restart the rpi2 adapter.
+
 
 ## Changelog
 
@@ -172,6 +191,13 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
+- (copilot) **FIXED**: DHTxx/AM23xx sensor type stored incorrectly as array causing read failures
+- (copilot) **FIXED**: DHT polling interval correction was applied to initialize but not to setInterval
+- (copilot) **FIXED**: Multiple DHT timers each reading all sensors instead of per-sensor timers
+- (copilot) **FIXED**: DHT read errors logged without error details
+- (copilot) **ENHANCED**: Added debug/info logging for DHT sensor initialization and polling
+- (copilot) **ENHANCED**: Added helpful message when node-dht-sensor fails to load (Pi 5 libgpiod hint)
+- (copilot) **ENHANCED**: README: added Raspberry Pi 5 libgpiod setup instructions for DHT sensors
 - (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
 
 ### 3.0.2 (2025-12-01)

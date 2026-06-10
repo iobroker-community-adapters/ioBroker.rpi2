@@ -191,7 +191,7 @@ After that, restart the rpi2 adapter.
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
-- (copilot) **FIXED**: DHTxx/AM23xx sensor type stored incorrectly as array causing read failures (fixes #issue)
+- (copilot) **FIXED**: DHTxx/AM23xx sensor type stored incorrectly as array causing read failures
 - (copilot) **FIXED**: DHT polling interval correction was applied to initialize but not to setInterval
 - (copilot) **FIXED**: Multiple DHT timers each reading all sensors instead of per-sensor timers
 - (copilot) **FIXED**: DHT read errors logged without error details

@@ -560,6 +560,9 @@ function humidityStateName(port) {
     return `gpio.${port}.humidity`;
 }
 
+const fs = require('fs');
+const { execSync } = require('child_process');
+
 /**
  * Detect if the system is a Raspberry Pi 5 or newer (which requires libgpiod).
  *
@@ -567,7 +570,6 @@ function humidityStateName(port) {
  */
 function isPi5orNewer() {
     try {
-        const fs = require('fs');
         const model = fs.readFileSync('/proc/device-tree/model', 'utf8');
         // Match "Raspberry Pi 5" or higher model numbers
         const match = model.match(/Raspberry Pi (\d+)/);
@@ -577,6 +579,8 @@ function isPi5orNewer() {
     }
 }
 
+let rebuildInProgress = false;
+
 /**
  * Attempt to rebuild node-dht-sensor with --use_libgpiod=true.
  *
@@ -584,15 +588,16 @@ function isPi5orNewer() {
  * @returns {Promise<boolean>} true if rebuild succeeded
  */
 async function rebuildDhtSensorWithLibgpiod(adapter) {
-    const { execSync } = require('child_process');
-    const path = require('path');
-    const adapterDir = path.join(__dirname);
+    if (rebuildInProgress) {
+        return false;
+    }
+    rebuildInProgress = true;
 
     adapter.log.warn('Attempting to rebuild node-dht-sensor with libgpiod support for Raspberry Pi 5...');
 
     try {
         execSync('npm rebuild node-dht-sensor --use_libgpiod=true', {
-            cwd: adapterDir,
+            cwd: __dirname,
             timeout: 120000,
             stdio: 'pipe',
         });
@@ -633,8 +638,6 @@ function setupDht(adapter, dhtPorts) {
     }
 
     const pi5 = isPi5orNewer();
-    let failureCount = 0;
-    let rebuildAttempted = false;
 
     for (const gpioSetting of dhtPorts) {
         const type = gpioSetting.configuration === 'dht11' ? 11 : 22;
@@ -659,20 +662,21 @@ function setupDht(adapter, dhtPorts) {
                 `DHTxx/AM23xx sensor type ${type} initialized on GPIO ${gpio}, polling every ${pollInterval}ms`,
             );
 
+            let initFailureLogged = false;
+
             intervalTimers.push(
                 adapter.setInterval(() => {
                     adapter.log.debug(`Polling DHTxx/AM23xx type ${type} on GPIO ${gpio}`);
                     sensorLib.read(type, gpio, async function (err, temperature, humidity) {
                         if (err) {
-                            failureCount++;
                             const errStr = String(err);
                             if (errStr.includes('failed to initialize sensor') && pi5) {
-                                adapter.log.error(
-                                    `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
-                                        'Raspberry Pi 5 detected - node-dht-sensor needs to be compiled with libgpiod support.',
-                                );
-                                if (!rebuildAttempted && failureCount <= 1) {
-                                    rebuildAttempted = true;
+                                if (!initFailureLogged) {
+                                    initFailureLogged = true;
+                                    adapter.log.error(
+                                        `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
+                                            'Raspberry Pi 5 detected - node-dht-sensor needs to be compiled with libgpiod support.',
+                                    );
                                     const success = await rebuildDhtSensorWithLibgpiod(adapter);
                                     if (success) {
                                         adapter.log.warn(
@@ -681,17 +685,19 @@ function setupDht(adapter, dhtPorts) {
                                     }
                                 }
                             } else if (errStr.includes('failed to initialize sensor')) {
-                                adapter.log.error(
-                                    `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
-                                        'The sensor hardware could not be initialized. Check wiring and ensure ' +
-                                        'the correct sensor type is configured. On Raspberry Pi 5+, node-dht-sensor ' +
-                                        'must be rebuilt with: npm rebuild node-dht-sensor --use_libgpiod=true',
-                                );
+                                if (!initFailureLogged) {
+                                    initFailureLogged = true;
+                                    adapter.log.error(
+                                        `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
+                                            'The sensor hardware could not be initialized. Check wiring and ensure ' +
+                                            'the correct sensor type is configured. On Raspberry Pi 5+, node-dht-sensor ' +
+                                            'must be rebuilt with: npm rebuild node-dht-sensor --use_libgpiod=true',
+                                    );
+                                }
                             } else {
                                 adapter.log.error(`Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}`);
                             }
                         } else {
-                            failureCount = 0;
                             adapter.log.debug(
                                 `Read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${temperature}°C, humidity: ${humidity}%`,
                             );

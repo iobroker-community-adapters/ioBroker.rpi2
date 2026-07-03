@@ -580,17 +580,31 @@ function isPi5orNewer() {
 }
 
 let rebuildInProgress = false;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 /**
- * Attempt to rebuild node-dht-sensor with --use_libgpiod=true.
+ * Attempt to rebuild node-dht-sensor with --use_libgpiod=true and restart the adapter.
+ * Will only attempt once per day (stored in config as lastDhtSensorRebuild timestamp).
+ * On success, writes the timestamp to native config which triggers an automatic adapter restart.
  *
  * @param adapter {object} adapter instance for logging
- * @returns {Promise<boolean>} true if rebuild succeeded
+ * @returns {Promise<boolean>} true if rebuild succeeded (adapter will restart shortly)
  */
 async function rebuildDhtSensorWithLibgpiod(adapter) {
     if (rebuildInProgress) {
         return false;
     }
+
+    // Check if we already rebuilt recently (max once per day to prevent restart loops)
+    const lastRebuild = adapter.config.lastDhtSensorRebuild;
+    if (lastRebuild && Date.now() - lastRebuild < ONE_DAY_MS) {
+        adapter.log.warn(
+            'node-dht-sensor was already rebuilt recently. Skipping rebuild to prevent restart loop. ' +
+                'Please manually verify: npm rebuild node-dht-sensor --use_libgpiod=true',
+        );
+        return false;
+    }
+
     rebuildInProgress = true;
 
     adapter.log.warn('Attempting to rebuild node-dht-sensor with libgpiod support for Raspberry Pi 5...');
@@ -601,7 +615,13 @@ async function rebuildDhtSensorWithLibgpiod(adapter) {
             timeout: 120000,
             stdio: 'pipe',
         });
-        adapter.log.info('node-dht-sensor rebuilt successfully with libgpiod support. Restart adapter to apply.');
+        adapter.log.info('node-dht-sensor rebuilt successfully with libgpiod support. Restarting adapter...');
+
+        // Write timestamp to native config - this triggers an automatic adapter restart
+        await adapter.extendForeignObjectAsync(`system.adapter.${adapter.namespace}`, {
+            native: { lastDhtSensorRebuild: Date.now() },
+        });
+
         return true;
     } catch (err) {
         adapter.log.error(`Failed to rebuild node-dht-sensor with libgpiod: ${err.message}`);
@@ -677,12 +697,7 @@ function setupDht(adapter, dhtPorts) {
                                         `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
                                             'Raspberry Pi 5 detected - node-dht-sensor needs to be compiled with libgpiod support.',
                                     );
-                                    const success = await rebuildDhtSensorWithLibgpiod(adapter);
-                                    if (success) {
-                                        adapter.log.warn(
-                                            'Rebuild succeeded. Please restart the adapter for changes to take effect.',
-                                        );
-                                    }
+                                    await rebuildDhtSensorWithLibgpiod(adapter);
                                 }
                             } else if (errStr.includes('failed to initialize sensor')) {
                                 if (!initFailureLogged) {

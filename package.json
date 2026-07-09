@@ -30,7 +30,7 @@
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2",
     "ci": "^2.3.0",
-    "opengpio": "^2.0.2"
+    "opengpio": "github:Garfonso/opengpio#fix/watch-pwm-dedicated-thread"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",

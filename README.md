@@ -33,79 +33,24 @@ For gpio to work, you need to install `libgpiod` in version `2.x`, **before** in
 
 ## Installation
 
-After installation you have to configure all required modules via administration page.
+After installation you can configure the monitor settings in the instance settings.
 
 After start of iobroker.rpi, all selected modules generates
 an object tree in ioBroker within rpi.<instance>.<modulename>
 e.g. `rpi.0.cpu`
 
-Be sure, that python and build-essential are installed:
+The adapter needs some os dependencies. Usually js-controller should take care of this, but if you have problems,
+please install the following packages manually:
 
 ```bash
 sudo apt update
 sudo apt install -y build-essential python
 sudo apt install -y libgpiod-dev
+sudo apt install -y pkg-config
 ```
 
-(the last one is only necessary, if you want to work with GPIOs)
-
-Following Objects are available after selection:
-
-#### **CPU**
-
-- cpu_frequency
-- load1
-- load5
-- load15
-
-#### **Raspberry (vcgencmd is required)**
-
-- cpu_voltage
-- mem_arm
-- mem_gpu
-
-#### **Memory**
-
-- memory_available
-- memory_free
-- memory_total
-
-#### **Network (eth0)**
-- net_received
-- net_send
-
-#### **SDCard**
-- sdcard_boot_total
-- sdcard_boot_used
-- sdcard_root_total
-- sdcard_root_used
-
-#### **Swap**
-- swap_total
-- swap_used
-
-#### **Temperature**
-- soc_temp
-
-#### **Uptime**
-- uptime
-
-#### **WLAN**
-- wifi_received
-- wifi_send
-
-## Configuration
-On configuration page you can select following modules:
-
-- CPU
-- Raspberry
-- Memory
-- Network
-- SDCard
-- Swap
-- Temperature
-- Uptime
-- WLAN
+(the third one is only necessary, if you want to work with GPIOs)
+(the last one is only necessary, if you want to use DHTxx/AM23xx sensors)
 
 ### NVME temperature
 Since adapter version 2.3.2 you can read NVMe temperature. To do this, you need to install `nvme-cli` package on your system. 

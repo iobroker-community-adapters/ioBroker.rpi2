@@ -286,7 +286,7 @@ class Rpi2 extends utils.Adapter {
         try {
             // Cancel any intervals
             for (const interval of intervalTimers) {
-                clearInterval(interval);
+                this.clearInterval(interval);
             }
             if (this.gpioControl) {
                 await this.gpioControl.unload();
@@ -318,7 +318,7 @@ const table = {};
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
         intervalTimers.push(
-            setInterval(() => {
+            adapter.setInterval(() => {
                 parser(adapter);
             }, adapter.config.interval || 60000),
         );
@@ -560,48 +560,170 @@ function humidityStateName(port) {
     return `gpio.${port}.humidity`;
 }
 
+const fs = require('fs');
+const { execSync } = require('child_process');
+
+/**
+ * Detect if the system is a Raspberry Pi 5 or newer (which requires libgpiod).
+ *
+ * @returns {boolean} true if Pi 5 or newer detected
+ */
+function isPi5orNewer() {
+    try {
+        const model = fs.readFileSync('/proc/device-tree/model', 'utf8');
+        // Match "Raspberry Pi 5" or higher model numbers
+        const match = model.match(/Raspberry Pi (\d+)/);
+        return match ? parseInt(match[1], 10) >= 5 : false;
+    } catch {
+        return false;
+    }
+}
+
+let rebuildInProgress = false;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Attempt to rebuild node-dht-sensor with --use_libgpiod=true and restart the adapter.
+ * Will only attempt once per day (stored in config as lastDhtSensorRebuild timestamp).
+ * On success, writes the timestamp to native config which triggers an automatic adapter restart.
+ *
+ * @param adapter {object} adapter instance for logging
+ * @returns {Promise<boolean>} true if rebuild succeeded (adapter will restart shortly)
+ */
+async function rebuildDhtSensorWithLibgpiod(adapter) {
+    if (rebuildInProgress) {
+        return false;
+    }
+
+    // Check if we already rebuilt recently (max once per day to prevent restart loops)
+    const lastRebuild = adapter.config.lastDhtSensorRebuild;
+    if (lastRebuild && Date.now() - lastRebuild < ONE_DAY_MS) {
+        adapter.log.warn(
+            'node-dht-sensor was already rebuilt recently. Skipping rebuild to prevent restart loop. ' +
+                'Please manually verify: npm rebuild node-dht-sensor --use_libgpiod=true',
+        );
+        return false;
+    }
+
+    rebuildInProgress = true;
+
+    adapter.log.warn('Attempting to rebuild node-dht-sensor with libgpiod support for Raspberry Pi 5...');
+
+    try {
+        execSync('npm rebuild node-dht-sensor --use_libgpiod=true', {
+            cwd: __dirname,
+            timeout: 120000,
+            stdio: 'pipe',
+        });
+        adapter.log.info('node-dht-sensor rebuilt successfully with libgpiod support. Restarting adapter...');
+
+        // Write timestamp to native config - this triggers an automatic adapter restart
+        await adapter.extendForeignObjectAsync(`system.adapter.${adapter.namespace}`, {
+            native: { lastDhtSensorRebuild: Date.now() },
+        });
+
+        return true;
+    } catch (err) {
+        adapter.log.error(`Failed to rebuild node-dht-sensor with libgpiod: ${err.message}`);
+        adapter.log.error(
+            'Please manually run in the adapter directory: npm rebuild node-dht-sensor --use_libgpiod=true',
+        );
+        return false;
+    }
+}
+
 // Setup DHTxx/AM23xx sensors
 function setupDht(adapter, dhtPorts) {
     if (dhtPorts.length === 0) {
         return;
     }
 
-    // Initialise ports, keeping track of those that worked with type
-    const dhtInitd = [];
+    let sensorLib;
+    try {
+        sensorLib = require('node-dht-sensor');
+        adapter.log.debug('node-dht-sensor library loaded successfully');
+    } catch (err) {
+        adapter.log.error(`Failed to load node-dht-sensor library: ${err}`);
+        if (isPi5orNewer()) {
+            adapter.log.error(
+                'Raspberry Pi 5 (or newer) detected. node-dht-sensor must be compiled with libgpiod support.',
+            );
+            adapter.log.error('Run in the adapter directory: npm rebuild node-dht-sensor --use_libgpiod=true');
+        } else {
+            adapter.log.error(
+                'Ensure node-dht-sensor is installed. For Pi 5+, reinstall with: npm install node-dht-sensor --use_libgpiod=true',
+            );
+        }
+        return;
+    }
+
+    const pi5 = isPi5orNewer();
+
     for (const gpioSetting of dhtPorts) {
         const type = gpioSetting.configuration === 'dht11' ? 11 : 22;
+        const gpio = gpioSetting.gpio;
         try {
-            const sensorLib = require('node-dht-sensor');
-            sensorLib.initialize(type, gpioSetting.gpio);
-            dhtInitd[gpioSetting.gpio] = [type];
+            adapter.log.debug(`Initializing DHTxx/AM23xx sensor type ${type} on GPIO ${gpio}`);
+            sensorLib.initialize(type, gpio);
 
             let pollInterval = gpioSetting.debounceOrPoll;
             if (pollInterval === 0) {
-                adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
+                adapter.log.warn(`DHTxx/AM23xx on GPIO ${gpio} configured but polling disabled`);
+                continue;
             }
             if (pollInterval < 350) {
-                adapter.log.warn(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - setting to 350ms`);
+                adapter.log.warn(
+                    `DHTxx/AM23xx polling interval seems too short (${pollInterval}ms) for GPIO ${gpio} - setting to 350ms`,
+                );
                 pollInterval = 350;
             }
+
+            adapter.log.info(
+                `DHTxx/AM23xx sensor type ${type} initialized on GPIO ${gpio}, polling every ${pollInterval}ms`,
+            );
+
+            let initFailureLogged = false;
+
             intervalTimers.push(
-                setInterval(async () => {
-                    for (const [port, type] of Object.entries(dhtInitd)) {
-                        sensorLib.read(type, port, async function (err, temperature, humidity) {
-                            if (err) {
-                                adapter.log.error(`Failed to read DHTxx/AM23xx: ${type}/${port}`);
+                adapter.setInterval(() => {
+                    adapter.log.debug(`Polling DHTxx/AM23xx type ${type} on GPIO ${gpio}`);
+                    sensorLib.read(type, gpio, async function (err, temperature, humidity) {
+                        if (err) {
+                            const errStr = String(err);
+                            if (errStr.includes('failed to initialize sensor') && pi5) {
+                                if (!initFailureLogged) {
+                                    initFailureLogged = true;
+                                    adapter.log.error(
+                                        `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
+                                            'Raspberry Pi 5 detected - node-dht-sensor needs to be compiled with libgpiod support.',
+                                    );
+                                    await rebuildDhtSensorWithLibgpiod(adapter);
+                                }
+                            } else if (errStr.includes('failed to initialize sensor')) {
+                                if (!initFailureLogged) {
+                                    initFailureLogged = true;
+                                    adapter.log.error(
+                                        `Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}. ` +
+                                            'The sensor hardware could not be initialized. Check wiring and ensure ' +
+                                            'the correct sensor type is configured. On Raspberry Pi 5+, node-dht-sensor ' +
+                                            'must be rebuilt with: npm rebuild node-dht-sensor --use_libgpiod=true',
+                                    );
+                                }
                             } else {
-                                adapter.log.debug(
-                                    `Read DHTxx/AM23xx: ${type}/${port} : ${temperature}°C, humidity: ${humidity}%`,
-                                );
-                                await adapter.setStateChanged(temperatureStateName(port), temperature, true);
-                                await adapter.setStateChanged(humidityStateName(port), humidity, true);
+                                adapter.log.error(`Failed to read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}`);
                             }
-                        });
-                    }
-                }, gpioSetting.debounceOrPoll),
+                        } else {
+                            adapter.log.debug(
+                                `Read DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${temperature}°C, humidity: ${humidity}%`,
+                            );
+                            await adapter.setStateChanged(temperatureStateName(gpio), temperature, true);
+                            await adapter.setStateChanged(humidityStateName(gpio), humidity, true);
+                        }
+                    });
+                }, pollInterval),
             );
         } catch (err) {
-            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}: ${err}`);
+            adapter.log.error(`Failed to initialise DHTxx/AM23xx type ${type} on GPIO ${gpio}: ${err}`);
         }
     }
 }

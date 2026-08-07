@@ -28,7 +28,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.3.2",
+    "@iobroker/adapter-core": "^3.4.3",
     "ci": "^2.3.0",
     "opengpio": "^2.0.2"
   },

@@ -84,7 +84,7 @@ jobs:
     needs: [build-libgpiod, check-and-lint]
     strategy:
       matrix:
-        node-version: [22.x, 24.x]
+        node-version: [22.x, 24.x, 26.x]
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v7

@@ -119,6 +119,8 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 - (mcm1957) Dependencies have been updated.
 - (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
 - (Garfonso/Claude): Improve GPIO handling.
+- (Garfonso/Claude): **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
+- (Garfonso/Claude): Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version

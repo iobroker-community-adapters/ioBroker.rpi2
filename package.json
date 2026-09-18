@@ -28,9 +28,9 @@
     "node": ">=22"
   },
   "dependencies": {
+    "@garfonso/opengpio": "^2.1.0",
     "@iobroker/adapter-core": "^3.3.2",
-    "ci": "^2.3.0",
-    "opengpio": "github:Garfonso/opengpio#fix/watch-pwm-dedicated-thread-hardened"
+    "ci": "^2.3.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",

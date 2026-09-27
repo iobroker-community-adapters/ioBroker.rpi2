@@ -8,7 +8,7 @@ describe('parser definitions', () => {
         expect(parsers.temperature).to.have.property('fan_activity');
         expect(parsers.temperature.fan_activity).to.deep.equal({
             command:
-                'test -r /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input && cat /sys/devices/platform/cooling_fan/hwmon/hwmon1/fan1_input || echo "0"',
+                'test -r /sys/devices/platform/cooling_fan/hwmon/hwmon*/fan1_input && cat /sys/devices/platform/cooling_fan/hwmon/hwmon*/fan1_input || echo "0"',
             regexp: '(\\d+)',
             post: '',
             role: 'value.speed',

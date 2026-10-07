@@ -13,17 +13,14 @@
 // (i.e. before the first async fs/dns/crypto operation - hence at the very top,
 // before any require that could do async I/O).
 //
-// Background: the `opengpio` dependency implements each input "watch" as an
-// endless loop dispatched via uv_queue_work(). Every watched GPIO therefore
-// permanently occupies one libuv worker thread. With the libuv default of
-// UV_THREADPOOL_SIZE=4 only the first ~4 inputs receive edge events; any
-// additional input is silently queued and never updates until an adapter
-// restart re-shuffles which ports get a thread.
-// See https://github.com/iobroker-community-adapters/ioBroker.rpi2/issues/378
-//
-// A Raspberry Pi header exposes at most ~28 usable GPIO lines, so 64 leaves
-// plenty of headroom for every possible input watch plus the normal fs/dns
-// pool usage. Respect an explicitly configured value if the user set one.
+// Background: upstream `opengpio` ran every input "watch" as an endless task on
+// this pool, so with the default size of 4 only the first ~4 inputs ever got edge
+// events (https://github.com/iobroker-community-adapters/ioBroker.rpi2/issues/378).
+// Our fork `@garfonso/opengpio` (>= 2.1.0) gives each watch its own thread, so that
+// no longer depends on the pool size. The larger pool is kept as headroom, because
+// native modules still run blocking work on it - node-dht-sensor holds a worker for
+// up to ~2s per read, and the adapter's own fs calls share the same pool.
+// Respect an explicitly configured value if the user set one.
 if (!process.env.UV_THREADPOOL_SIZE) {
     process.env.UV_THREADPOOL_SIZE = '64';
 }

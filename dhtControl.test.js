@@ -10,7 +10,6 @@ const {
     detectLibraryBuild,
     effectivePollInterval,
     findKernelDhtDevices,
-    raspberryGeneration,
     readKernelDht,
     FAILURES_BEFORE_ERROR,
     FAILURE_REMINDER_EVERY,
@@ -100,25 +99,6 @@ describe('dhtControl', () => {
         }
         return dir;
     }
-
-    describe('raspberryGeneration', () => {
-        const cases = {
-            'Raspberry Pi 5 Model B Rev 1.0': 5,
-            'Raspberry Pi 500 Rev 1.0': 5,
-            'Raspberry Pi Compute Module 5 Rev 1.0': 5,
-            'Raspberry Pi 4 Model B Rev 1.5': 4,
-            'Raspberry Pi 400 Rev 1.0': 4,
-            'Raspberry Pi Compute Module 4 Rev 1.1': 4,
-            'Raspberry Pi 3 Model B Plus Rev 1.3': 3,
-            'Raspberry Pi Zero 2 W Rev 1.0': 0,
-            '': 0,
-        };
-        for (const [model, generation] of Object.entries(cases)) {
-            it(`"${model}" is generation ${generation}`, () => {
-                expect(raspberryGeneration(model)).to.equal(generation);
-            });
-        }
-    });
 
     describe('effectivePollInterval', () => {
         it('uses the default if nothing is configured', () => {

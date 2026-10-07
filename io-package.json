@@ -267,6 +267,60 @@
           "agree",
           "cancel"
         ]
+      },
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<4.0.0",
+            "newVersion>=4.0.0"
+          ]
+        },
+        "title": {
+          "en": "Version 4: please check your GPIOs",
+          "de": "Version 4: Bitte GPIO-Einstellungen prüfen",
+          "ru": "Версия 4: проверьте настройки GPIO",
+          "pt": "Versão 4: verifique a configuração dos GPIOs",
+          "nl": "Versie 4: controleer uw GPIO-instellingen",
+          "fr": "Version 4 : vérifiez votre configuration GPIO",
+          "it": "Versione 4: controllare la configurazione GPIO",
+          "es": "Versión 4: compruebe la configuración de los GPIO",
+          "pl": "Wersja 4: sprawdź konfigurację GPIO",
+          "uk": "Версія 4: перевірте налаштування GPIO",
+          "zh-cn": "版本 4：请检查您的 GPIO 设置"
+        },
+        "text": {
+          "en": "Version 4 changes a lot in how GPIOs and DHT sensors are handled. Most of it fixes problems: outputs start with their configured initial value right away instead of switching off and on, all inputs report changes (before, only about four did), and DHT sensors use the configured poll interval (at least 2 seconds, 30 seconds if empty) and the Linux dht11 kernel driver if it is enabled. If your setup relied on the old behaviour, please check your GPIO states and scripts after the update. Node.js 22 or newer is required.",
+          "de": "Version 4 ändert vieles an der Behandlung von GPIOs und DHT-Sensoren. Das meiste behebt Probleme: Ausgänge starten direkt mit ihrem konfigurierten Anfangswert, statt kurz aus- und wieder einzuschalten, alle Eingänge melden Änderungen (bisher nur etwa vier), und DHT-Sensoren nutzen das eingestellte Abfrageintervall (mindestens 2 Sekunden, 30 Sekunden wenn leer) sowie den Linux-Kerneltreiber dht11, falls er aktiviert ist. Falls Ihr Setup auf dem alten Verhalten aufbaut, prüfen Sie bitte nach dem Update Ihre GPIO-Datenpunkte und Skripte. Node.js 22 oder neuer ist erforderlich.",
+          "ru": "Версия 4 многое меняет в работе с GPIO и датчиками DHT. В основном это исправления: выходы сразу получают заданное начальное значение, а не выключаются и снова включаются, все входы сообщают об изменениях (раньше — только около четырёх), а датчики DHT используют заданный интервал опроса (не менее 2 секунд, 30 секунд, если не указан) и драйвер ядра Linux dht11, если он включён. Если ваша конфигурация зависела от старого поведения, проверьте после обновления состояния GPIO и скрипты. Требуется Node.js 22 или новее.",
+          "pt": "A versão 4 altera muito o tratamento dos GPIOs e dos sensores DHT. A maior parte corrige problemas: as saídas iniciam imediatamente com o valor inicial configurado, em vez de desligar e ligar de novo, todas as entradas comunicam alterações (antes, apenas cerca de quatro) e os sensores DHT usam o intervalo de leitura configurado (no mínimo 2 segundos, 30 segundos se vazio) e o driver dht11 do kernel Linux, se estiver ativado. Se a sua configuração dependia do comportamento antigo, verifique os estados GPIO e os scripts após a atualização. É necessário Node.js 22 ou superior.",
+          "nl": "Versie 4 verandert veel aan de afhandeling van GPIO's en DHT-sensoren. Het meeste lost problemen op: uitgangen starten direct met hun ingestelde beginwaarde in plaats van uit en weer aan te gaan, alle ingangen melden wijzigingen (voorheen slechts ongeveer vier) en DHT-sensoren gebruiken het ingestelde pollinginterval (minimaal 2 seconden, 30 seconden als het leeg is) en het Linux-kernelstuurprogramma dht11 als dat is ingeschakeld. Als uw opstelling op het oude gedrag vertrouwde, controleer dan na de update uw GPIO-statussen en scripts. Node.js 22 of nieuwer is vereist.",
+          "fr": "La version 4 modifie beaucoup la gestion des GPIO et des capteurs DHT. L'essentiel corrige des problèmes : les sorties démarrent directement avec leur valeur initiale configurée au lieu de s'éteindre puis se rallumer, toutes les entrées signalent leurs changements (auparavant, seulement quatre environ) et les capteurs DHT utilisent l'intervalle d'interrogation configuré (au moins 2 secondes, 30 secondes s'il est vide) ainsi que le pilote noyau Linux dht11 s'il est activé. Si votre installation dépendait de l'ancien comportement, vérifiez vos états GPIO et vos scripts après la mise à jour. Node.js 22 ou plus récent est requis.",
+          "it": "La versione 4 cambia molto nella gestione dei GPIO e dei sensori DHT. La maggior parte corregge problemi: le uscite partono subito con il valore iniziale configurato invece di spegnersi e riaccendersi, tutti gli ingressi segnalano le modifiche (prima solo circa quattro) e i sensori DHT usano l'intervallo di lettura configurato (almeno 2 secondi, 30 secondi se vuoto) e il driver del kernel Linux dht11, se attivato. Se la vostra configurazione dipendeva dal vecchio comportamento, controllate gli stati GPIO e gli script dopo l'aggiornamento. È richiesto Node.js 22 o superiore.",
+          "es": "La versión 4 cambia mucho el manejo de los GPIO y de los sensores DHT. La mayor parte corrige problemas: las salidas arrancan directamente con su valor inicial configurado en lugar de apagarse y volver a encenderse, todas las entradas informan de sus cambios (antes solo unas cuatro) y los sensores DHT usan el intervalo de consulta configurado (al menos 2 segundos, 30 segundos si está vacío) y el controlador dht11 del kernel de Linux si está activado. Si su configuración dependía del comportamiento anterior, compruebe los estados GPIO y los scripts después de la actualización. Se requiere Node.js 22 o superior.",
+          "pl": "Wersja 4 wiele zmienia w obsłudze GPIO i czujników DHT. Większość zmian usuwa problemy: wyjścia od razu startują ze skonfigurowaną wartością początkową zamiast wyłączać się i ponownie włączać, wszystkie wejścia zgłaszają zmiany (wcześniej tylko około czterech), a czujniki DHT używają skonfigurowanego interwału odczytu (co najmniej 2 sekundy, 30 sekund, jeśli pole jest puste) oraz sterownika jądra Linux dht11, jeśli jest włączony. Jeśli Twoja konfiguracja opierała się na starym zachowaniu, sprawdź po aktualizacji stany GPIO i skrypty. Wymagany jest Node.js 22 lub nowszy.",
+          "uk": "Версія 4 суттєво змінює роботу з GPIO та датчиками DHT. Здебільшого це виправлення: виходи одразу отримують налаштоване початкове значення, а не вимикаються й знову вмикаються, усі входи повідомляють про зміни (раніше — лише близько чотирьох), а датчики DHT використовують налаштований інтервал опитування (щонайменше 2 секунди, 30 секунд, якщо не вказано) і драйвер ядра Linux dht11, якщо його ввімкнено. Якщо ваша конфігурація залежала від старої поведінки, після оновлення перевірте стани GPIO та скрипти. Потрібен Node.js 22 або новіший.",
+          "zh-cn": "版本 4 对 GPIO 和 DHT 传感器的处理做了大量修改，主要是修复问题：输出会直接以配置的初始值启动，而不再先关闭再打开；所有输入都会报告变化（以前只有大约四个）；DHT 传感器会使用配置的轮询间隔（至少 2 秒，留空时为 30 秒），并在启用时使用 Linux dht11 内核驱动。如果您的设置依赖旧的行为，请在更新后检查 GPIO 状态和脚本。需要 Node.js 22 或更高版本。"
+        },
+        "link": "https://github.com/iobroker-community-adapters/ioBroker.rpi2#gpios",
+        "linkText": {
+          "en": "GPIO documentation",
+          "de": "GPIO-Dokumentation",
+          "ru": "Документация по GPIO",
+          "pt": "Documentação dos GPIO",
+          "nl": "GPIO-documentatie",
+          "fr": "Documentation GPIO",
+          "it": "Documentazione GPIO",
+          "es": "Documentación de GPIO",
+          "pl": "Dokumentacja GPIO",
+          "uk": "Документація GPIO",
+          "zh-cn": "GPIO 文档"
+        },
+        "level": "warn",
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
       }
     ]
   },

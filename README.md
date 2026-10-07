@@ -140,8 +140,7 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 4.0.0 (2026-10-07)
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
@@ -174,10 +173,6 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 * (Garfonso) add an option to invert true/false mapping to 1/0.
 * (Garfonso) Allow multiple instances of this adapter per host.
 * (Garfonso) tried to improve initialization of GPIO inputs.
-
-### 2.3.2 (2025-02-06)
-* (asgothian) added support for NVMe temperature (needs additional configuration, see README)
-* (Garfonso) fixed inital values for outputs.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

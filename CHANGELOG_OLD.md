@@ -1,4 +1,8 @@
 # Older Changes
+## 2.3.2 (2025-02-06)
+* (asgothian) added support for NVMe temperature (needs additional configuration, see README)
+* (Garfonso) fixed inital values for outputs.
+
 ## 2.3.1 (2025-01-06)
 * (Garfonso) fixed: GPIO library failed to load after recent dependency update.
 

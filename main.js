@@ -167,7 +167,8 @@ class Rpi2 extends utils.Adapter {
 
         const stateName = `gpio.${data.gpio}.state`;
         if (data.isGpio) {
-            const obj = {
+            // extendObject creates one if it doesn't exist - the same below
+            await this.extendObject(stateName, {
                 common: {
                     name: `GPIO ${data.gpio}`,
                     type: 'boolean',
@@ -177,9 +178,7 @@ class Rpi2 extends utils.Adapter {
                 },
                 native: {},
                 type: 'state',
-            };
-            // extendObject creates one if it doesn't exist - the same below
-            await this.extendObject(stateName, obj);
+            });
         } else {
             await this.delObjectAsync(stateName);
         }
@@ -203,7 +202,7 @@ class Rpi2 extends utils.Adapter {
         for (const eventName of buttonEvents) {
             const stateName = `gpio.${data.gpio}.${eventName}`;
             if (data.isButton) {
-                const obj = {
+                await this.extendObject(stateName, {
                     common: {
                         name: `GPIO ${data.gpio} ${eventName}`,
                         type: 'boolean',
@@ -213,8 +212,7 @@ class Rpi2 extends utils.Adapter {
                     },
                     native: {},
                     type: 'state',
-                };
-                await this.extendObject(stateName, obj);
+                });
             } else {
                 //await this.delObjectAsync(stateName);
                 //Do not delete 'state' as this is used above. TODO: clean up code, when decided if buttons are ever supported.
@@ -230,7 +228,7 @@ class Rpi2 extends utils.Adapter {
      */
     async syncPortTempHum(data) {
         if (data.isTempHum) {
-            const obj = {
+            await this.extendObject(temperatureStateName(data.gpio), {
                 common: {
                     name: `GPIO ${data.gpio} temperature`,
                     type: 'number',
@@ -240,15 +238,14 @@ class Rpi2 extends utils.Adapter {
                 },
                 native: {},
                 type: 'state',
-            };
-            await this.extendObject(temperatureStateName(data.gpio), obj);
+            });
         } else {
             await this.delObjectAsync(temperatureStateName(data.gpio));
         }
         if (data.isTempHum) {
-            const obj = {
+            await this.extendObject(humidityStateName(data.gpio), {
                 common: {
-                    name: `GPIO ${data.gpio} temperature`,
+                    name: `GPIO ${data.gpio} humidity`,
                     type: 'number',
                     role: 'value.humidity',
                     read: true,
@@ -256,8 +253,7 @@ class Rpi2 extends utils.Adapter {
                 },
                 native: {},
                 type: 'state',
-            };
-            await this.extendObject(humidityStateName(data.gpio), obj);
+            });
         } else {
             await this.delObjectAsync(humidityStateName(data.gpio));
         }
@@ -272,7 +268,7 @@ class Rpi2 extends utils.Adapter {
     async syncPortDirection(data) {
         const stateName = `gpio.${data.gpio}.isInput`;
         this.log.debug(`Creating ${stateName}`);
-        const obj = {
+        await this.extendObject(stateName, {
             common: {
                 name: `GPIO ${data.gpio} direction`,
                 type: 'boolean',
@@ -282,8 +278,7 @@ class Rpi2 extends utils.Adapter {
             },
             native: {},
             type: 'state',
-        };
-        await this.extendObject(stateName, obj);
+        });
         await this.setState(stateName, data.isInput, true);
     }
 

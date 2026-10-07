@@ -19,13 +19,13 @@ describe('parser definitions', () => {
         const fanRegexp = new RegExp(parsers.temperature.fan_activity.regexp);
         const match = fanRegexp.exec('3200\n');
         expect(match).to.exist;
-        expect(match[1]).to.equal('3200');
+        expect(match?.[1]).to.equal('3200');
     });
 
     it('should capture fallback fan value when fan hardware is unavailable', () => {
         const fanRegexp = new RegExp(parsers.temperature.fan_activity.regexp);
         const match = fanRegexp.exec('0\n');
         expect(match).to.exist;
-        expect(match[1]).to.equal('0');
+        expect(match?.[1]).to.equal('0');
     });
 });

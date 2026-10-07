@@ -25,6 +25,9 @@
         // "noUnusedParameters": true,
         "useUnknownInCatchVariables": false,
 
+        // @tsconfig/node20 restricts "types" to node; the *.test.js files also need the mocha globals
+        "types": ["node", "mocha"],
+
     },
     "include": [
         "**/*.js",
@@ -32,6 +35,7 @@
     ],
     "exclude": [
         "node_modules/**",
-        "widgets/**"
+        "widgets/**",
+        "admin/words.js"
     ]
 }

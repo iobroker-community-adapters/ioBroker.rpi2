@@ -4,7 +4,21 @@
 
 import { native } from '../io-package.json';
 
-type _AdapterConfig = typeof native;
+// One row of the GPIO table in admin/jsonConfig.json.
+// io-package.json only holds an empty default array, so the row type is declared here.
+interface GpioSetting {
+    gpio: number;
+    configuration: 'in' | 'out' | 'outlow' | 'outhigh' | 'button' | 'dht11' | 'dht22';
+    debounceOrPoll?: number;
+    pullUp?: boolean;
+    pullDown?: boolean;
+    invert?: boolean;
+    label?: string;
+}
+
+type _AdapterConfig = Omit<typeof native, 'gpioSettings'> & {
+    gpioSettings: GpioSetting[];
+};
 
 // Augment the globally declared type ioBroker.AdapterConfig
 declare global {

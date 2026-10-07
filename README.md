@@ -101,9 +101,37 @@ For instance PI2:
 ```
 
 ## DHTxx/AM23xx Sensors
-You can read from DHT11, DHT22 and AM2302 temperature/humidity sensors.
+You can read from DHT11, DHT21 (AM2301), DHT22 and AM2302 temperature/humidity sensors.
 
 Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https://www.npmjs.com/package/node-dht-sensor) package page. Multiple sensors can be connected to *multiple* pins (this is *not* a bus system) as discussed.
+
+In the GPIO table, select `DHT11` for DHT11 sensors and `DHT22/AM23xx` for all others, and enter the poll interval in milliseconds into the *Debounce / Poll* column. The sensors cannot be read faster than every 2000 ms (DHT11: 1000 ms); without a value, the adapter polls every 30000 ms.
+
+The adapter reads a sensor in one of two ways and logs at startup which one it uses for each sensor.
+
+### Linux kernel driver (recommended, works on every Raspberry Pi including the Pi 5)
+
+Linux has its own driver for these sensors (it handles DHT11, DHT21, DHT22 and AM2302 alike). Enable it for each sensor by adding a line to `/boot/firmware/config.txt` (`/boot/config.txt` on older systems) and reboot:
+
+```
+dtoverlay=dht11,gpiopin=17
+```
+
+`gpiopin` is the GPIO (BCM) number, the same as in the adapter's GPIO table. You can check that it works with `cat /sys/bus/iio/devices/iio:device*/in_temp_input` (the value is in 1/1000 °C). The adapter detects the driver and uses it automatically, there is nothing else to configure.
+
+### node-dht-sensor
+
+Without the kernel driver, the adapter uses node-dht-sensor. On Raspberry Pi 1 to 4 this works as installed.
+
+On a **Raspberry Pi 5** (also Pi 500 and Compute Module 5), the default build of node-dht-sensor cannot work, because it accesses GPIO registers the Pi 5 does not have. Either use the kernel driver above, or rebuild node-dht-sensor with libgpiod support:
+
+```bash
+sudo apt-get install -y build-essential libgpiod-dev pkg-config
+cd /opt/iobroker
+sudo -u iobroker -H npm rebuild node-dht-sensor --use_libgpiod=true
+```
+
+Then restart the adapter. `pkg-config` is required: without it, the build assumes the outdated libgpiod 1 and fails on current systems. Whenever node-dht-sensor is reinstalled or rebuilt later (for example after a Node.js upgrade), it gets the default build again - the adapter then logs an error at startup and the rebuild has to be repeated. The kernel driver does not have this problem.
 
 
 ## Changelog
@@ -122,6 +150,9 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 - (Garfonso/Claude): **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
 - (Garfonso/Claude): Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
 - (Garfonso/Claude): **FIXED**: The fan parser unit test matched the old single-hwmon path and failed since the fan reading fix.
+- (Garfonso/Claude): **FIXED**: DHT sensors ignored the configured poll interval (with no interval they were read continuously, so every read failed) and every sensor's timer read all sensors.
+- (Garfonso/Claude): **NEW**: DHT sensors are read through the Linux dht11 kernel driver if it is enabled (`dtoverlay=dht11,gpiopin=<n>`). This makes them work on a Raspberry Pi 5 without rebuilding node-dht-sensor (#406).
+- (Garfonso/Claude): **ENHANCED**: DHT sensor problems are logged with their cause and how to fix them; the startup log shows how each sensor is read.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version

@@ -34,6 +34,7 @@ const utils = require('@iobroker/adapter-core');
 const parsers = require('./lib/parsers.json');
 const { buttonEvents, GpioControl } = require('./lib/gpioControl');
 const { convertConfig } = require('./lib/configConverter');
+const { DhtControl, temperatureStateName, humidityStateName } = require('./lib/dhtControl');
 
 const errorsLogged = {};
 const intervalTimers = [];
@@ -133,7 +134,10 @@ class Rpi2 extends utils.Adapter {
             if (this.gpioControl) {
                 await this.gpioControl.setupGpio(gpioPorts, buttonPorts);
             }
-            setupDht(this, dhtPorts);
+            if (dhtPorts.length) {
+                this.dhtControl = new DhtControl(this);
+                await this.dhtControl.setup(dhtPorts);
+            }
         } else {
             this.log.info('GPIO ports are not configured');
         }
@@ -305,7 +309,10 @@ class Rpi2 extends utils.Adapter {
         try {
             // Cancel any intervals
             for (const interval of intervalTimers) {
-                clearInterval(interval);
+                this.clearInterval(interval);
+            }
+            if (this.dhtControl) {
+                this.dhtControl.unload();
             }
             if (this.gpioControl) {
                 await this.gpioControl.unload();
@@ -337,7 +344,7 @@ const table = {};
 async function main(adapter) {
     if (anyParserConfigEnabled(adapter)) {
         intervalTimers.push(
-            setInterval(() => {
+            adapter.setInterval(() => {
                 parser(adapter);
             }, adapter.config.interval || 60000),
         );
@@ -568,59 +575,6 @@ async function parser(adapter) {
                     }
                 }
             }
-        }
-    }
-}
-
-function temperatureStateName(port) {
-    return `gpio.${port}.temperature`;
-}
-function humidityStateName(port) {
-    return `gpio.${port}.humidity`;
-}
-
-// Setup DHTxx/AM23xx sensors
-function setupDht(adapter, dhtPorts) {
-    if (dhtPorts.length === 0) {
-        return;
-    }
-
-    // Initialise ports, keeping track of those that worked with type
-    const dhtInitd = [];
-    for (const gpioSetting of dhtPorts) {
-        const type = gpioSetting.configuration === 'dht11' ? 11 : 22;
-        try {
-            const sensorLib = require('node-dht-sensor');
-            sensorLib.initialize(type, gpioSetting.gpio);
-            dhtInitd[gpioSetting.gpio] = [type];
-
-            let pollInterval = gpioSetting.debounceOrPoll;
-            if (pollInterval === 0) {
-                adapter.log.warn('DHTxx/AM23xx configured but polling disabled');
-            }
-            if (pollInterval < 350) {
-                adapter.log.warn(`DHTxx/AM23xx polling interval seems too short (${pollInterval}) - setting to 350ms`);
-                pollInterval = 350;
-            }
-            intervalTimers.push(
-                setInterval(async () => {
-                    for (const [port, type] of Object.entries(dhtInitd)) {
-                        sensorLib.read(type, port, async function (err, temperature, humidity) {
-                            if (err) {
-                                adapter.log.error(`Failed to read DHTxx/AM23xx: ${type}/${port}`);
-                            } else {
-                                adapter.log.debug(
-                                    `Read DHTxx/AM23xx: ${type}/${port} : ${temperature}°C, humidity: ${humidity}%`,
-                                );
-                                await adapter.setStateChanged(temperatureStateName(port), temperature, true);
-                                await adapter.setStateChanged(humidityStateName(port), humidity, true);
-                            }
-                        });
-                    }
-                }, gpioSetting.debounceOrPoll),
-            );
-        } catch (err) {
-            adapter.log.error(`Failed to initialise DHTxx/AM23xx: ${type}/${gpioSetting.gpio}: ${err}`);
         }
     }
 }

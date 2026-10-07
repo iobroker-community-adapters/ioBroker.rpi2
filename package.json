@@ -28,9 +28,9 @@
     "node": ">=22"
   },
   "dependencies": {
+    "@garfonso/opengpio": "^2.1.0",
     "@iobroker/adapter-core": "^3.4.3",
-    "ci": "^2.3.0",
-    "opengpio": "^2.0.2"
+    "ci": "^2.3.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",

@@ -9,6 +9,25 @@
  * Created with @iobroker/create-adapter v2.6.5
  */
 
+// Enlarge the libuv thread pool BEFORE anything triggers its lazy initialisation
+// (i.e. before the first async fs/dns/crypto operation - hence at the very top,
+// before any require that could do async I/O).
+//
+// Background: the `opengpio` dependency implements each input "watch" as an
+// endless loop dispatched via uv_queue_work(). Every watched GPIO therefore
+// permanently occupies one libuv worker thread. With the libuv default of
+// UV_THREADPOOL_SIZE=4 only the first ~4 inputs receive edge events; any
+// additional input is silently queued and never updates until an adapter
+// restart re-shuffles which ports get a thread.
+// See https://github.com/iobroker-community-adapters/ioBroker.rpi2/issues/378
+//
+// A Raspberry Pi header exposes at most ~28 usable GPIO lines, so 64 leaves
+// plenty of headroom for every possible input watch plus the normal fs/dns
+// pool usage. Respect an explicitly configured value if the user set one.
+if (!process.env.UV_THREADPOOL_SIZE) {
+    process.env.UV_THREADPOOL_SIZE = '64';
+}
+
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');

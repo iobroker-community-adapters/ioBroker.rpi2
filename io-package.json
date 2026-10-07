@@ -159,7 +159,8 @@
       "linux": [
         "build-essential",
         "python",
-        "libgpiod-dev"
+        "libgpiod-dev",
+        "pkg-config"
       ]
     },
     "dependencies": [

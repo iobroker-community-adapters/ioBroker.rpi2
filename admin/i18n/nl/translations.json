@@ -12,7 +12,6 @@
     "Monitoring": "Toezicht",
     "GPIOs": "GPIO's",
     "GPIOConfigExplanation": "Voeg hier GPIO-configuraties toe. Druk op +, selecteer of invoer of uitvoer enzovoort. Poortnummers hebben betrekking op het Broadcom SOC-kanaal, niet op fysieke pinnen. Voer voor invoer een debouncetijd in milliseconden in de kolom Debounce / Poll in. Voor DHT11/22-temperatuursensoren is de waarde in die kolom het poll-interval.",
-    "pullupwarning": "WAARSCHUWING: Pull up / Pull down wordt momenteel niet echt ondersteund. Het zou in de toekomst moeten gebeuren, maar dat is in het verleden nooit zo geweest. Zorg ervoor dat je niets kapot maakt.",
     "GPIO Number": "GPIO-nummer",
     "Type": "Type",
     "in": "Invoer",
@@ -21,11 +20,14 @@
     "outlow": "Uitgang, beginwaarde 0",
     "DHT11": "DHT11 temperatuur- en vochtigheidssensor",
     "DHT22": "DHT22/AM23xx temperatuur- en vochtigheidssensor",
-    "Debounce / Poll (ms)": "Debounce/peiling (ms)",
-    "Pull Up": "Trek omhoog",
-    "Pull Down": "Trek naar beneden",
+    "Debounce / Poll (ms)": "Ontdendering / Poll (ms)",
+    "Pull Up": "Pull-up",
+    "Pull Down": "Pull-down",
     "Label": "Label",
     "GPIOVauleERRORText": "Fout: GPIO-nummer mag niet leeg zijn, moet uniek zijn en tussen 2 en 27 liggen.",
     "Invert": "Omkeren",
-    "invertTooltip": "Meestal True -> GPIO 1, False -> GPIO 0. Als u wilt dat het dat omkeert, vink dan dit vakje aan."
+    "invertTooltip": "Meestal True -> GPIO 1, False -> GPIO 0. Als u wilt dat het dat omkeert, vink dan dit vakje aan.",
+    "pullUpTooltip": "Schakelt de interne pull-up-weerstand in. De ingang is dan actief laag: hij leest true zolang hij met GND verbonden is, bijvoorbeeld via een gesloten schakelaar.",
+    "pullDownTooltip": "Schakelt de interne pull-down-weerstand in. De ingang leest true zolang hij met 3,3 V verbonden is.",
+    "debounceTooltip": "Ingangen: een wijziging wordt pas gemeld als het niveau zo lang stabiel is geweest, bijvoorbeeld 20-50 ms voor schakelaars. DHT-sensoren: pollinterval."
 }

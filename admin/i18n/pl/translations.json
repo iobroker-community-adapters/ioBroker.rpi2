@@ -12,7 +12,6 @@
     "Monitoring": "Monitorowanie",
     "GPIOs": "GPIO",
     "GPIOConfigExplanation": "Dodaj tutaj konfiguracje GPIO. Naciśnij +, wybierz wejście lub wyjście i tak dalej. Numery portów odnoszą się do kanału Broadcom SOC, a nie do fizycznych pinów. W przypadku wejść wprowadź czas odbicia w milisekundach w kolumnie Odbicie/odpytywanie. Dla czujników temperatury DHT11/22 wartość w tej kolumnie będzie interwałem odpytywania.",
-    "pullupwarning": "OSTRZEŻENIE: Funkcja podciągania i opuszczania nie jest obecnie obsługiwana. Powinno to nastąpić w przyszłości, ale nigdy tak nie było w przeszłości. Pamiętaj, aby niczego nie złamać.",
     "GPIO Number": "Numer GPIO",
     "Type": "Typ",
     "in": "Wejście",
@@ -21,11 +20,14 @@
     "outlow": "Wyjście, wartość początkowa 0",
     "DHT11": "Czujnik temperatury i wilgotności DHT11",
     "DHT22": "Czujnik temperatury i wilgotności DHT22/AM23xx",
-    "Debounce / Poll (ms)": "Odrzucenie/ankieta (ms)",
-    "Pull Up": "Zatrzymać się",
-    "Pull Down": "Rozbierać",
+    "Debounce / Poll (ms)": "Eliminacja drgań / Odczyt (ms)",
+    "Pull Up": "Pull-up",
+    "Pull Down": "Pull-down",
     "Label": "Etykieta",
     "GPIOVauleERRORText": "Błąd: Numer GPIO nie może być pusty, musi być unikalny i zawierać się w przedziale od 2 do 27.",
     "Invert": "Odwracać",
-    "invertTooltip": "Zwykle True -> GPIO 1, False -> GPIO 0. Jeśli chcesz, aby to odwrócił, zaznacz to pole."
+    "invertTooltip": "Zwykle True -> GPIO 1, False -> GPIO 0. Jeśli chcesz, aby to odwrócił, zaznacz to pole.",
+    "pullUpTooltip": "Włącza wewnętrzny rezystor podciągający (pull-up). Wejście jest wtedy aktywne stanem niskim: odczytuje true, dopóki jest połączone z GND, np. przez zamknięty przełącznik.",
+    "pullDownTooltip": "Włącza wewnętrzny rezystor ściągający (pull-down). Wejście odczytuje true, dopóki jest połączone z 3,3 V.",
+    "debounceTooltip": "Wejścia: zmiana jest zgłaszana dopiero, gdy poziom był stabilny przez ten czas, np. 20-50 ms dla przełączników. Czujniki DHT: interwał odczytu."
 }

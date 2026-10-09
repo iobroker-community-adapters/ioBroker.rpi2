@@ -119,20 +119,6 @@
                     "lg": 12,
                     "xl": 12
                 },
-                "_pullUpWarning": {
-                    "type": "staticText",
-                    "text": "pullupwarning",
-                    "style": {
-                        "color": "red",
-                        "font-size": "larger"
-                    },
-                    "newLine": true,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12
-                },
                 "gpioSettings": {
                     "type": "table",
                     "newLine": true,
@@ -197,6 +183,7 @@
                             "type": "number",
                             "attr": "debounceOrPoll",
                             "title": "Debounce / Poll (ms)",
+                            "tooltip": "debounceTooltip",
                             "defaultFunc": "['dht11', 'dht22'].includes(data.configuration) ? 350 : 0",
                             "hidden": "!['in', 'dht11', 'dht22'].includes(data.configuration)",
                             "min": 0,
@@ -206,14 +193,18 @@
                             "type": "checkbox",
                             "attr": "pullUp",
                             "title": "Pull Up",
+                            "tooltip": "pullUpTooltip",
                             "hidden": "data.configuration !== 'in'",
+                            "disabled": "!!data.pullDown",
                             "default": false
                         },
                         {
                             "type": "checkbox",
                             "attr": "pullDown",
                             "title": "Pull Down",
-                            "hidden": "true || !['out', 'outlow','outhigh'].includes(data.configuration)",
+                            "tooltip": "pullDownTooltip",
+                            "hidden": "data.configuration !== 'in'",
+                            "disabled": "!!data.pullUp",
                             "default": false
                         },
                         {

@@ -12,7 +12,6 @@
     "Monitoring": "Monitoramento",
     "GPIOs": "GPIOs",
     "GPIOConfigExplanation": "Adicione configurações GPIO aqui. Pressione +, selecione se é entrada ou saída e assim por diante. Os números das portas estão relacionados ao canal SOC da Broadcom, não aos pinos físicos. Para entradas, insira um tempo de rejeição em milissegundos na coluna Debounce/Poll. Para sensores de temperatura DHT11/22, o valor nessa coluna será o intervalo de pesquisa.",
-    "pullupwarning": "AVISO: Pull up / Pull down não é realmente suportado atualmente. Deveria estar no futuro, mas nunca esteve no passado. Certifique-se de não quebrar nada.",
     "GPIO Number": "Número GPIO",
     "Type": "Tipo",
     "in": "Entrada",
@@ -21,11 +20,14 @@
     "outlow": "Saída, valor inicial 0",
     "DHT11": "Sensor de temperatura e umidade DHT11",
     "DHT22": "Sensor de temperatura e umidade DHT22/AM23xx",
-    "Debounce / Poll (ms)": "Debounce/Enquete (ms)",
-    "Pull Up": "Puxe para cima",
-    "Pull Down": "Puxar para baixo",
+    "Debounce / Poll (ms)": "Debounce / Consulta (ms)",
+    "Pull Up": "Pull-up",
+    "Pull Down": "Pull-down",
     "Label": "Rótulo",
     "GPIOVauleERRORText": "Erro: o número GPIO não deve estar vazio, deve ser único e estar entre 2 e 27.",
     "Invert": "Invertido",
-    "invertTooltip": "Geralmente true -> gpio 1, false -> gpio 0. Se você quiser invertê -lo, verifique esta caixa."
+    "invertTooltip": "Geralmente true -> gpio 1, false -> gpio 0. Se você quiser invertê -lo, verifique esta caixa.",
+    "pullUpTooltip": "Liga a resistência pull-up interna. A entrada fica então ativa em nível baixo: lê true enquanto estiver ligada ao GND, por exemplo por um interruptor fechado.",
+    "pullDownTooltip": "Liga a resistência pull-down interna. A entrada lê true enquanto estiver ligada a 3,3 V.",
+    "debounceTooltip": "Entradas: uma alteração só é comunicada depois de o nível estar estável durante este tempo, por exemplo 20-50 ms para interruptores. Sensores DHT: intervalo de consulta."
 }

@@ -46,7 +46,7 @@ please install the following packages manually:
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential python3
+sudo apt install -y build-essential
 sudo apt install -y libgpiod-dev
 sudo apt install -y pkg-config
 ```
@@ -102,6 +102,11 @@ For instance PI2:
 +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
 
+### Inputs
+- **Pull Up** / **Pull Down** switch on the internal pull resistor of the input. With *Pull Up*, the input is active low: connect a switch between the GPIO and GND, and the state is `true` while the switch is closed. With *Pull Down*, connect the switch to 3.3 V instead; the state is `true` while it is closed.
+  Without either, the pull resistor is left as it is - the default of the Raspberry Pi (pull-up for GPIO 0-8, pull-down for all others) or what you set in `config.txt`, e.g. `gpio=17=pu`.
+- **Debounce / Poll (ms)**: a change is only reported once the input has been stable for this time, e.g. 20-50 ms for switches and buttons. The kernel does this; if your system does not support it, the adapter does it itself and logs a message.
+
 ## DHTxx/AM23xx Sensors
 You can read from DHT11, DHT21 (AM2301), DHT22 and AM2302 temperature/humidity sensors.
 
@@ -142,21 +147,27 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### 5.0.0-alpha.0 (2026-10-09)
+- (Garfonso/Claude) **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
+- (Garfonso/Claude) **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.
+- (Garfonso/Claude) **ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.
+- (Garfonso/Claude) Removed `python` from the OS dependencies, there is no such package on current Debian.
+
 ### 4.0.0 (2026-10-07)
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
 - (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
-- (Garfonso/Claude): Improve GPIO handling.
-- (Garfonso/Claude): **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
-- (Garfonso/Claude): Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
-- (Garfonso/Claude): **FIXED**: The fan parser unit test matched the old single-hwmon path and failed since the fan reading fix.
-- (Garfonso/Claude): **FIXED**: DHT sensors ignored the configured poll interval (with no interval they were read continuously, so every read failed) and every sensor's timer read all sensors.
-- (Garfonso/Claude): **NEW**: DHT sensors are read through the Linux dht11 kernel driver if it is enabled (`dtoverlay=dht11,gpiopin=<n>`). This makes them work on a Raspberry Pi 5 without rebuilding node-dht-sensor (#406).
-- (Garfonso/Claude): **ENHANCED**: DHT sensor problems are logged with their cause and how to fix them; the startup log shows how each sensor is read.
-- (Garfonso/Claude): **FIXED**: Raspberry Pi 500 and Compute Module 5 are recognised as Raspberry Pi 5 boards and use the same GPIO chip.
-- (Garfonso/Claude): **FIXED**: The humidity object of a DHT sensor was named "temperature".
-- (Garfonso/Claude): **BREAKING**: GPIO and DHT sensor handling changed in several places (see above). This mostly fixes problems, but please check your GPIO setup after updating.
+- (Garfonso/Claude) Improve GPIO handling.
+- (Garfonso/Claude) **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
+- (Garfonso/Claude) Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
+- (Garfonso/Claude) **FIXED**: The fan parser unit test matched the old single-hwmon path and failed since the fan reading fix.
+- (Garfonso/Claude) **FIXED**: DHT sensors ignored the configured poll interval (with no interval they were read continuously, so every read failed) and every sensor's timer read all sensors.
+- (Garfonso/Claude) **NEW**: DHT sensors are read through the Linux dht11 kernel driver if it is enabled (`dtoverlay=dht11,gpiopin=<n>`). This makes them work on a Raspberry Pi 5 without rebuilding node-dht-sensor (#406).
+- (Garfonso/Claude) **ENHANCED**: DHT sensor problems are logged with their cause and how to fix them; the startup log shows how each sensor is read.
+- (Garfonso/Claude) **FIXED**: Raspberry Pi 500 and Compute Module 5 are recognised as Raspberry Pi 5 boards and use the same GPIO chip.
+- (Garfonso/Claude) **FIXED**: The humidity object of a DHT sensor was named "temperature".
+- (Garfonso/Claude) **BREAKING**: GPIO and DHT sensor handling changed in several places (see above). This mostly fixes problems, but please check your GPIO setup after updating.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version
@@ -168,13 +179,6 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 ### 3.0.0 (2025-11-28)
 * (@klein0r) NodeJS 20.x (or newer) is required
 * (@klein0r) Updated opengpio to v2 (works on Debian trixie)
-
-### 2.4.0 (2025-03-06)
-* (Garfonso) read the current state of GPIO outputs during adapter startup.
-* (Garfonso) re-read GPIO input, if set by the user (with ack=false).
-* (Garfonso) add an option to invert true/false mapping to 1/0.
-* (Garfonso) Allow multiple instances of this adapter per host.
-* (Garfonso) tried to improve initialization of GPIO inputs.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

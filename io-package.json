@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "4.0.0",
+    "version": "5.0.0-alpha.0",
     "news": {
       "5.0.0-alpha.0": {
         "en": "**BREAKING**: 'Pull Up' and 'Pull Down' switch on the internal pull resistors of inputs (#31). Before, 'Pull Up' only inverted the value; it still does. If you used 'Pull Up' just to invert an input that is switched to 3.3 V, the input now stays high: untick 'Pull Up' and tick 'Invert' instead. Also check inputs with 'Pull Up' and an external pull-down resistor.\n**BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.\n**ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.\nRemoved `python` from the OS dependencies, there is no such package on current Debian.",
@@ -93,19 +93,6 @@
         "pl": "dodane wsparcie dla temperatury NVMe (wymaga dodatkowej konfiguracji, patrz README)\nstałe wartości wewnętrzne dla wyjść.",
         "uk": "додана підтримка температури NVMe (при додатковій конфігурації див. README)\nфіксовані значення для виходу.",
         "zh-cn": "添加对 NVMe 温度的支持( 需要额外的配置, 请参见 README)\n产出的固定实值."
-      },
-      "2.3.1": {
-        "en": "fixed: GPIO library failed to load after recent dependency update.",
-        "de": "behoben: Die GPIO-Bibliothek konnte nach dem aktuellen Abhängigkeitsupdate nicht geladen werden.",
-        "ru": "фиксированный: библиотека GPIO не загрузилась после недавнего обновления зависимости.",
-        "pt": "corrigido: Biblioteca GPIO não conseguiu carregar após atualização recente de dependência.",
-        "nl": "vast: GPIO-bibliotheek kon niet worden geladen na recente afhankelijkheidsupdate.",
-        "fr": "corrigé : la bibliothèque GPIO n'a pas réussi à se charger après la mise à jour récente de la dépendance.",
-        "it": "fisso: la libreria GPIO non è riuscita a caricare dopo il recente aggiornamento della dipendenza.",
-        "es": "fijo: la biblioteca GPIO no se carga después de la actualización reciente de dependencia.",
-        "pl": "stałe: biblioteka GPIO nie wczytała się po ostatniej aktualizacji zależności.",
-        "uk": "виправлено: Бібліотека GPIO не вдалося завантажити після останнього оновлення залежності.",
-        "zh-cn": "固定: GPIO 库在最近依赖更新后无法加载 ."
       }
     },
     "titleLang": {

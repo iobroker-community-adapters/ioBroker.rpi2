@@ -147,7 +147,7 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.0.0-alpha.0 (2026-10-09)
 - (Garfonso/Claude) **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
 - (Garfonso/Claude) **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.
 - (Garfonso/Claude) **ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.
@@ -179,13 +179,6 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 ### 3.0.0 (2025-11-28)
 * (@klein0r) NodeJS 20.x (or newer) is required
 * (@klein0r) Updated opengpio to v2 (works on Debian trixie)
-
-### 2.4.0 (2025-03-06)
-* (Garfonso) read the current state of GPIO outputs during adapter startup.
-* (Garfonso) re-read GPIO input, if set by the user (with ack=false).
-* (Garfonso) add an option to invert true/false mapping to 1/0.
-* (Garfonso) Allow multiple instances of this adapter per host.
-* (Garfonso) tried to improve initialization of GPIO inputs.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

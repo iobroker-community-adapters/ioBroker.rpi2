@@ -102,6 +102,11 @@ For instance PI2:
 +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
 
+### Inputs
+- **Pull Up** / **Pull Down** switch on the internal pull resistor of the input. With *Pull Up*, the input is active low: connect a switch between the GPIO and GND, and the state is `true` while the switch is closed. With *Pull Down*, connect the switch to 3.3 V instead; the state is `true` while it is closed.
+  Without either, the pull resistor is left as it is - the default of the Raspberry Pi (pull-up for GPIO 0-8, pull-down for all others) or what you set in `config.txt`, e.g. `gpio=17=pu`.
+- **Debounce / Poll (ms)**: a change is only reported once the input has been stable for this time, e.g. 20-50 ms for switches and buttons. The kernel does this; if your system does not support it, the adapter does it itself and logs a message.
+
 ## DHTxx/AM23xx Sensors
 You can read from DHT11, DHT21 (AM2301), DHT22 and AM2302 temperature/humidity sensors.
 
@@ -142,6 +147,12 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Garfonso/Claude): **NEW**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value. It still does, so states stay the same - but if you used *Pull Up* together with an external pull-down resistor, please check your input.
+- (Garfonso/Claude): **CHANGED**: Inputs are debounced by the kernel. A change is now reported once the input has been stable for the debounce time, instead of right away followed by a pause. Values are therefore delayed by the debounce time, but no longer get stuck on a short glitch.
+- (Garfonso/Claude): **ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.
+- (Garfonso/Claude): Removed `python` from the OS dependencies, there is no such package on current Debian.
+
 ### 4.0.0 (2026-10-07)
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now

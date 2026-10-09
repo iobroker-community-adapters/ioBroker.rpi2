@@ -12,7 +12,6 @@
     "Monitoring": "Surveillance",
     "GPIOs": "GPIO",
     "GPIOConfigExplanation": "Ajoutez des configurations GPIO ici. Appuyez sur +, sélectionnez si entrée ou sortie et ainsi de suite. Les numéros de port concernent le canal Broadcom SOC et non les broches physiques. Pour les entrées, entrez un temps anti-rebond en millisecondes dans la colonne Anti-rebond / Sondage. Pour les capteurs de température DHT11/22, la valeur dans cette colonne sera l'intervalle d'interrogation.",
-    "pullupwarning": "AVERTISSEMENT : Pull up / Pull down n'est pas vraiment pris en charge actuellement. Cela devrait être le cas dans le futur, mais cela ne l’a jamais été dans le passé. Assurez-vous de ne rien casser.",
     "GPIO Number": "Numéro GPIO",
     "Type": "Type",
     "in": "Saisir",
@@ -27,5 +26,8 @@
     "Label": "Étiquette",
     "GPIOVauleERRORText": "Erreur : Le numéro GPIO ne doit pas être vide, doit être unique et compris entre 2 et 27.",
     "Invert": "Inverser",
-    "invertTooltip": "Habituellement vrai -> gpio 1, false -> gpio 0. Si vous voulez qu'il l'inverse, cochez cette case."
+    "invertTooltip": "Habituellement vrai -> gpio 1, false -> gpio 0. Si vous voulez qu'il l'inverse, cochez cette case.",
+    "pullUpTooltip": "Active la résistance de rappel interne (pull-up). L'entrée est alors active à l'état bas : elle vaut true tant qu'elle est reliée à GND, par exemple par un interrupteur fermé.",
+    "pullDownTooltip": "Active la résistance de tirage interne (pull-down). L'entrée vaut true tant qu'elle est reliée à 3,3 V.",
+    "debounceTooltip": "Entrées : un changement n'est signalé qu'une fois le niveau stable pendant cette durée, par exemple 20-50 ms pour des interrupteurs. Capteurs DHT : intervalle d'interrogation."
 }

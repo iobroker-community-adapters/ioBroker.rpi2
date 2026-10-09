@@ -158,7 +158,6 @@
     "osDependencies": {
       "linux": [
         "build-essential",
-        "python",
         "libgpiod-dev",
         "pkg-config"
       ]

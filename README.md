@@ -46,7 +46,7 @@ please install the following packages manually:
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential python3
+sudo apt install -y build-essential
 sudo apt install -y libgpiod-dev
 sudo apt install -y pkg-config
 ```

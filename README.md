@@ -148,8 +148,8 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (Garfonso/Claude): **NEW**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value. It still does, so states stay the same - but if you used *Pull Up* together with an external pull-down resistor, please check your input.
-- (Garfonso/Claude): **CHANGED**: Inputs are debounced by the kernel. A change is now reported once the input has been stable for the debounce time, instead of right away followed by a pause. Values are therefore delayed by the debounce time, but no longer get stuck on a short glitch.
+- (Garfonso/Claude): **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
+- (Garfonso/Claude): **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.
 - (Garfonso/Claude): **ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.
 - (Garfonso/Claude): Removed `python` from the OS dependencies, there is no such package on current Debian.
 

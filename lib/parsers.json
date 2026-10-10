@@ -116,12 +116,12 @@
       "post": "",
       "role": "value.speed"
     },
-    "nvme_temp": {
-       "command": "test -e /usr/sbin/nvme && sudo nvme smart-log /dev/nvme0 || echo \"0\"",
-       "regexp": "temperature\\s+:\\s+(\\d+)",
-       "post": "%1",
-       "role": "value.temperature",
-       "multiline": true
+    "disk_temp": {
+      "command": "if ls /dev/nvme[0-9] >/dev/null 2>&1; then sudo nvme smart-log /dev/nvme0; else sudo smartctl -A /dev/sda; fi 2>/dev/null | awk '/^temperature[[:space:]]*:/ {print $3; found=1; exit} END {if (!found) exit 1}' || sudo smartctl -A /dev/sda 2>/dev/null | awk '$1==194 || $1==190 {print $10; exit}' || echo 0",
+      "regexp": "(\\d+)",
+      "post": "%1",
+      "role": "value.temperature",
+      "multiline": true
     }
   },
   "uptime": {

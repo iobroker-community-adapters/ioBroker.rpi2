@@ -54,12 +54,12 @@ sudo apt install -y pkg-config
 `libgpiod-dev` (version 2.2 or newer) is always required, the installation checks for it.
 `pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
 
-### NVME temperature
-Since adapter version 2.3.2 you can read NVMe temperature. To do this, you need to install `nvme-cli` package on your system. 
-You can do this with the following command: `sudo apt-get install nvme-cli`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. Open it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker` and add the following line to the bottom:
+### Disk temperature
+Since adapter version 2.3.2 you can read disk temperature. To do this, you need to install `nvme-cli` and `smartmontools` packages on your system. 
+You can do this with the following command: `sudo apt install nvme-cli smartmontools`. You will also need to add the command to the ioBroker
+sudoers file `/etc/sudoers.d/iobroker-disktemp`. Open it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following line:
 
-`iobroker ALL=(ALL) NOPASSWD: /usr/sbin/nvme smart-log /dev/nvme0`
+`iobroker ALL=(root) NOPASSWD: /usr/sbin/nvme, /usr/sbin/smartctl`
 
 ## GPIOs
 You can read and control GPIOs too.

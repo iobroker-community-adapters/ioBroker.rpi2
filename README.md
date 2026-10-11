@@ -55,9 +55,9 @@ sudo apt install -y pkg-config
 `pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
 
 ### Disk temperature
-Since adapter version 2.3.2 you can read NVMe and SSD temperature. To do this, you need to install `smartmontools` package on your system. 
+You can now read NVMe and SSD temperatures. To do this, you need to install `smartmontools` package on your system. 
 You can do this with the following command: `sudo apt-get install smartmontools`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. Open it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following line to the bottom:
+sudoers file `/etc/sudoers.d/iobroker`. We use a dropin file and do not touch the original file. Create it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following line:
 
 `iobroker ALL=(root) NOPASSWD: /usr/sbin/smartctl -A /dev/nvme*, /usr/sbin/smartctl -A /dev/sd*`
 

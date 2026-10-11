@@ -116,12 +116,21 @@
       "post": "",
       "role": "value.speed"
     },
-    "disk_temp": {
-      "command": "for dev in /sys/block/nvme[0-9]* /sys/block/sd[a-z]; do [ -e \"$dev\" ] || continue; dev_name=$(basename \"$dev\"); temp=$(sudo smartctl -A \"/dev/$dev_name\" 2>/dev/null | awk '/^Temperature:/ {print $2; found=1; next} ($1==194 || $1==190) {print $10; found=1; next}'); if [ ! -z \"$temp\" ]; then echo \"$dev_name: $temp\"; logger -t iobroker-disk \"$dev_name ist disk_temp mit $temp °C\"; fi; done",
-      "regexp": "([^:]+):\\s*(\\d+)",
-      "post": "%2",
+    "disk_temp_sda": {
+      "command": "sudo smartctl -A /dev/sda 2>/dev/null | awk '/^Temperature:/ {print $2; exit} $1==194 || $1==190 {print $10; exit}'",
+      "regexp": "(\\d+)",
+      "post": "%1",
       "role": "value.temperature",
-      "multiline": true
+      "type": "number",
+      "name": "Temperatur sda"
+    },
+    "disk_temp_nvme0": {
+      "command": "sudo smartctl -A /dev/nvme0 2>/dev/null | awk '/^Temperature:/ {print $2; exit} $1==194 || $1==190 {print $10; exit}'",
+      "regexp": "(\\d+)",
+      "post": "%1",
+      "role": "value.temperature",
+      "type": "number",
+      "name": "Temperatur nvme0"
     }
   },
   "uptime": {

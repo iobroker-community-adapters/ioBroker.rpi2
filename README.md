@@ -55,11 +55,20 @@ sudo apt install -y pkg-config
 `pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
 
 ### Disk temperature
-You can now read NVMe and SSD temperatures. To do this, you need to install `smartmontools` package on your system. 
-You can do this with the following command: `sudo apt-get install smartmontools`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. We use a dropin file and do not touch the original file. Create it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following line:
+You can read NVMe and SATA/USB drive temperatures (`temperature.disk_temp`, enable *Temperature* in the instance settings).
+The adapter reports the first drive that has a temperature, checking `/dev/nvme0` to `/dev/nvme9` first, then `/dev/sda` to `/dev/sdz`.
+To do this, you need to install the `smartmontools` package and allow the `iobroker` user to run `smartctl` as root.
+We use a drop-in file and do not touch the original sudoers file `/etc/sudoers.d/iobroker`:
 
-`iobroker ALL=(root) NOPASSWD: /usr/sbin/smartctl -A /dev/nvme*, /usr/sbin/smartctl -A /dev/sd*`
+```bash
+sudo apt-get install smartmontools
+echo 'iobroker ALL=(root) NOPASSWD: /usr/sbin/smartctl -A /dev/nvme[0-9], /usr/sbin/smartctl -A /dev/sd[a-z]' | sudo tee /etc/sudoers.d/iobroker-disktemp
+sudo chmod 440 /etc/sudoers.d/iobroker-disktemp
+```
+
+The rule allows only reading the values of these drives, not changing any drive settings.
+Some USB-SATA adapters do not pass the SMART data through. To check, run `sudo -u iobroker sudo -n smartctl -A /dev/sda`
+and look for `Temperature_Celsius` or `Temperature:` in the output.
 
 ## GPIOs
 You can read and control GPIOs too.
@@ -147,6 +156,10 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Grothesk242) **BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.
+- (Garfonso/Claude) A missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.
+
 ### 5.0.0-alpha.0 (2026-10-09)
 - (Garfonso/Claude) **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
 - (Garfonso/Claude) **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.

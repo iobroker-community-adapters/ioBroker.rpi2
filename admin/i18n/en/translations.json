@@ -12,7 +12,6 @@
     "Monitoring": "Monitoring",
     "GPIOs": "GPIOs",
     "GPIOConfigExplanation": "Add GPIO configurations here. Press on +, select if input or output and so on. Port numbers relate to Broadcom SOC channel, not physical pins. For inputs enter a debounce time in milliseconds into the Debounce / Poll column. For DHT11/22 Temperature sensors, the value in that column will be the poll interval.",
-    "pullupwarning": "WARNING: Pull up / Pull down is not really supported, currently. It should be in future, but it never was in the past. Be sure not to break anything.",
     "GPIO Number": "GPIO Number",
     "Type": "Type",
     "in": "Input",
@@ -27,5 +26,8 @@
     "Label": "Label",
     "GPIOVauleERRORText": "Error: GPIO Number must not be empty, must be unique and between 2 and 27.",
     "Invert": "Invert",
-    "invertTooltip": "Usually true -> GPIO 1, false -> GPIO 0. If you want it to invert that, check this box."
+    "invertTooltip": "Usually true -> GPIO 1, false -> GPIO 0. If you want it to invert that, check this box.",
+    "pullUpTooltip": "Switches on the internal pull-up resistor. The input is then active low: it reads true while it is connected to GND, e.g. by a closed switch.",
+    "pullDownTooltip": "Switches on the internal pull-down resistor. The input reads true while it is connected to 3.3 V.",
+    "debounceTooltip": "Inputs: a change is only reported after the level has been stable for this time, e.g. 20-50 ms for switches. DHT sensors: poll interval."
 }

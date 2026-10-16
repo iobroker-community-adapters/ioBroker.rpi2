@@ -156,7 +156,7 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.0.0-alpha.1 (2026-10-16)
 - (Grothesk242) **BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.
 - (Garfonso/Claude) A missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.
 
@@ -188,10 +188,6 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 ### 3.0.1 (2025-11-28)
 * (@klein0r) Updated logo, workflows and documentation
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required
-
-### 3.0.0 (2025-11-28)
-* (@klein0r) NodeJS 20.x (or newer) is required
-* (@klein0r) Updated opengpio to v2 (works on Debian trixie)
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

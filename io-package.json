@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "rpi2",
-    "version": "5.0.0-alpha.0",
+    "version": "5.0.0-alpha.1",
     "news": {
       "5.0.0-alpha.1": {
         "en": "**BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.\nA missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.",
@@ -93,19 +93,6 @@
         "pl": "czytaj aktualny stan wyjść GPIO podczas uruchamiania adaptera.\nre- read GPIO input, if set by the user (with ack = false).\ndodaj opcję, aby odwrócić prawdziwe / fałszywe odwzorowanie do 1 / 0.\nZezwala na wiele instancji tego adaptera na hosta.\npróbował poprawić inicjalizację wejść GPIO.",
         "uk": "читати поточний стан виходів GPIO під час запуску адаптера.\nперечитати вхід GPIO, якщо встановити користувачем (з ack=false).\nдодати варіант для інвертації true/false до 1/0.\nДозволити кілька екземплярів цього адаптера за господар.\nнамагалася вдосконалити ініціалізацію вводів GPIO.",
         "zh-cn": "读取适配器启动期间GPIO输出的当前状态.\n重读 GPIO 输入,如果由用户设置(带有 ack=false).\n将反向真实/假映射的选项添加到 1/0.\n每个主机允许此适配器的多个实例 .\n尝试改进GPIO投入的初始化."
-      },
-      "2.3.2": {
-        "en": "added support for NVMe temperature (needs additional configuration, see README)\nfixed inital values for outputs.",
-        "de": "Unterstützung für NVMe-Temperatur (benötigt zusätzliche Konfiguration, siehe README) hinzugefügt\nInitalwerte für Ausgänge repariert.",
-        "ru": "дополнительная поддержка температуры NVMe (необходимая дополнительная конфигурация, см. README)\nфиксированные первоначальные значения для результатов.",
-        "pt": "suporte adicionado para a temperatura NVMe (necessita configuração adicional, veja README)\nvalores inital fixos para saídas.",
-        "nl": "extra ondersteuning voor NVMe temperatuur (nodige extra configuratie, zie README)\nvaste initale waarden voor outputs.",
-        "fr": "prise en charge supplémentaire de la température NVMe (besoins de configuration supplémentaire, voir README)\nvaleurs initales fixes pour les sorties.",
-        "it": "supporto aggiunto per la temperatura NVMe (necessità di configurazione aggiuntiva, vedi README)\nvalori fissi inital per uscite.",
-        "es": "soporte añadido para temperatura NVMe (necesita configuración adicional, véase README)\nvalores initales fijos para salidas.",
-        "pl": "dodane wsparcie dla temperatury NVMe (wymaga dodatkowej konfiguracji, patrz README)\nstałe wartości wewnętrzne dla wyjść.",
-        "uk": "додана підтримка температури NVMe (при додатковій конфігурації див. README)\nфіксовані значення для виходу.",
-        "zh-cn": "添加对 NVMe 温度的支持( 需要额外的配置, 请参见 README)\n产出的固定实值."
       }
     },
     "titleLang": {

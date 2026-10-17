@@ -55,11 +55,13 @@ sudo apt install -y pkg-config
 `pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
 
 ### Disk temperature
-You can now read NVMe and SSD temperatures. To do this, you need to install `smartmontools` package on your system. 
-You can do this with the following command: `sudo apt-get install smartmontools`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. We use a dropin file and do not touch the original file. Create it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following line:
+You can now read NVMe and SSD temperatures. To do this, you need to install the `smartmontools` package on your system. 
+You can do this with the following command: `sudo apt install smartmontools`. You will also need to add the command to the ioBroker
+sudoers file `/etc/sudoers.d/iobroker`. But we use a dropin file and do not touch the original file as otherwise it will be reseted after a iobroker fix. Create it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following lines:
 
 `iobroker ALL=(root) NOPASSWD: /usr/sbin/smartctl -A /dev/nvme*, /usr/sbin/smartctl -A /dev/sd*`
+`Cmnd_Alias IOB_SMARTCTL = /usr/sbin/smartctl -A /dev/nvme*, /usr/sbin/smartctl -A /dev/sd*`
+`Defaults!IOB_SMARTCTL !syslog, !pam_session`
 
 ## GPIOs
 You can read and control GPIOs too.

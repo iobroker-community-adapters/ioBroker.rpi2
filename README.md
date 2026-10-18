@@ -57,12 +57,14 @@ sudo apt install -y pkg-config
 ### Disk temperature
 You can now read NVMe and SSD temperatures. To do this, you need to install the `smartmontools` package on your system. 
 You can do this with the following command: `sudo apt install smartmontools`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. But we use a dropin file and do not touch the original file as otherwise it will be reseted after a iobroker fix. Create it with an editor, for example nano: `sudo nano /etc/sudoers.d/iobroker-disktemp` and add the following lines:
+sudoers file `/etc/sudoers.d/iobroker`. But we use a dropin file and do not touch the original file as otherwise it will be reseted after a iobroker fix. Create it with visudo: `sudo visudo -f /etc/sudoers.d/iobroker-disktemp` and add the following lines:
 
-`Cmnd_Alias SMARTCTL = /usr/sbin/smartctl -A /dev/sd[a-z], \`
-`                      /usr/sbin/smartctl -A /dev/nvme[0-9]`
-`Defaults!SMARTCTL !syslog, !pam_session`
-`iobroker ALL=(root) NOPASSWD: SMARTCTL`
+```bash
+Cmnd_Alias SMARTCTL = /usr/sbin/smartctl -A /dev/sd[a-z], \
+                      /usr/sbin/smartctl -A /dev/nvme[0-9]
+Defaults!SMARTCTL !syslog, !pam_session
+iobroker ALL=(root) NOPASSWD: SMARTCTL
+``` 
 
 ## GPIOs
 You can read and control GPIOs too.

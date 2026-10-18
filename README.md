@@ -57,16 +57,24 @@ sudo apt install -y pkg-config
 ### Disk temperature
 You can read NVMe and SATA/USB drive temperatures (`temperature.disk_temp`, enable *Temperature* in the instance settings).
 The adapter reports the first drive that has a temperature, checking `/dev/nvme0` to `/dev/nvme9` first, then `/dev/sda` to `/dev/sdz`.
-To do this, you need to install the `smartmontools` package and allow the `iobroker` user to run `smartctl` as root.
-We use a drop-in file and do not touch the original sudoers file `/etc/sudoers.d/iobroker`:
+To do this, you need to install the `smartmontools` package and allow the `iobroker` user to run `smartctl` as root:
 
 ```bash
-sudo apt-get install smartmontools
-echo 'iobroker ALL=(root) NOPASSWD: /usr/sbin/smartctl -A /dev/nvme[0-9], /usr/sbin/smartctl -A /dev/sd[a-z]' | sudo tee /etc/sudoers.d/iobroker-disktemp
-sudo chmod 440 /etc/sudoers.d/iobroker-disktemp
+sudo apt install smartmontools
+sudo visudo -f /etc/sudoers.d/iobroker-disktemp
+```
+
+Do not add the rule to the sudoers file `/etc/sudoers.d/iobroker`, it is reset by `iob fix`. Add these lines to the new file:
+
+```
+Cmnd_Alias SMARTCTL = /usr/sbin/smartctl -A /dev/sd[a-z], \
+                      /usr/sbin/smartctl -A /dev/nvme[0-9]
+Defaults!SMARTCTL !syslog, !pam_session
+iobroker ALL=(root) NOPASSWD: SMARTCTL
 ```
 
 The rule allows only reading the values of these drives, not changing any drive settings.
+`!syslog` and `!pam_session` keep the regular readings out of the system log.
 Some USB-SATA adapters do not pass the SMART data through. To check, run `sudo -u iobroker sudo -n smartctl -A /dev/sda`
 and look for `Temperature_Celsius` or `Temperature:` in the output.
 

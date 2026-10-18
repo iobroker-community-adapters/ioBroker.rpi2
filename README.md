@@ -131,6 +131,8 @@ Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https:
 
 In the GPIO table, select `DHT11` for DHT11 sensors and `DHT22/AM23xx` for all others, and enter the poll interval in milliseconds into the *Debounce / Poll* column. The sensors cannot be read faster than every 2000 ms (DHT11: 1000 ms); without a value, the adapter polls every 30000 ms.
 
+For each sensor the adapter creates `gpio.N.temperature`, `gpio.N.humidity` and `gpio.N.dewpoint`. The dew point is calculated from temperature and humidity with the Magnus formula. It is only as accurate as the sensor: about ±1 °C with a DHT22, considerably less with a DHT11.
+
 The adapter reads a sensor in one of two ways and logs at startup which one it uses for each sensor.
 
 ### Linux kernel driver (recommended, works on every Raspberry Pi including the Pi 5)
@@ -164,6 +166,9 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Garfonso/Claude) **NEW**: DHT sensors also report the dew point (`gpio.N.dewpoint`), calculated from temperature and humidity.
+
 ### 5.0.0-alpha.1 (2026-10-16)
 - (Grothesk242) **BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.
 - (Garfonso/Claude) A missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.

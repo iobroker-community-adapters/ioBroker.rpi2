@@ -31,7 +31,7 @@ const utils = require('@iobroker/adapter-core');
 const parsers = require('./lib/parsers.json');
 const { buttonEvents, GpioControl } = require('./lib/gpioControl');
 const { convertConfig } = require('./lib/configConverter');
-const { DhtControl, temperatureStateName, humidityStateName } = require('./lib/dhtControl');
+const { DhtControl, temperatureStateName, humidityStateName, dewPointStateName } = require('./lib/dhtControl');
 
 const errorsLogged = {};
 const intervalTimers = [];
@@ -227,7 +227,7 @@ class Rpi2 extends utils.Adapter {
     }
 
     /**
-     * Create/Delete ioBroker Objects for gpio temperature and humidity.
+     * Create/Delete ioBroker Objects for gpio temperature, humidity and dew point.
      *
      * @param data {object} from config
      * @returns {Promise<void>}
@@ -262,6 +262,22 @@ class Rpi2 extends utils.Adapter {
             });
         } else {
             await this.delObjectAsync(humidityStateName(data.gpio));
+        }
+        if (data.isTempHum) {
+            await this.extendObject(dewPointStateName(data.gpio), {
+                common: {
+                    name: `GPIO ${data.gpio} dew point`,
+                    type: 'number',
+                    role: 'value.temperature.dewpoint',
+                    unit: '°C',
+                    read: true,
+                    write: false,
+                },
+                native: {},
+                type: 'state',
+            });
+        } else {
+            await this.delObjectAsync(dewPointStateName(data.gpio));
         }
     }
 

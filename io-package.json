@@ -3,6 +3,19 @@
     "name": "rpi2",
     "version": "5.0.0-alpha.1",
     "news": {
+      "5.0.0-alpha.2": {
+        "en": "**NEW**: DHT sensors also report the dew point (`gpio.N.dewpoint`), calculated from temperature and humidity.",
+        "de": "**NEU**: DHT-Sensoren liefern auch den Taupunkt (`gpio.N.dewpoint`), berechnet aus Temperatur und Luftfeuchte.",
+        "ru": "**NEW**: Датчики DHT также сообщают точку росы (`gpio.N.dewpoint`), вычисленную по температуре и влажности.",
+        "pt": "**NEW**: Os sensores DHT também informam o ponto de orvalho (`gpio.N.dewpoint`), calculado a partir da temperatura e da humidade.",
+        "nl": "**NEW**: DHT-sensoren leveren ook het dauwpunt (`gpio.N.dewpoint`), berekend uit temperatuur en luchtvochtigheid.",
+        "fr": "**NEW** : les capteurs DHT fournissent aussi le point de rosée (`gpio.N.dewpoint`), calculé à partir de la température et de l'humidité.",
+        "it": "**NEW**: i sensori DHT forniscono anche il punto di rugiada (`gpio.N.dewpoint`), calcolato da temperatura e umidità.",
+        "es": "**NEW**: Los sensores DHT también informan el punto de rocío (`gpio.N.dewpoint`), calculado a partir de la temperatura y la humedad.",
+        "pl": "**NEW**: Czujniki DHT podają też punkt rosy (`gpio.N.dewpoint`), obliczany z temperatury i wilgotności.",
+        "uk": "**NEW**: Датчики DHT також повідомляють точку роси (`gpio.N.dewpoint`), обчислену з температури та вологості.",
+        "zh-cn": "**NEW**：DHT 传感器现在也提供露点（`gpio.N.dewpoint`），由温度和湿度计算得出。"
+      },
       "5.0.0-alpha.1": {
         "en": "**BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.\nA missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.",
         "de": "**BREAKING**: `temperature.nvme_temp` wird durch `temperature.disk_temp` ersetzt. Der Wert wird mit smartmontools vom ersten NVMe- oder SATA/USB-Laufwerk gelesen, das eine Temperatur liefert. Der alte Datenpunkt wird gelöscht. `smartmontools` installieren und die alte `nvme`-sudo-Regel durch die neue aus der README ersetzen.\nEin fehlendes Laufwerk, WLAN oder eine fehlende sudo-Regel wird nicht mehr als Fehler geloggt, und es wird keine Laufwerkstemperatur von 0 mehr angezeigt.",

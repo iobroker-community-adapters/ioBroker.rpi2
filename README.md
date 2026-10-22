@@ -46,7 +46,7 @@ please install the following packages manually:
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential python3
+sudo apt install -y build-essential
 sudo apt install -y libgpiod-dev
 sudo apt install -y pkg-config
 ```
@@ -55,16 +55,28 @@ sudo apt install -y pkg-config
 `pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
 
 ### Disk temperature
-You can now read NVMe and SSD temperatures. To do this, you need to install the `smartmontools` package on your system. 
-You can do this with the following command: `sudo apt install smartmontools`. You will also need to add the command to the ioBroker
-sudoers file `/etc/sudoers.d/iobroker`. But we use a dropin file and do not touch the original file as otherwise it will be reseted after a iobroker fix. Create it with visudo: `sudo visudo -f /etc/sudoers.d/iobroker-disktemp` and add the following lines:
+You can read NVMe and SATA/USB drive temperatures (`temperature.disk_temp`, enable *Temperature* in the instance settings).
+The adapter reports the first drive that has a temperature, checking `/dev/nvme0` to `/dev/nvme9` first, then `/dev/sda` to `/dev/sdz`.
+To do this, you need to install the `smartmontools` package and allow the `iobroker` user to run `smartctl` as root:
 
 ```bash
+sudo apt install smartmontools
+sudo visudo -f /etc/sudoers.d/iobroker-disktemp
+```
+
+Do not add the rule to the sudoers file `/etc/sudoers.d/iobroker`, it is reset by `iob fix`. Add these lines to the new file:
+
+```
 Cmnd_Alias SMARTCTL = /usr/sbin/smartctl -A /dev/sd[a-z], \
                       /usr/sbin/smartctl -A /dev/nvme[0-9]
 Defaults!SMARTCTL !syslog, !pam_session
 iobroker ALL=(root) NOPASSWD: SMARTCTL
-``` 
+```
+
+The rule allows only reading the values of these drives, not changing any drive settings.
+`!syslog` and `!pam_session` keep the regular readings out of the system log.
+Some USB-SATA adapters do not pass the SMART data through. To check, run `sudo -u iobroker sudo -n smartctl -A /dev/sda`
+and look for `Temperature_Celsius` or `Temperature:` in the output.
 
 ## GPIOs
 You can read and control GPIOs too.
@@ -107,12 +119,19 @@ For instance PI2:
 +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
 
+### Inputs
+- **Pull Up** / **Pull Down** switch on the internal pull resistor of the input. With *Pull Up*, the input is active low: connect a switch between the GPIO and GND, and the state is `true` while the switch is closed. With *Pull Down*, connect the switch to 3.3 V instead; the state is `true` while it is closed.
+  Without either, the pull resistor is left as it is - the default of the Raspberry Pi (pull-up for GPIO 0-8, pull-down for all others) or what you set in `config.txt`, e.g. `gpio=17=pu`.
+- **Debounce / Poll (ms)**: a change is only reported once the input has been stable for this time, e.g. 20-50 ms for switches and buttons. The kernel does this; if your system does not support it, the adapter does it itself and logs a message.
+
 ## DHTxx/AM23xx Sensors
 You can read from DHT11, DHT21 (AM2301), DHT22 and AM2302 temperature/humidity sensors.
 
 Connect such a sensor to a GPIO pin as described on the [node-dht-sensor](https://www.npmjs.com/package/node-dht-sensor) package page. Multiple sensors can be connected to *multiple* pins (this is *not* a bus system) as discussed.
 
 In the GPIO table, select `DHT11` for DHT11 sensors and `DHT22/AM23xx` for all others, and enter the poll interval in milliseconds into the *Debounce / Poll* column. The sensors cannot be read faster than every 2000 ms (DHT11: 1000 ms); without a value, the adapter polls every 30000 ms.
+
+For each sensor the adapter creates `gpio.N.temperature`, `gpio.N.humidity` and `gpio.N.dewpoint`. The dew point is calculated from temperature and humidity with the Magnus formula. It is only as accurate as the sensor: about ±1 °C with a DHT22, considerably less with a DHT11.
 
 The adapter reads a sensor in one of two ways and logs at startup which one it uses for each sensor.
 
@@ -147,21 +166,34 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Garfonso/Claude) **NEW**: DHT sensors also report the dew point (`gpio.N.dewpoint`), calculated from temperature and humidity.
+
+### 5.0.0-alpha.1 (2026-10-16)
+- (Grothesk242) **BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.
+- (Garfonso/Claude) A missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.
+
+### 5.0.0-alpha.0 (2026-10-09)
+- (Garfonso/Claude) **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
+- (Garfonso/Claude) **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.
+- (Garfonso/Claude) **ENHANCED**: An input that cannot be set up no longer disables all other GPIOs; the reason is logged.
+- (Garfonso/Claude) Removed `python` from the OS dependencies, there is no such package on current Debian.
+
 ### 4.0.0 (2026-10-07)
 - (copilot) Adapter requires node.js >= 22 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) Dependencies have been updated.
 - (copilot) **ENHANCED**: Added `temperature.fan_activity` object to monitor fan RPM via `/sys/devices/platform/cooling_fan/...`; falls back to `0` when unavailable.
-- (Garfonso/Claude): Improve GPIO handling.
-- (Garfonso/Claude): **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
-- (Garfonso/Claude): Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
-- (Garfonso/Claude): **FIXED**: The fan parser unit test matched the old single-hwmon path and failed since the fan reading fix.
-- (Garfonso/Claude): **FIXED**: DHT sensors ignored the configured poll interval (with no interval they were read continuously, so every read failed) and every sensor's timer read all sensors.
-- (Garfonso/Claude): **NEW**: DHT sensors are read through the Linux dht11 kernel driver if it is enabled (`dtoverlay=dht11,gpiopin=<n>`). This makes them work on a Raspberry Pi 5 without rebuilding node-dht-sensor (#406).
-- (Garfonso/Claude): **ENHANCED**: DHT sensor problems are logged with their cause and how to fix them; the startup log shows how each sensor is read.
-- (Garfonso/Claude): **FIXED**: Raspberry Pi 500 and Compute Module 5 are recognised as Raspberry Pi 5 boards and use the same GPIO chip.
-- (Garfonso/Claude): **FIXED**: The humidity object of a DHT sensor was named "temperature".
-- (Garfonso/Claude): **BREAKING**: GPIO and DHT sensor handling changed in several places (see above). This mostly fixes problems, but please check your GPIO setup after updating.
+- (Garfonso/Claude) Improve GPIO handling.
+- (Garfonso/Claude) **FIXED**: GPIO outputs no longer switch off and on again during adapter start (#431).
+- (Garfonso/Claude) Use the `@garfonso/opengpio` npm package instead of a git branch of the fork.
+- (Garfonso/Claude) **FIXED**: The fan parser unit test matched the old single-hwmon path and failed since the fan reading fix.
+- (Garfonso/Claude) **FIXED**: DHT sensors ignored the configured poll interval (with no interval they were read continuously, so every read failed) and every sensor's timer read all sensors.
+- (Garfonso/Claude) **NEW**: DHT sensors are read through the Linux dht11 kernel driver if it is enabled (`dtoverlay=dht11,gpiopin=<n>`). This makes them work on a Raspberry Pi 5 without rebuilding node-dht-sensor (#406).
+- (Garfonso/Claude) **ENHANCED**: DHT sensor problems are logged with their cause and how to fix them; the startup log shows how each sensor is read.
+- (Garfonso/Claude) **FIXED**: Raspberry Pi 500 and Compute Module 5 are recognised as Raspberry Pi 5 boards and use the same GPIO chip.
+- (Garfonso/Claude) **FIXED**: The humidity object of a DHT sensor was named "temperature".
+- (Garfonso/Claude) **BREAKING**: GPIO and DHT sensor handling changed in several places (see above). This mostly fixes problems, but please check your GPIO setup after updating.
 
 ### 3.0.2 (2025-12-01)
 * (@klein0r) Check for required libgpiod-dev package version
@@ -169,17 +201,6 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 ### 3.0.1 (2025-11-28)
 * (@klein0r) Updated logo, workflows and documentation
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required
-
-### 3.0.0 (2025-11-28)
-* (@klein0r) NodeJS 20.x (or newer) is required
-* (@klein0r) Updated opengpio to v2 (works on Debian trixie)
-
-### 2.4.0 (2025-03-06)
-* (Garfonso) read the current state of GPIO outputs during adapter startup.
-* (Garfonso) re-read GPIO input, if set by the user (with ack=false).
-* (Garfonso) add an option to invert true/false mapping to 1/0.
-* (Garfonso) Allow multiple instances of this adapter per host.
-* (Garfonso) tried to improve initialization of GPIO inputs.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

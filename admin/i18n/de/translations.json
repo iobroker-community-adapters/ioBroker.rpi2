@@ -12,7 +12,6 @@
     "Monitoring": "Überwachung",
     "GPIOs": "GPIOs",
     "GPIOConfigExplanation": "Fügen Sie hier GPIO-Konfigurationen hinzu. Drücken Sie auf +, wählen Sie Eingabe oder Ausgabe aus und so weiter. Portnummern beziehen sich auf den Broadcom SOC-Kanal, nicht auf physische Pins. Geben Sie für Eingaben eine Entprellzeit in Millisekunden in die Spalte „Entprellung/Abfrage“ ein. Bei DHT11/22-Temperatursensoren ist der Wert in dieser Spalte das Abfrageintervall.",
-    "pullupwarning": "ACHTUNG: Pull-Up/Pull-Down wird derzeit nicht wirklich unterstützt. Es sollte in der Zukunft sein, aber es war nie in der Vergangenheit. Achten Sie darauf, dass nichts kaputt geht.",
     "GPIO Number": "GPIO-Nummer",
     "Type": "Typ",
     "in": "Eingang",
@@ -27,5 +26,8 @@
     "Label": "Beschriftung",
     "GPIOVauleERRORText": "Fehler: GPIO Nummer darf nicht leer sein, muss eindeutig sein und zwischen 2 und 27 liegen.",
     "Invert": "Umkehren",
-    "invertTooltip": "Normalerweise true -> GPIO 1, false -> GPIO 0. Um es andersrum zu haben, dieses Kontrollkästchen aktiviert."
+    "invertTooltip": "Normalerweise true -> GPIO 1, false -> GPIO 0. Um es andersrum zu haben, dieses Kontrollkästchen aktiviert.",
+    "pullUpTooltip": "Schaltet den internen Pull-up-Widerstand ein. Der Eingang ist dann low-aktiv: Er liefert true, solange er mit GND verbunden ist, z. B. über einen geschlossenen Schalter.",
+    "pullDownTooltip": "Schaltet den internen Pull-down-Widerstand ein. Der Eingang liefert true, solange er mit 3,3 V verbunden ist.",
+    "debounceTooltip": "Eingänge: Eine Änderung wird erst gemeldet, wenn der Pegel so lange stabil war, z. B. 20-50 ms für Schalter. DHT-Sensoren: Abfrageintervall."
 }

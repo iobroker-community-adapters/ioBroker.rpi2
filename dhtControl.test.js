@@ -8,6 +8,7 @@ const {
     DhtControl,
     binaryBackend,
     detectLibraryBuild,
+    dewPoint,
     effectivePollInterval,
     findKernelDhtDevices,
     readKernelDht,
@@ -113,6 +114,27 @@ describe('dhtControl', () => {
         it('keeps valid intervals, also when configured as string', () => {
             expect(effectivePollInterval('10000', 22)).to.deep.equal({ interval: 10000 });
             expect(effectivePollInterval(1500, 11)).to.deep.equal({ interval: 1500 });
+        });
+    });
+
+    describe('dewPoint', () => {
+        // reference values from the Magnus formula (Sonntag 1990)
+        for (const [temperature, humidity, expected] of [
+            [22, 55, 12.5],
+            [21.5, 40.1, 7.4],
+            [30, 90, 28.2],
+            [-10, 80, -12.8],
+            [20, 100, 20],
+        ]) {
+            it(`is ${expected}°C at ${temperature}°C and ${humidity}%`, () => {
+                expect(dewPoint(temperature, humidity)).to.equal(expected);
+            });
+        }
+
+        it('is not defined for implausible humidity', () => {
+            expect(dewPoint(20, 0)).to.equal(null);
+            expect(dewPoint(20, 101)).to.equal(null);
+            expect(dewPoint(20, NaN)).to.equal(null);
         });
     });
 
@@ -252,6 +274,7 @@ describe('dhtControl', () => {
             expect(adapter.states).to.deep.equal({
                 'gpio.17.temperature': { val: 23.4, ack: true },
                 'gpio.17.humidity': { val: 45.6, ack: true },
+                'gpio.17.dewpoint': { val: 11, ack: true },
             });
             const info = adapter.log.at('info').join('\n');
             expect(info).to.contain('kernel dht11 driver on GPIO 17');
@@ -288,6 +311,7 @@ describe('dhtControl', () => {
             expect(calls).to.deep.equal([[11, 4]]);
             expect(adapter.intervals.map(i => i.ms)).to.deep.equal([30000]);
             expect(adapter.states['gpio.4.temperature']).to.deep.equal({ val: 21.5, ack: true });
+            expect(adapter.states['gpio.4.dewpoint']).to.deep.equal({ val: 7.4, ack: true });
             expect(adapter.log.at('info').join('\n')).to.contain('no poll interval configured, using 30000ms');
         });
 

@@ -29,5 +29,7 @@
     "invertTooltip": "Zwykle True -> GPIO 1, False -> GPIO 0. Jeśli chcesz, aby to odwrócił, zaznacz to pole.",
     "pullUpTooltip": "Włącza wewnętrzny rezystor podciągający (pull-up). Wejście jest wtedy aktywne stanem niskim: odczytuje true, dopóki jest połączone z GND, np. przez zamknięty przełącznik.",
     "pullDownTooltip": "Włącza wewnętrzny rezystor ściągający (pull-down). Wejście odczytuje true, dopóki jest połączone z 3,3 V.",
-    "debounceTooltip": "Wejścia: zmiana jest zgłaszana dopiero, gdy poziom był stabilny przez ten czas, np. 20-50 ms dla przełączników. Czujniki DHT: interwał odczytu."
+    "debounceTooltip": "Wejścia: zmiana jest zgłaszana dopiero, gdy poziom był stabilny przez ten czas, np. 20-50 ms dla przełączników. Czujniki DHT: interwał odczytu.",
+    "Enter number of GPIO to configure": "Numer GPIO do skonfigurowania",
+    "GPIO Name": "Nazwa GPIO"
 }

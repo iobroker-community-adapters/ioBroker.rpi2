@@ -29,5 +29,7 @@
     "invertTooltip": "Di solito TRUE -> GPIO 1, FALSE -> GPIO 0. Se vuoi che lo inverte, controlla questa casella.",
     "pullUpTooltip": "Attiva la resistenza di pull-up interna. L'ingresso diventa attivo basso: legge true finché è collegato a GND, ad esempio tramite un interruttore chiuso.",
     "pullDownTooltip": "Attiva la resistenza di pull-down interna. L'ingresso legge true finché è collegato a 3,3 V.",
-    "debounceTooltip": "Ingressi: una modifica viene segnalata solo dopo che il livello è rimasto stabile per questo tempo, ad esempio 20-50 ms per gli interruttori. Sensori DHT: intervallo di lettura."
+    "debounceTooltip": "Ingressi: una modifica viene segnalata solo dopo che il livello è rimasto stabile per questo tempo, ad esempio 20-50 ms per gli interruttori. Sensori DHT: intervallo di lettura.",
+    "Enter number of GPIO to configure": "Numero del GPIO da configurare",
+    "GPIO Name": "Nome GPIO"
 }

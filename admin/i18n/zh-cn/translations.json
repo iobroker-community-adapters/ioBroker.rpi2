@@ -12,7 +12,7 @@
     "Monitoring": "监控",
     "GPIOs": "GPIO",
     "GPIOConfigExplanation": "此处添加 GPIO 配置。按+，选择输入或输出等。端口号与 Broadcom SOC 通道相关，与物理引脚无关。对于输入，请在“去抖/轮询”列中输入以毫秒为单位的去抖时间。对于 DHT11/22 温度传感器，该列中的值将是轮询间隔。",
-    "GPIO Number": "GPIO 数量",
+    "GPIO Number": "GPIO 编号",
     "Type": "类型",
     "in": "输入",
     "out": "输出",
@@ -29,5 +29,7 @@
     "invertTooltip": "通常是true-> gpio 1，false-> gpio 0。如果要倒倒，请选中该框。",
     "pullUpTooltip": "启用内部上拉电阻。输入随后为低电平有效：连接到 GND 时（例如开关闭合）读取为 true。",
     "pullDownTooltip": "启用内部下拉电阻。输入连接到 3.3 V 时读取为 true。",
-    "debounceTooltip": "输入：电平在此时间内保持稳定后才会报告变化，例如开关使用 20-50 毫秒。DHT 传感器：轮询间隔。"
+    "debounceTooltip": "输入：电平在此时间内保持稳定后才会报告变化，例如开关使用 20-50 毫秒。DHT 传感器：轮询间隔。",
+    "Enter number of GPIO to configure": "要配置的 GPIO 编号",
+    "GPIO Name": "GPIO 名称"
 }

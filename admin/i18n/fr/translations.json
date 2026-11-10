@@ -29,5 +29,7 @@
     "invertTooltip": "Habituellement vrai -> gpio 1, false -> gpio 0. Si vous voulez qu'il l'inverse, cochez cette case.",
     "pullUpTooltip": "Active la résistance de rappel interne (pull-up). L'entrée est alors active à l'état bas : elle vaut true tant qu'elle est reliée à GND, par exemple par un interrupteur fermé.",
     "pullDownTooltip": "Active la résistance de tirage interne (pull-down). L'entrée vaut true tant qu'elle est reliée à 3,3 V.",
-    "debounceTooltip": "Entrées : un changement n'est signalé qu'une fois le niveau stable pendant cette durée, par exemple 20-50 ms pour des interrupteurs. Capteurs DHT : intervalle d'interrogation."
+    "debounceTooltip": "Entrées : un changement n'est signalé qu'une fois le niveau stable pendant cette durée, par exemple 20-50 ms pour des interrupteurs. Capteurs DHT : intervalle d'interrogation.",
+    "Enter number of GPIO to configure": "Numéro du GPIO à configurer",
+    "GPIO Name": "Nom du GPIO"
 }

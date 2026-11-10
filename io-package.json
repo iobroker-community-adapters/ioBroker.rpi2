@@ -162,7 +162,7 @@
     "tier": 2,
     "mode": "daemon",
     "type": "hardware",
-    "compact": true,
+    "compact": false,
     "connectionType": "local",
     "dataSource": "poll",
     "adminUI": {

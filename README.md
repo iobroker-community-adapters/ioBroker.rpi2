@@ -156,7 +156,7 @@ Without the kernel driver, the adapter falls back to node-dht-sensor. This works
 	PLACEHOLDER for the next version:
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.0.0 (2026-11-11)
 - (Garfonso/Claude) **BREAKING**: *Pull Up* and *Pull Down* switch on the internal pull resistors of inputs (#31). Before, *Pull Up* only inverted the value; it still does. If you used *Pull Up* just to invert an input that is switched to 3.3 V, the input now stays high: untick *Pull Up* and tick *Invert* instead. Also check inputs with *Pull Up* and an external pull-down resistor.
 - (Garfonso/Claude) **BREAKING**: Inputs are debounced by the kernel. A change is reported once the input has been stable for the debounce time, instead of right away followed by a pause. Changes therefore arrive later by that time, and pulses shorter than the debounce time (e.g. from S0 or reed contact meters) are ignored - lower the debounce time below the shortest pulse. In return a short glitch no longer leaves the state wrong.
 - (Grothesk242) **BREAKING**: `temperature.nvme_temp` is replaced by `temperature.disk_temp`. It is read with smartmontools from the first NVMe or SATA/USB drive that reports a temperature. The old state is deleted. Install `smartmontools` and replace the old `nvme` sudo rule by the new one from the README.
@@ -191,6 +191,10 @@ Without the kernel driver, the adapter falls back to node-dht-sensor. This works
 ### 3.0.1 (2025-11-28)
 * (@klein0r) Updated logo, workflows and documentation
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required
+
+### 3.0.0 (2025-11-28)
+* (@klein0r) NodeJS 20.x (or newer) is required
+* (@klein0r) Updated opengpio to v2 (works on Debian trixie)
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

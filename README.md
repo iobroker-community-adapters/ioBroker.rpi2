@@ -51,8 +51,7 @@ sudo apt install -y libgpiod-dev
 sudo apt install -y pkg-config
 ```
 
-`libgpiod-dev` (version 2.2 or newer) is always required, the installation checks for it.
-`pkg-config` is only necessary if you rebuild node-dht-sensor with libgpiod support for DHTxx/AM23xx sensors (see [DHTxx/AM23xx Sensors](#dhtxxam23xx-sensors)).
+`libgpiod-dev` (version 2.2 or newer) is always required, the installation checks for it (with `pkg-config` if installed).
 
 ### Disk temperature
 You can read NVMe and SATA/USB drive temperatures (`temperature.disk_temp`, enable *Temperature* in the instance settings).
@@ -135,9 +134,9 @@ For each sensor the adapter creates `gpio.N.temperature`, `gpio.N.humidity` and 
 
 The adapter reads a sensor in one of two ways and logs at startup which one it uses for each sensor.
 
-### Linux kernel driver (recommended, works on every Raspberry Pi including the Pi 5)
+### Linux kernel driver (recommended)
 
-Linux has its own driver for these sensors (it handles DHT11, DHT21, DHT22 and AM2302 alike). Enable it for each sensor by adding a line to `/boot/firmware/config.txt` (`/boot/config.txt` on older systems) and reboot:
+Linux has its own driver for these sensors (it handles DHT11, DHT22 and AM2302, and should handle DHT21 as well). Enable it for each sensor by adding a line to `/boot/firmware/config.txt` (`/boot/config.txt` on older systems) and reboot:
 
 ```
 dtoverlay=dht11,gpiopin=17
@@ -145,20 +144,11 @@ dtoverlay=dht11,gpiopin=17
 
 `gpiopin` is the GPIO (BCM) number, the same as in the adapter's GPIO table. You can check that it works with `cat /sys/bus/iio/devices/iio:device*/in_temp_input` (the value is in 1/1000 °C). The adapter detects the driver and uses it automatically, there is nothing else to configure.
 
+The overlay is part of Raspberry Pi OS since 2015 (Raspbian Jessie) and works on every Raspberry Pi, including the Pi 5, Pi 500 and Compute Module 5. Kernels from before November 2024 often failed to decode newer DHT11 sensors that report decimal places ("Don't know how to decode data" in `dmesg`); Raspberry Pi OS 13 (Trixie), which this adapter requires, has the fix.
+
 ### node-dht-sensor
 
-Without the kernel driver, the adapter uses node-dht-sensor. On Raspberry Pi 1 to 4 this works as installed.
-
-On a **Raspberry Pi 5** (also Pi 500 and Compute Module 5), the default build of node-dht-sensor cannot work, because it accesses GPIO registers the Pi 5 does not have. Either use the kernel driver above, or rebuild node-dht-sensor with libgpiod support:
-
-```bash
-sudo apt-get install -y build-essential libgpiod-dev pkg-config
-cd /opt/iobroker
-sudo -u iobroker -H npm rebuild node-dht-sensor --use_libgpiod=true
-```
-
-Then restart the adapter. `pkg-config` is required: without it, the build assumes the outdated libgpiod 1 and fails on current systems. Whenever node-dht-sensor is reinstalled or rebuilt later (for example after a Node.js upgrade), it gets the default build again - the adapter then logs an error at startup and the rebuild has to be repeated. The kernel driver does not have this problem.
-
+Without the kernel driver, the adapter falls back to node-dht-sensor. This works on Raspberry Pi 1 to 4 only. On a Raspberry Pi 5 (also Pi 500 and Compute Module 5) it cannot work, because it accesses GPIO registers the Pi 5 does not have - use the kernel driver there. Unlike node-dht-sensor, the kernel driver also keeps working after Node.js upgrades and adapter reinstalls.
 
 ## Changelog
 
@@ -175,6 +165,8 @@ Then restart the adapter. `pkg-config` is required: without it, the build assume
 - (Garfonso/Claude) A missing drive, WLAN or sudo rule is no longer logged as an error, and no longer shows a disk temperature of 0.
 - (copilot) Adapter requires node.js >= 22.19.0 now
 - (Garfonso/Claude) Removed `python` from the OS dependencies, there is no such package on current Debian.
+- (Garfonso/Claude) DHT sensors: the README and the log messages recommend the Linux kernel driver, the instructions for rebuilding node-dht-sensor are removed. An already rebuilt node-dht-sensor keeps working.
+- (Garfonso/Claude) The check for libgpiod 2.2 moved from the adapter's preinstall script into `@garfonso/opengpio`.
 - (Garfonso/Claude) Removed the unused `ci` dependency, updated dependencies and added missing translations in the admin page.
 
 ### 4.0.0 (2026-10-07)

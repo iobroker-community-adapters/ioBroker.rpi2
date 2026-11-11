@@ -28,7 +28,7 @@
     "node": ">=22.19.0"
   },
   "dependencies": {
-    "@garfonso/opengpio": "^2.1.0",
+    "@garfonso/opengpio": "^2.1.3",
     "@iobroker/adapter-core": "^3.4.3"
   },
   "devDependencies": {

@@ -31,7 +31,7 @@ const utils = require('@iobroker/adapter-core');
 const parsers = require('./lib/parsers.json');
 const { buttonEvents, GpioControl } = require('./lib/gpioControl');
 const { convertConfig } = require('./lib/configConverter');
-const { DhtControl, temperatureStateName, humidityStateName } = require('./lib/dhtControl');
+const { DhtControl, temperatureStateName, humidityStateName, dewPointStateName } = require('./lib/dhtControl');
 
 const errorsLogged = {};
 const intervalTimers = [];
@@ -68,6 +68,12 @@ class Rpi2 extends utils.Adapter {
         const adapterObjects = await this.getAdapterObjectsAsync();
         for (const id of Object.keys(adapterObjects)) {
             objects[id] = true; //object already exists.
+        }
+        // replaced by temperature.disk_temp in 5.0.0
+        const nvmeTemp = `${this.namespace}.temperature.nvme_temp`;
+        if (objects[nvmeTemp]) {
+            await this.delObjectAsync(nvmeTemp);
+            delete objects[nvmeTemp];
         }
         this.log.debug('received all objects');
         this.gpioControl = new GpioControl(this, this.log);
@@ -221,7 +227,7 @@ class Rpi2 extends utils.Adapter {
     }
 
     /**
-     * Create/Delete ioBroker Objects for gpio temperature and humidity.
+     * Create/Delete ioBroker Objects for gpio temperature, humidity and dew point.
      *
      * @param data {object} from config
      * @returns {Promise<void>}
@@ -256,6 +262,22 @@ class Rpi2 extends utils.Adapter {
             });
         } else {
             await this.delObjectAsync(humidityStateName(data.gpio));
+        }
+        if (data.isTempHum) {
+            await this.extendObject(dewPointStateName(data.gpio), {
+                common: {
+                    name: `GPIO ${data.gpio} dew point`,
+                    type: 'number',
+                    role: 'value.temperature.dewpoint',
+                    unit: '°C',
+                    read: true,
+                    write: false,
+                },
+                native: {},
+                type: 'state',
+            });
+        } else {
+            await this.delObjectAsync(dewPointStateName(data.gpio));
         }
     }
 
@@ -544,7 +566,8 @@ async function parser(adapter) {
                             ack: true,
                         });
                     } else {
-                        if (i === 'wifi_send' || i === 'wifi_received') {
+                        if (object.optional) {
+                            // hardware, tool or sudo rule missing on this system
                             adapter.log.debug(`No Value found for ${i}`);
                         } else if (!errorsLogged[i]) {
                             adapter.log.error(`No Value found for ${i}`);
